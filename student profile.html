@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Portfolio | ALUKA PARDHU</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#eef2f7;
+}
+
+header{
+    background:#003366;
+    color:white;
+    text-align:center;
+    padding:30px;
+}
+
+nav{
+    background:#0059b3;
+    padding:15px;
+    text-align:center;
+    position:sticky;
+    top:0;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:20px;
+    font-size:18px;
+    font-weight:bold;
+}
+
+nav a:hover{
+    color:yellow;
+}
+
+section{
+    width:85%;
+    margin:30px auto;
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0px 5px 15px rgba(0,0,0,0.2);
+}
+
+.profile{
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    flex-wrap:wrap;
+}
+
+.profile img{
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    border:5px solid #003366;
+    object-fit:cover;
+}
+
+.info{
+    width:60%;
+}
+
+h2{
+    color:#003366;
+    margin-bottom:15px;
+}
+
+ul,ol{
+    margin-left:30px;
+    line-height:30px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+table,th,td{
+    border:2px solid #003366;
+}
+
+th{
+    background:#003366;
+    color:white;
+}
+
+th,td{
+    padding:12px;
+    text-align:center;
+}
+
+tr:nth-child(even){
+    background:#f5f5f5;
+}
+
+.gallery img{
+    width:180px;
+    height:180px;
+    margin:10px;
+    border-radius:10px;
+    border:3px solid #003366;
+    object-fit:cover;
+}
+
+.button{
+    background:#003366;
+    color:white;
+    padding:10px 20px;
+    text-decoration:none;
+    border-radius:5px;
+}
+
+.button:hover{
+    background:#0059b3;
+}
+
+footer{
+    background:#003366;
+    color:white;
+    text-align:center;
+    padding:20px;
+    margin-top:40px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>ALUKA PARDHU</h1>
+
+<h3>Student Portfolio Website</h3>
+
+</header>
+
+<nav>
+
+<a href="#home">Home</a>
+
+<a href="#about">About</a>
+
+<a href="#academics">Academics</a>
+
+<a href="#gallery">Gallery</a>
+
+<a href="#contact">Contact</a>
+
+</nav>
+
+<!-- HOME -->
+
+<section id="home">
+
+<div class="profile">
+
+<div>
+
+<!-- Add your own image here -->
+<img src="images/myphoto.jpg" alt="My Photo">
+
+</div>
+
+<div class="info">
+
+<h2>Welcome</h2>
+
+<p>
+
+Hello! I am <b>ALUKA PARDHU</b>, an Information Technology student with
+interest in Web Development, Artificial Intelligence, Python Programming,
+Cyber Security and Software Development.
+
+</p>
+
+<br>
+
+<p>
+
+This portfolio contains my personal details, hobbies,
+academic information and contact details.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ABOUT -->
+
+<section id="about">
+
+<h2>About Me</h2>
+
+<p>
+
+I enjoy learning new technologies and creating innovative projects.
+My ambition is to become a successful Software Engineer and contribute
+to the IT industry.
+
+</p>
+
+<br>
+
+<h2>Hobbies</h2>
+
+<ul>
+
+<li>Programming</li>
+
+<li>Playing Cricket</li>
+
+<li>Listening to Music</li>
+
+<li>Watching Movies</li>
+
+<li>Learning New Technologies</li>
+
+<li>Web Designing</li>
+
+</ul>
+
+<br>
+
+<h2>Academic Goals</h2>
+
+<ol>
+
+<li>Complete B.Tech with Excellent CGPA</li>
+
+<li>Become a Full Stack Developer</li>
+
+<li>Learn Artificial Intelligence</li>
+
+<li>Develop Real-Time Projects</li>
+
+<li>Get Placed in a Top IT Company</li>
+
+</ol>
+
+</section>
+
+<!-- ACADEMICS -->
+
+<section id="academics">
+
+<h2>Subject Marks</h2>
+
+<table>
+
+<tr>
+
+<th>Subject</th>
+
+<th>Marks</th>
+
+<th>Grade</th>
+
+</tr>
+
+<tr>
+
+<td>Web Technology</td>
+
+<td>92</td>
+
+<td>A+</td>
+
+</tr>
+
+<tr>
+
+<td>Python Programming</td>
+
+<td>89</td>
+
+<td>A</td>
+
+</tr>
+
+<tr>
+
+<td>Database Management System</td>
+
+<td>90</td>
+
+<td>A+</td>
+
+</tr>
+
+<tr>
+
+<td>Operating System</td>
+
+<td>88</td>
+
+<td>A</td>
+
+</tr>
+
+<tr>
+
+<td>Computer Networks</td>
+
+<td>91</td>
+
+<td>A+</td>
+
+</tr>
+
+</table>
+
+</section>
+
+<!-- GALLERY -->
+
+<section id="gallery">
+
+<h2>My Gallery</h2>
+
+<div class="gallery">
+
+<!-- Replace these with your own images -->
+
+<img src="images/myphoto.jpg" alt="Photo 1">
+
+<img src="images/photo2.jpg" alt="Photo 2">
+
+<img src="images/photo3.jpg" alt="Photo 3">
+
+</div>
+
+</section>
+
+<!-- CONTACT -->
+
+<section id="contact">
+
+<h2>Contact Details</h2>
+
+<p><b>Name :</b> ALUKA PARDHU</p>
+
+<p><b>Email :</b> yourmail@gmail.com</p>
+
+<p><b>Phone :</b> +91 9876543210</p>
+
+<p><b>Address :</b> Telangana, India</p>
+
+<br>
+
+<a class="button" href="https://jntuh.ac.in" target="_blank">
+
+Visit College Website
+
+</a>
+
+</section>
+
+<footer>
+
+<h3>Thank You for Visiting My Portfolio</h3>
+
+<p>© 2026 ALUKA PARDHU | Student Portfolio Website</p>
+
+</footer>
+
+</body>
+</html>
