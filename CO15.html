@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GET and POST Method</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+
+background:linear-gradient(135deg,#00c9ff,#92fe9d);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+min-height:100vh;
+
+padding:30px;
+
+}
+
+.container{
+
+width:1000px;
+
+display:flex;
+
+gap:30px;
+
+flex-wrap:wrap;
+
+justify-content:center;
+
+}
+
+.card{
+
+background:white;
+
+width:450px;
+
+padding:30px;
+
+border-radius:20px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.3);
+
+}
+
+.card h2{
+
+text-align:center;
+
+margin-bottom:20px;
+
+color:#1565c0;
+
+}
+
+.card p{
+
+margin-bottom:20px;
+
+color:#555;
+
+line-height:24px;
+
+}
+
+input{
+
+width:100%;
+
+padding:12px;
+
+margin:10px 0;
+
+border:1px solid #ccc;
+
+border-radius:8px;
+
+font-size:16px;
+
+}
+
+button{
+
+width:100%;
+
+padding:12px;
+
+border:none;
+
+border-radius:30px;
+
+background:#1565c0;
+
+color:white;
+
+font-size:18px;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+button:hover{
+
+background:#0d47a1;
+
+}
+
+.info{
+
+margin-top:20px;
+
+padding:15px;
+
+background:#f4f4f4;
+
+border-left:5px solid green;
+
+border-radius:8px;
+
+font-size:15px;
+
+}
+
+.title{
+
+text-align:center;
+
+margin-bottom:30px;
+
+color:white;
+
+font-size:40px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div>
+
+<h1 class="title">HTML GET and POST Methods</h1>
+
+<div class="container">
+
+<div class="card">
+
+<h2>GET Method Form</h2>
+
+<p>
+The GET method sends data through the URL.
+You can see the entered values in the browser address bar.
+</p>
+
+<form action="" method="GET">
+
+<input type="text" name="username" placeholder="Enter Username">
+
+<input type="email" name="email" placeholder="Enter Email">
+
+<button type="submit">Submit Using GET</button>
+
+</form>
+
+<div class="info">
+
+<b>Example URL:</b><br>
+
+Exp5.html?username=Rahul&email=abc@gmail.com
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>POST Method Form</h2>
+
+<p>
+The POST method sends data securely in the request body.
+The entered values are <b>not visible</b> in the URL.
+</p>
+
+<form action="" method="POST">
+
+<input type="text" name="username" placeholder="Enter Username">
+
+<input type="password" name="password" placeholder="Enter Password">
+
+<button type="submit">Submit Using POST</button>
+
+</form>
+
+<div class="info">
+
+<b>Observation:</b><br>
+
+The browser URL does not display the submitted form values.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

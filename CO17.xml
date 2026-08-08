@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<college>
+
+    <student>
+
+        <rollno>192421418</rollno>
+
+        <name>ALUKA PARDHU</name>
+
+        <department>Computer Science Engineering</department>
+
+        <year>2</year>
+
+        <email>pardhu@gmail.com</email>
+
+        <mobile>9876543210</mobile>
+
+    </student>
+
+    <student>
+
+        <rollno>192421419</rollno>
+
+        <name>Rahul Kumar</name>
+
+        <department>Computer Science Engineering</department>
+
+        <year>2</year>
+
+        <email>rahul@gmail.com</email>
+
+        <mobile>9876543211</mobile>
+
+    </student>
+
+    <student>
+
+        <rollno>192421420</rollno>
+
+        <name>Sneha Reddy</name>
+
+        <department>Electronics Engineering</department>
+
+        <year>3</year>
+
+        <email>sneha@gmail.com</email>
+
+        <mobile>9876543212</mobile>
+
+    </student>
+
+    <student>
+
+        <rollno>192421421</rollno>
+
+        <name>Vamsi Krishna</name>
+
+        <department>Mechanical Engineering</department>
+
+        <year>4</year>
+
+        <email>vamsi@gmail.com</email>
+
+        <mobile>9876543213</mobile>
+
+    </student>
+
+    <student>
+
+        <rollno>192421422</rollno>
+
+        <name>Priya Sharma</name>
+
+        <department>Civil Engineering</department>
+
+        <year>1</year>
+
+        <email>priya@gmail.com</email>
+
+        <mobile>9876543214</mobile>
+
+    </student>
+
+</college>

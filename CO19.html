@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Internet Protocol Observation</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#2193b0,#6dd5ed);
+padding:40px;
+}
+
+.container{
+width:90%;
+max-width:1100px;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,.3);
+}
+
+h1{
+text-align:center;
+color:#1565c0;
+margin-bottom:15px;
+}
+
+h2{
+color:#0d47a1;
+margin:20px 0;
+}
+
+p{
+font-size:18px;
+line-height:30px;
+color:#444;
+}
+
+ol{
+margin-left:25px;
+line-height:35px;
+font-size:18px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+th{
+background:#1565c0;
+color:white;
+padding:15px;
+}
+
+td{
+padding:15px;
+text-align:center;
+border:1px solid #ddd;
+}
+
+tr:nth-child(even){
+background:#f2f2f2;
+}
+
+.footer{
+text-align:center;
+margin-top:30px;
+color:#555;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🌐 Internet Protocol Observation</h1>
+
+<p>
+This experiment demonstrates how to observe website requests using the browser's Developer Tools.
+</p>
+
+<h2>Steps to Perform</h2>
+
+<ol>
+
+<li>Open Google Chrome or Microsoft Edge.</li>
+
+<li>Visit any website (example: https://www.google.com).</li>
+
+<li>Press <b>F12</b> to open Developer Tools.</li>
+
+<li>Select the <b>Network</b> tab.</li>
+
+<li>Refresh the webpage.</li>
+
+<li>Observe the request details shown below.</li>
+
+</ol>
+
+<h2>Sample Observation Table</h2>
+
+<table>
+
+<tr>
+<th>URL</th>
+<th>Protocol</th>
+<th>Method</th>
+<th>Status</th>
+<th>File Type</th>
+<th>Size</th>
+<th>Load Time</th>
+</tr>
+
+<tr>
+<td>index.html</td>
+<td>HTTP/2</td>
+<td>GET</td>
+<td>200 OK</td>
+<td>Document</td>
+<td>18 KB</td>
+<td>120 ms</td>
+</tr>
+
+<tr>
+<td>style.css</td>
+<td>HTTP/2</td>
+<td>GET</td>
+<td>200 OK</td>
+<td>Stylesheet</td>
+<td>5 KB</td>
+<td>30 ms</td>
+</tr>
+
+<tr>
+<td>logo.png</td>
+<td>HTTP/2</td>
+<td>GET</td>
+<td>200 OK</td>
+<td>Image</td>
+<td>85 KB</td>
+<td>95 ms</td>
+</tr>
+
+<tr>
+<td>script.js</td>
+<td>HTTP/2</td>
+<td>GET</td>
+<td>200 OK</td>
+<td>JavaScript</td>
+<td>12 KB</td>
+<td>45 ms</td>
+</tr>
+
+</table>
+
+<div class="footer">
+
+<h3>✅ Observation Completed Successfully</h3>
+
+<p>Web Technology Laboratory</p>
+
+</div>
+
+</div>
+
+</body>
+</html>
