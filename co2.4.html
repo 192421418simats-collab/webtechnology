@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Student Result Analysis - ALUKA PARDHU</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            min-height: 100vh;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .student {
+            text-align: center;
+            color: #764ba2;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .form {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .form label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 6px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .full {
+            grid-column: span 2;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+            padding: 13px;
+        }
+
+        td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        tr:nth-child(even) {
+            background: #f4f5ff;
+        }
+
+        .analysis {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .card {
+            background: #f1f3ff;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            border-top: 5px solid #667eea;
+        }
+
+        .card h3 {
+            color: #764ba2;
+        }
+
+        .card p {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .result {
+            margin-top: 25px;
+            padding: 20px;
+            background: #e8f5e9;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        @media (max-width: 700px) {
+
+            .form {
+                grid-template-columns: 1fr;
+            }
+
+            .full {
+                grid-column: span 1;
+            }
+
+            .analysis {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Student Result Analysis System</h1>
+
+    <div class="student">
+        ALUKA PARDHU
+    </div>
+
+    <div class="form">
+
+        <div>
+            <label>Student Name</label>
+
+            <input type="text"
+                   id="studentName"
+                   value="ALUKA PARDHU">
+        </div>
+
+        <div>
+            <label>Roll Number</label>
+
+            <input type="text"
+                   id="rollNumber"
+                   value="101">
+        </div>
+
+        <div>
+            <label>HTML Marks</label>
+
+            <input type="number"
+                   id="html"
+                   min="0"
+                   max="100"
+                   placeholder="0 - 100">
+        </div>
+
+        <div>
+            <label>CSS Marks</label>
+
+            <input type="number"
+                   id="css"
+                   min="0"
+                   max="100"
+                   placeholder="0 - 100">
+        </div>
+
+        <div>
+            <label>JavaScript Marks</label>
+
+            <input type="number"
+                   id="javascript"
+                   min="0"
+                   max="100"
+                   placeholder="0 - 100">
+        </div>
+
+        <div>
+            <label>Python Marks</label>
+
+            <input type="number"
+                   id="python"
+                   min="0"
+                   max="100"
+                   placeholder="0 - 100">
+        </div>
+
+        <div class="full">
+            <button onclick="analyzeResult()">
+                Analyze Result
+            </button>
+        </div>
+
+    </div>
+
+
+    <table>
+
+        <thead>
+
+            <tr>
+                <th>Subject</th>
+                <th>Marks</th>
+                <th>Grade</th>
+            </tr>
+
+        </thead>
+
+        <tbody id="resultTable">
+
+        </tbody>
+
+    </table>
+
+
+    <div class="analysis">
+
+        <div class="card">
+            <h3>Total</h3>
+            <p id="total">0</p>
+        </div>
+
+        <div class="card">
+            <h3>Average</h3>
+            <p id="average">0</p>
+        </div>
+
+        <div class="card">
+            <h3>Highest</h3>
+            <p id="highest">0</p>
+        </div>
+
+        <div class="card">
+            <h3>Lowest</h3>
+            <p id="lowest">0</p>
+        </div>
+
+    </div>
+
+
+    <div class="result">
+
+        <h2 id="finalResult">
+            Enter marks and click Analyze Result
+        </h2>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    // Function to determine grade
+    function getGrade(mark) {
+
+        if (mark >= 90) {
+            return "A+";
+        }
+        else if (mark >= 80) {
+            return "A";
+        }
+        else if (mark >= 70) {
+            return "B";
+        }
+        else if (mark >= 60) {
+            return "C";
+        }
+        else if (mark >= 50) {
+            return "D";
+        }
+        else {
+            return "F";
+        }
+
+    }
+
+
+    // Main result analysis function
+    function analyzeResult() {
+
+        // Student object
+        let student = {
+            name: document.getElementById("studentName").value,
+            roll: document.getElementById("rollNumber").value
+        };
+
+
+        // Marks array
+        let subjects = [
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "Python"
+        ];
+
+
+        let marks = [
+
+            Number(document.getElementById("html").value),
+
+            Number(document.getElementById("css").value),
+
+            Number(document.getElementById("javascript").value),
+
+            Number(document.getElementById("python").value)
+
+        ];
+
+
+        // Check marks
+        for (let i = 0; i < marks.length; i++) {
+
+            if (marks[i] < 0 || marks[i] > 100) {
+
+                alert("Marks must be between 0 and 100.");
+
+                return;
+            }
+
+        }
+
+
+        // Calculate total using loop
+        let total = 0;
+
+        for (let i = 0; i < marks.length; i++) {
+
+            total = total + marks[i];
+
+        }
+
+
+        // Calculate average
+        let average = total / marks.length;
+
+
+        // Math.max and Math.min
+        let highest = Math.max(...marks);
+
+        let lowest = Math.min(...marks);
+
+
+        // Display table
+        let table = "";
+
+        for (let i = 0; i < subjects.length; i++) {
+
+            table +=
+
+                "<tr>" +
+
+                "<td>" +
+                subjects[i] +
+                "</td>" +
+
+                "<td>" +
+                marks[i] +
+                "</td>" +
+
+                "<td>" +
+                getGrade(marks[i]) +
+                "</td>" +
+
+                "</tr>";
+
+        }
+
+
+        document.getElementById("resultTable").innerHTML =
+            table;
+
+
+        // Display analysis
+        document.getElementById("total").innerHTML =
+            total + " / 400";
+
+
+        document.getElementById("average").innerHTML =
+            average.toFixed(2);
+
+
+        document.getElementById("highest").innerHTML =
+            highest;
+
+
+        document.getElementById("lowest").innerHTML =
+            lowest;
+
+
+        // Pass / Fail condition
+        let finalMessage;
+
+        if (average >= 40 && lowest >= 35) {
+
+            finalMessage =
+                "Congratulations " +
+                student.name +
+                "! You have PASSED.";
+
+        }
+        else {
+
+            finalMessage =
+                "Sorry " +
+                student.name +
+                ". You have FAILED.";
+
+        }
+
+
+        document.getElementById("finalResult").innerHTML =
+            finalMessage;
+
+    }
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Image Gallery - ALUKA PARDHU</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            min-height: 100vh;
+            padding: 30px 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .student {
+            text-align: center;
+            color: #764ba2;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        /* Main Image */
+
+        .main-image {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        #mainImage {
+            width: 650px;
+            max-width: 100%;
+            height: 380px;
+            object-fit: cover;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        #caption {
+            font-size: 20px;
+            font-weight: bold;
+            color: #555;
+            margin-top: 12px;
+        }
+
+        /* Gallery */
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .gallery-item {
+            cursor: pointer;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 4px solid transparent;
+            transition: 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.04);
+            border-color: #667eea;
+        }
+
+        .gallery-item.active {
+            border-color: #764ba2;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Buttons */
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 10px;
+            background: #667eea;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #764ba2;
+        }
+
+        /* Responsive */
+
+        @media (max-width: 800px) {
+
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            #mainImage {
+                height: 300px;
+            }
+
+        }
+
+        @media (max-width: 500px) {
+
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-item img {
+                height: 200px;
+            }
+
+            .controls {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+    <h1>Interactive Image Gallery</h1>
+
+    <div class="student">
+        ALUKA PARDHU
+    </div>
+
+
+    <!-- Main Image -->
+
+    <div class="main-image">
+
+        <img id="mainImage"
+             src="https://images.unsplash.com/photo-1562774053-701939374585"
+             alt="College Campus">
+
+        <p id="caption">
+            College Campus
+        </p>
+
+    </div>
+
+
+    <!-- Thumbnail Gallery -->
+
+    <div class="gallery">
+
+        <div class="gallery-item active"
+             onclick="changeImage(
+                'https://images.unsplash.com/photo-1562774053-701939374585',
+                'College Campus',
+                this
+             )">
+
+            <img src="https://images.unsplash.com/photo-1562774053-701939374585"
+                 alt="College Campus">
+
+        </div>
+
+
+        <div class="gallery-item"
+             onclick="changeImage(
+                'https://images.unsplash.com/photo-1523050854058-8df90110c9f1',
+                'University Building',
+                this
+             )">
+
+            <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1"
+                 alt="University Building">
+
+        </div>
+
+
+        <div class="gallery-item"
+             onclick="changeImage(
+                'https://images.unsplash.com/photo-1498243691581-b145c3f54a5a',
+                'College Library',
+                this
+             )">
+
+            <img src="https://images.unsplash.com/photo-1498243691581-b145c3f54a5a"
+                 alt="College Library">
+
+        </div>
+
+
+        <div class="gallery-item"
+             onclick="changeImage(
+                'https://images.unsplash.com/photo-1531482615713-2afd69097998',
+                'Students Learning',
+                this
+             )">
+
+            <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998"
+                 alt="Students Learning">
+
+        </div>
+
+
+        <div class="gallery-item"
+             onclick="changeImage(
+                'https://images.unsplash.com/photo-1519452575417-564c1401ecc0',
+                'College Classroom',
+                this
+             )">
+
+            <img src="https://images.unsplash.com/photo-1519452575417-564c1401ecc0"
+                 alt="College Classroom">
+
+        </div>
+
+
+        <div class="gallery-item"
+             onclick="changeImage(
+                'https://images.unsplash.com/photo-1503676260728-1c00da094a0b',
+                'Students',
+                this
+             )">
+
+            <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b"
+                 alt="Students">
+
+        </div>
+
+
+        <div class="gallery-item"
+             onclick="changeImage(
+                'https://images.unsplash.com/photo-1524178232363-1fb2b075b655',
+                'Lecture Hall',
+                this
+             )">
+
+            <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655"
+                 alt="Lecture Hall">
+
+        </div>
+
+
+        <div class="gallery-item"
+             onclick="changeImage(
+                'https://images.unsplash.com/photo-1516321318423-f06f85e504b3',
+                'Computer Lab',
+                this
+             )">
+
+            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3"
+                 alt="Computer Lab">
+
+        </div>
+
+    </div>
+
+
+    <!-- Controls -->
+
+    <div class="controls">
+
+        <button onclick="previousImage()">
+            ← Previous
+        </button>
+
+        <button onclick="nextImage()">
+            Next →
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    // Image data
+
+    const images = [
+
+        {
+            url:
+            "https://images.unsplash.com/photo-1562774053-701939374585",
+            caption:
+            "College Campus"
+        },
+
+        {
+            url:
+            "https://images.unsplash.com/photo-1523050854058-8df90110c9f1",
+            caption:
+            "University Building"
+        },
+
+        {
+            url:
+            "https://images.unsplash.com/photo-1498243691581-b145c3f54a5a",
+            caption:
+            "College Library"
+        },
+
+        {
+            url:
+            "https://images.unsplash.com/photo-1531482615713-2afd69097998",
+            caption:
+            "Students Learning"
+        },
+
+        {
+            url:
+            "https://images.unsplash.com/photo-1519452575417-564c1401ecc0",
+            caption:
+            "College Classroom"
+        },
+
+        {
+            url:
+            "https://images.unsplash.com/photo-1503676260728-1c00da094a0b",
+            caption:
+            "Students"
+        },
+
+        {
+            url:
+            "https://images.unsplash.com/photo-1524178232363-1fb2b075b655",
+            caption:
+            "Lecture Hall"
+        },
+
+        {
+            url:
+            "https://images.unsplash.com/photo-1516321318423-f06f85e504b3",
+            caption:
+            "Computer Lab"
+        }
+
+    ];
+
+
+    let currentIndex = 0;
+
+
+    // Change image
+
+    function changeImage(url, caption, element) {
+
+        document.getElementById("mainImage").src =
+            url;
+
+        document.getElementById("caption").textContent =
+            caption;
+
+
+        // Remove active class
+
+        let items =
+            document.querySelectorAll(".gallery-item");
+
+        items.forEach(function(item) {
+
+            item.classList.remove("active");
+
+        });
+
+
+        // Add active class
+
+        element.classList.add("active");
+
+
+        // Find current image
+
+        currentIndex =
+            images.findIndex(function(image) {
+
+                return image.url === url;
+
+            });
+
+    }
+
+
+    // Show image by index
+
+    function showImage(index) {
+
+        if (index < 0) {
+
+            index = images.length - 1;
+
+        }
+
+        if (index >= images.length) {
+
+            index = 0;
+
+        }
+
+
+        currentIndex = index;
+
+
+        document.getElementById("mainImage").src =
+            images[index].url;
+
+        document.getElementById("caption").textContent =
+            images[index].caption;
+
+
+        let items =
+            document.querySelectorAll(".gallery-item");
+
+
+        items.forEach(function(item) {
+
+            item.classList.remove("active");
+
+        });
+
+
+        items[index].classList.add("active");
+
+    }
+
+
+    // Previous image
+
+    function previousImage() {
+
+        showImage(currentIndex - 1);
+
+    }
+
+
+    // Next image
+
+    function nextImage() {
+
+        showImage(currentIndex + 1);
+
+    }
+
+
+</script>
+
+
+</body>
+
+</html>

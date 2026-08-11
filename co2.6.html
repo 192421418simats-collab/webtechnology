@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>To-Do List - ALUKA PARDHU</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .student {
+            text-align: center;
+            color: #764ba2;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .input-area {
+            display: flex;
+            gap: 10px;
+        }
+
+        #taskInput {
+            flex: 1;
+            padding: 14px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        #taskInput:focus {
+            border-color: #667eea;
+        }
+
+        .add-btn {
+            padding: 14px 22px;
+            border: none;
+            border-radius: 10px;
+            background: #667eea;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .add-btn:hover {
+            background: #764ba2;
+        }
+
+        #taskList {
+            list-style: none;
+            padding: 0;
+            margin-top: 25px;
+        }
+
+        .task {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            background: #f3f4ff;
+            margin-bottom: 12px;
+            padding: 14px;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+
+        .task-text {
+            flex: 1;
+            cursor: pointer;
+        }
+
+        .completed {
+            text-decoration: line-through;
+            color: #888;
+        }
+
+        .delete-btn {
+            border: none;
+            background: #e74c3c;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        .delete-btn:hover {
+            background: #c0392b;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .clear-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: #ff9800;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .clear-all {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: #e74c3c;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .count {
+            margin-top: 20px;
+            text-align: center;
+            color: #555;
+            font-weight: bold;
+        }
+
+        @media (max-width: 550px) {
+
+            .input-area {
+                flex-direction: column;
+            }
+
+            .task {
+                align-items: flex-start;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <h1>My To-Do List</h1>
+
+    <div class="student">
+        ALUKA PARDHU
+    </div>
+
+
+    <div class="input-area">
+
+        <input type="text"
+               id="taskInput"
+               placeholder="Enter a new task...">
+
+        <button class="add-btn"
+                onclick="addTask()">
+            Add Task
+        </button>
+
+    </div>
+
+
+    <ul id="taskList"></ul>
+
+
+    <div class="count">
+        Total Tasks:
+        <span id="taskCount">0</span>
+    </div>
+
+
+    <div class="buttons">
+
+        <button class="clear-btn"
+                onclick="clearCompleted()">
+            Clear Completed
+        </button>
+
+        <button class="clear-all"
+                onclick="clearAll()">
+            Clear All
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    // Get HTML elements
+    const taskInput =
+        document.getElementById("taskInput");
+
+    const taskList =
+        document.getElementById("taskList");
+
+    const taskCount =
+        document.getElementById("taskCount");
+
+
+    // Add task function
+    function addTask() {
+
+        let taskText =
+            taskInput.value.trim();
+
+
+        // Check empty input
+        if (taskText === "") {
+
+            alert("Please enter a task.");
+
+            return;
+        }
+
+
+        // Create list item
+        let li =
+            document.createElement("li");
+
+        li.className = "task";
+
+
+        // Create task text
+        let span =
+            document.createElement("span");
+
+        span.className = "task-text";
+
+        span.textContent = taskText;
+
+
+        // Mark task as completed
+        span.onclick = function() {
+
+            span.classList.toggle("completed");
+
+        };
+
+
+        // Create delete button
+        let deleteButton =
+            document.createElement("button");
+
+        deleteButton.className =
+            "delete-btn";
+
+        deleteButton.textContent =
+            "Delete";
+
+
+        // Delete task
+        deleteButton.onclick = function() {
+
+            li.remove();
+
+            updateCount();
+
+        };
+
+
+        // Add elements to list
+        li.appendChild(span);
+
+        li.appendChild(deleteButton);
+
+        taskList.appendChild(li);
+
+
+        // Clear input
+        taskInput.value = "";
+
+        taskInput.focus();
+
+
+        // Update task count
+        updateCount();
+
+    }
+
+
+    // Update task count
+    function updateCount() {
+
+        let tasks =
+            document.querySelectorAll(".task");
+
+        taskCount.textContent =
+            tasks.length;
+
+    }
+
+
+    // Clear completed tasks
+    function clearCompleted() {
+
+        let completedTasks =
+            document.querySelectorAll(".completed");
+
+        completedTasks.forEach(function(task) {
+
+            task.parentElement.remove();
+
+        });
+
+        updateCount();
+
+    }
+
+
+    // Clear all tasks
+    function clearAll() {
+
+        if (taskList.children.length === 0) {
+
+            alert("There are no tasks to clear.");
+
+            return;
+        }
+
+
+        let confirmation =
+            confirm("Are you sure you want to delete all tasks?");
+
+
+        if (confirmation) {
+
+            taskList.innerHTML = "";
+
+            updateCount();
+
+        }
+
+    }
+
+
+    // Add task using Enter key
+    taskInput.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (event.key === "Enter") {
+
+                addTask();
+
+            }
+
+        }
+    );
+
+</script>
+
+</body>
+
+</html>

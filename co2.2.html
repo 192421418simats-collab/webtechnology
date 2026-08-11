@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Registration - ALUKA PARDHU</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            min-height: 100vh;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 35px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .student {
+            text-align: center;
+            color: #764ba2;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 7px;
+            color: #333;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #667eea;
+        }
+
+        .gender {
+            display: flex;
+            gap: 25px;
+        }
+
+        .gender label {
+            font-weight: normal;
+        }
+
+        .gender input {
+            width: auto;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .error {
+            color: red;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        .success {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: #d4edda;
+            color: #155724;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Student Registration</h1>
+
+    <p class="student">ALUKA PARDHU</p>
+
+    <form id="registrationForm">
+
+        <div class="form-group">
+            <label for="name">Student Name</label>
+
+            <input type="text"
+                   id="name"
+                   placeholder="Enter your full name">
+
+            <div id="nameError" class="error"></div>
+        </div>
+
+
+        <div class="form-group">
+            <label for="email">Email Address</label>
+
+            <input type="text"
+                   id="email"
+                   placeholder="example@gmail.com">
+
+            <div id="emailError" class="error"></div>
+        </div>
+
+
+        <div class="form-group">
+            <label for="phone">Mobile Number</label>
+
+            <input type="text"
+                   id="phone"
+                   placeholder="Enter 10-digit mobile number">
+
+            <div id="phoneError" class="error"></div>
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Gender</label>
+
+            <div class="gender">
+
+                <label>
+                    <input type="radio"
+                           name="gender"
+                           value="Male">
+                    Male
+                </label>
+
+                <label>
+                    <input type="radio"
+                           name="gender"
+                           value="Female">
+                    Female
+                </label>
+
+            </div>
+
+            <div id="genderError" class="error"></div>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="course">Select Course</label>
+
+            <select id="course">
+
+                <option value="">-- Select Course --</option>
+                <option value="CSE">Computer Science Engineering</option>
+                <option value="ECE">Electronics and Communication</option>
+                <option value="EEE">Electrical Engineering</option>
+                <option value="MECH">Mechanical Engineering</option>
+
+            </select>
+
+            <div id="courseError" class="error"></div>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="password">Password</label>
+
+            <input type="password"
+                   id="password"
+                   placeholder="Enter password">
+
+            <div id="passwordError" class="error"></div>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="address">Address</label>
+
+            <textarea id="address"
+                      rows="4"
+                      placeholder="Enter your address"></textarea>
+
+            <div id="addressError" class="error"></div>
+
+        </div>
+
+
+        <button type="submit">
+            Register Student
+        </button>
+
+    </form>
+
+
+    <div id="successMessage" class="success">
+        Registration Successful! Welcome ALUKA PARDHU.
+    </div>
+
+</div>
+
+
+<script>
+
+    // Form event handling
+    document.getElementById("registrationForm")
+        .addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            validateForm();
+
+        });
+
+
+    function validateForm() {
+
+        // DOM methods
+        let name = document.getElementById("name").value.trim();
+        let email = document.getElementById("email").value.trim();
+        let phone = document.getElementById("phone").value.trim();
+        let password = document.getElementById("password").value;
+        let address = document.getElementById("address").value.trim();
+        let course = document.getElementById("course").value;
+
+        let gender = document.querySelector(
+            'input[name="gender"]:checked'
+        );
+
+
+        // Clear previous errors
+        document.getElementById("nameError").innerHTML = "";
+        document.getElementById("emailError").innerHTML = "";
+        document.getElementById("phoneError").innerHTML = "";
+        document.getElementById("genderError").innerHTML = "";
+        document.getElementById("courseError").innerHTML = "";
+        document.getElementById("passwordError").innerHTML = "";
+        document.getElementById("addressError").innerHTML = "";
+
+        let valid = true;
+
+
+        // Regular expression for name
+        let namePattern = /^[A-Za-z ]+$/;
+
+        if (name === "") {
+
+            document.getElementById("nameError").innerHTML =
+                "Please enter your name.";
+
+            valid = false;
+
+        }
+        else if (!namePattern.test(name)) {
+
+            document.getElementById("nameError").innerHTML =
+                "Name should contain only letters.";
+
+            valid = false;
+        }
+
+
+        // Regular expression for email
+        let emailPattern =
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (email === "") {
+
+            document.getElementById("emailError").innerHTML =
+                "Please enter your email.";
+
+            valid = false;
+
+        }
+        else if (!emailPattern.test(email)) {
+
+            document.getElementById("emailError").innerHTML =
+                "Enter a valid email address.";
+
+            valid = false;
+        }
+
+
+        // Regular expression for mobile number
+        let phonePattern = /^[6-9][0-9]{9}$/;
+
+        if (phone === "") {
+
+            document.getElementById("phoneError").innerHTML =
+                "Please enter your mobile number.";
+
+            valid = false;
+
+        }
+        else if (!phonePattern.test(phone)) {
+
+            document.getElementById("phoneError").innerHTML =
+                "Enter a valid 10-digit mobile number.";
+
+            valid = false;
+        }
+
+
+        // Gender validation
+        if (!gender) {
+
+            document.getElementById("genderError").innerHTML =
+                "Please select your gender.";
+
+            valid = false;
+        }
+
+
+        // Course validation
+        if (course === "") {
+
+            document.getElementById("courseError").innerHTML =
+                "Please select a course.";
+
+            valid = false;
+        }
+
+
+        // Password validation
+        if (password.length < 6) {
+
+            document.getElementById("passwordError").innerHTML =
+                "Password must contain at least 6 characters.";
+
+            valid = false;
+        }
+
+
+        // Address validation
+        if (address === "") {
+
+            document.getElementById("addressError").innerHTML =
+                "Please enter your address.";
+
+            valid = false;
+        }
+
+
+        // Final result
+        if (valid) {
+
+            document.getElementById("successMessage").style.display =
+                "block";
+
+            document.getElementById("registrationForm").reset();
+
+        }
+        else {
+
+            document.getElementById("successMessage").style.display =
+                "none";
+        }
+
+    }
+
+</script>
+
+</body>
+</html>

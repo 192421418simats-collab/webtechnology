@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Student Registration - ALUKA PARDHU</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            padding: 30px 20px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #667eea,
+                    #764ba2
+                );
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 35px;
+            border-radius: 25px;
+
+            box-shadow:
+                0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .student {
+            text-align: center;
+            color: #764ba2;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .full {
+            grid-column: span 2;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 7px;
+            color: #333;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 13px;
+
+            border: 2px solid #ddd;
+            border-radius: 9px;
+
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #667eea;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .gender {
+            display: flex;
+            gap: 20px;
+            padding-top: 10px;
+        }
+
+        .gender label {
+            font-weight: normal;
+        }
+
+        .gender input {
+            width: auto;
+            margin-right: 5px;
+        }
+
+        .checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checkbox input {
+            width: auto;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        button {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .submit {
+            background: #667eea;
+        }
+
+        .reset {
+            background: #e74c3c;
+        }
+
+        button:hover {
+            opacity: 0.85;
+        }
+
+        #message {
+            display: none;
+            margin-top: 25px;
+            padding: 18px;
+
+            background: #d4edda;
+            color: #155724;
+
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        @media (max-width: 650px) {
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full {
+                grid-column: span 1;
+            }
+
+            .container {
+                padding: 25px 18px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .gender {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<div class="container">
+
+    <h1>🎓 Student Registration Form</h1>
+
+    <div class="student">
+        Created by ALUKA PARDHU
+    </div>
+
+
+    <form id="registrationForm"
+          onsubmit="registerStudent(event)">
+
+
+        <div class="form-grid">
+
+
+            <!-- Student Name -->
+
+            <div class="form-group">
+
+                <label for="name">
+                    Student Name
+                </label>
+
+                <input type="text"
+                       id="name"
+                       placeholder="Enter your name"
+                       value="ALUKA PARDHU"
+                       required>
+
+            </div>
+
+
+            <!-- Roll Number -->
+
+            <div class="form-group">
+
+                <label for="roll">
+                    Roll Number
+                </label>
+
+                <input type="text"
+                       id="roll"
+                       placeholder="Enter roll number"
+                       required>
+
+            </div>
+
+
+            <!-- Email -->
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email Address
+                </label>
+
+                <input type="email"
+                       id="email"
+                       placeholder="example@gmail.com"
+                       required>
+
+            </div>
+
+
+            <!-- Phone -->
+
+            <div class="form-group">
+
+                <label for="phone">
+                    Mobile Number
+                </label>
+
+                <input type="tel"
+                       id="phone"
+                       placeholder="10-digit mobile number"
+                       pattern="[0-9]{10}"
+                       required>
+
+            </div>
+
+
+            <!-- Date of Birth -->
+
+            <div class="form-group">
+
+                <label for="dob">
+                    Date of Birth
+                </label>
+
+                <input type="date"
+                       id="dob"
+                       required>
+
+            </div>
+
+
+            <!-- Course -->
+
+            <div class="form-group">
+
+                <label for="course">
+                    Select Course
+                </label>
+
+                <select id="course"
+                        required>
+
+                    <option value="">
+                        -- Select Course --
+                    </option>
+
+                    <option>
+                        Computer Science Engineering
+                    </option>
+
+                    <option>
+                        Electronics and Communication
+                    </option>
+
+                    <option>
+                        Electrical Engineering
+                    </option>
+
+                    <option>
+                        Mechanical Engineering
+                    </option>
+
+                    <option>
+                        Civil Engineering
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- Gender -->
+
+            <div class="form-group">
+
+                <label>
+                    Gender
+                </label>
+
+                <div class="gender">
+
+                    <label>
+                        <input type="radio"
+                               name="gender"
+                               value="Male"
+                               required>
+                        Male
+                    </label>
+
+                    <label>
+                        <input type="radio"
+                               name="gender"
+                               value="Female">
+                        Female
+                    </label>
+
+                    <label>
+                        <input type="radio"
+                               name="gender"
+                               value="Other">
+                        Other
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <!-- Year -->
+
+            <div class="form-group">
+
+                <label for="year">
+                    Year of Study
+                </label>
+
+                <select id="year"
+                        required>
+
+                    <option value="">
+                        -- Select Year --
+                    </option>
+
+                    <option>1st Year</option>
+                    <option>2nd Year</option>
+                    <option>3rd Year</option>
+                    <option>4th Year</option>
+
+                </select>
+
+            </div>
+
+
+            <!-- Address -->
+
+            <div class="form-group full">
+
+                <label for="address">
+                    Address
+                </label>
+
+                <textarea id="address"
+                          placeholder="Enter your complete address"
+                          required></textarea>
+
+            </div>
+
+
+            <!-- Skills -->
+
+            <div class="form-group full">
+
+                <label for="skills">
+                    Technical Skills
+                </label>
+
+                <input type="text"
+                       id="skills"
+                       placeholder="Example: HTML, CSS, JavaScript, Python">
+
+            </div>
+
+
+            <!-- Terms -->
+
+            <div class="form-group full">
+
+                <label class="checkbox">
+
+                    <input type="checkbox"
+                           id="terms"
+                           required>
+
+                    I confirm that the information
+                    provided is correct.
+
+                </label>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- Buttons -->
+
+        <div class="buttons">
+
+            <button type="submit"
+                    class="submit">
+
+                Register Student
+
+            </button>
+
+            <button type="reset"
+                    class="reset"
+                    onclick="hideMessage()">
+
+                Reset Form
+
+            </button>
+
+        </div>
+
+
+    </form>
+
+
+    <!-- Success Message -->
+
+    <div id="message">
+
+        Registration Successful! 🎉
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+    function registerStudent(event) {
+
+        event.preventDefault();
+
+
+        let name =
+            document.getElementById("name").value;
+
+
+        let course =
+            document.getElementById("course").value;
+
+
+        let year =
+            document.getElementById("year").value;
+
+
+        document.getElementById(
+            "message"
+        ).innerHTML =
+
+            "🎉 Registration Successful!<br><br>" +
+
+            "Welcome <strong>" +
+            name +
+            "</strong>!<br>" +
+
+            "Course: <strong>" +
+            course +
+            "</strong><br>" +
+
+            "Year: <strong>" +
+            year +
+            "</strong>";
+
+
+        document.getElementById(
+            "message"
+        ).style.display = "block";
+
+
+        window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: "smooth"
+        });
+
+    }
+
+
+    function hideMessage() {
+
+        document.getElementById(
+            "message"
+        ).style.display = "none";
+
+    }
+
+</script>
+
+
+</body>
+
+</html>

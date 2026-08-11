@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Digital Clock & Stopwatch - ALUKA PARDHU</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #141e30, #243b55);
+            color: white;
+            padding: 30px 20px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 35px;
+            margin-bottom: 5px;
+        }
+
+        .student {
+            text-align: center;
+            color: #8ec5fc;
+            font-weight: bold;
+            margin-bottom: 35px;
+        }
+
+        .box {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 25px;
+            margin-bottom: 25px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .box h2 {
+            margin-bottom: 20px;
+        }
+
+        #clock {
+            font-size: 55px;
+            font-weight: bold;
+            letter-spacing: 4px;
+        }
+
+        #date {
+            font-size: 20px;
+            margin-top: 10px;
+            color: #ddd;
+        }
+
+        #stopwatch {
+            font-size: 50px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        button {
+            padding: 12px 22px;
+            margin: 5px;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .start {
+            background: #27ae60;
+        }
+
+        .pause {
+            background: #f39c12;
+        }
+
+        .reset {
+            background: #e74c3c;
+        }
+
+        button:hover {
+            opacity: 0.85;
+            transform: scale(1.04);
+        }
+
+        .lap {
+            background: #3498db;
+        }
+
+        #laps {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+            max-height: 180px;
+            overflow-y: auto;
+        }
+
+        #laps li {
+            background: rgba(255,255,255,0.1);
+            padding: 10px;
+            margin: 7px;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 600px) {
+
+            #clock {
+                font-size: 35px;
+            }
+
+            #stopwatch {
+                font-size: 35px;
+            }
+
+            h1 {
+                font-size: 27px;
+            }
+
+            button {
+                width: 90%;
+                margin: 6px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Digital Clock & Stopwatch</h1>
+
+    <div class="student">
+        ALUKA PARDHU
+    </div>
+
+
+    <!-- DIGITAL CLOCK -->
+
+    <div class="box">
+
+        <h2>🕐 Digital Clock</h2>
+
+        <div id="clock">
+            00:00:00
+        </div>
+
+        <div id="date">
+            Loading date...
+        </div>
+
+    </div>
+
+
+    <!-- STOPWATCH -->
+
+    <div class="box">
+
+        <h2>⏱ Stopwatch</h2>
+
+        <div id="stopwatch">
+            00:00:00.00
+        </div>
+
+        <button class="start"
+                onclick="startStopwatch()">
+            Start
+        </button>
+
+        <button class="pause"
+                onclick="pauseStopwatch()">
+            Pause
+        </button>
+
+        <button class="reset"
+                onclick="resetStopwatch()">
+            Reset
+        </button>
+
+        <button class="lap"
+                onclick="recordLap()">
+            Lap
+        </button>
+
+
+        <h3>Lap Times</h3>
+
+        <ul id="laps"></ul>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    /* ==========================
+       DIGITAL CLOCK
+    =========================== */
+
+    function updateClock() {
+
+        let now = new Date();
+
+        let hours = now.getHours();
+
+        let minutes = now.getMinutes();
+
+        let seconds = now.getSeconds();
+
+
+        hours =
+            hours < 10
+            ? "0" + hours
+            : hours;
+
+        minutes =
+            minutes < 10
+            ? "0" + minutes
+            : minutes;
+
+        seconds =
+            seconds < 10
+            ? "0" + seconds
+            : seconds;
+
+
+        document.getElementById("clock").textContent =
+            hours + ":" + minutes + ":" + seconds;
+
+
+        let dateOptions = {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric"
+        };
+
+
+        document.getElementById("date").textContent =
+            now.toLocaleDateString(
+                "en-IN",
+                dateOptions
+            );
+
+    }
+
+
+    // Update clock every second
+
+    setInterval(updateClock, 1000);
+
+    updateClock();
+
+
+    /* ==========================
+       STOPWATCH
+    =========================== */
+
+    let stopwatchTime = 0;
+
+    let stopwatchInterval = null;
+
+    let running = false;
+
+
+    // Start stopwatch
+
+    function startStopwatch() {
+
+        if (running) {
+            return;
+        }
+
+        running = true;
+
+        let startTime = Date.now() - stopwatchTime;
+
+
+        stopwatchInterval =
+            setInterval(function() {
+
+                stopwatchTime =
+                    Date.now() - startTime;
+
+                displayStopwatch();
+
+            }, 10);
+
+    }
+
+
+    // Pause stopwatch
+
+    function pauseStopwatch() {
+
+        if (!running) {
+            return;
+        }
+
+        running = false;
+
+        clearInterval(stopwatchInterval);
+
+    }
+
+
+    // Reset stopwatch
+
+    function resetStopwatch() {
+
+        running = false;
+
+        clearInterval(stopwatchInterval);
+
+        stopwatchTime = 0;
+
+        displayStopwatch();
+
+        document.getElementById("laps").innerHTML = "";
+
+    }
+
+
+    // Display stopwatch
+
+    function displayStopwatch() {
+
+        let milliseconds =
+            Math.floor(
+                (stopwatchTime % 1000) / 10
+            );
+
+        let totalSeconds =
+            Math.floor(
+                stopwatchTime / 1000
+            );
+
+        let seconds =
+            totalSeconds % 60;
+
+        let minutes =
+            Math.floor(totalSeconds / 60) % 60;
+
+        let hours =
+            Math.floor(totalSeconds / 3600);
+
+
+        hours =
+            hours.toString().padStart(2, "0");
+
+        minutes =
+            minutes.toString().padStart(2, "0");
+
+        seconds =
+            seconds.toString().padStart(2, "0");
+
+        milliseconds =
+            milliseconds.toString().padStart(2, "0");
+
+
+        document.getElementById("stopwatch").textContent =
+
+            hours + ":" +
+            minutes + ":" +
+            seconds + "." +
+            milliseconds;
+
+    }
+
+
+    /* ==========================
+       LAP FUNCTION
+    =========================== */
+
+    function recordLap() {
+
+        if (!running) {
+
+            alert(
+                "Start the stopwatch before recording a lap."
+            );
+
+            return;
+        }
+
+
+        let currentTime =
+            document.getElementById(
+                "stopwatch"
+            ).textContent;
+
+
+        let lapItem =
+            document.createElement("li");
+
+
+        lapItem.textContent =
+            "Lap " +
+            (document.getElementById("laps").children.length + 1) +
+            " : " +
+            currentTime;
+
+
+        document.getElementById("laps")
+            .appendChild(lapItem);
+
+    }
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Online Quiz - ALUKA PARDHU</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .quiz-container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 35px;
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .student {
+            text-align: center;
+            color: #764ba2;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .progress {
+            height: 10px;
+            background: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 25px;
+        }
+
+        #progressBar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(
+                90deg,
+                #667eea,
+                #764ba2
+            );
+            transition: 0.3s;
+        }
+
+        #questionNumber {
+            color: #764ba2;
+            font-weight: bold;
+        }
+
+        #question {
+            font-size: 24px;
+            color: #333;
+            margin: 15px 0 25px;
+        }
+
+        .option {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin: 12px 0;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            background: #f8f9ff;
+            text-align: left;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.2s;
+        }
+
+        .option:hover {
+            border-color: #667eea;
+            background: #eef0ff;
+        }
+
+        .option.correct {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+
+        .option.wrong {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+
+        .option:disabled {
+            cursor: not-allowed;
+        }
+
+        #nextBtn {
+            width: 100%;
+            padding: 14px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 10px;
+            background: #667eea;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        #nextBtn:hover {
+            background: #764ba2;
+        }
+
+        #result {
+            display: none;
+            text-align: center;
+        }
+
+        #result h2 {
+            color: #667eea;
+            font-size: 32px;
+        }
+
+        .score {
+            font-size: 50px;
+            font-weight: bold;
+            color: #27ae60;
+            margin: 20px;
+        }
+
+        .restart {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 10px;
+            background: #764ba2;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        @media (max-width: 600px) {
+
+            .quiz-container {
+                padding: 25px 18px;
+            }
+
+            #question {
+                font-size: 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="quiz-container">
+
+    <h1>💡 Web Technology Quiz</h1>
+
+    <div class="student">
+        ALUKA PARDHU
+    </div>
+
+
+    <!-- Quiz Section -->
+
+    <div id="quiz">
+
+        <div class="progress">
+            <div id="progressBar"></div>
+        </div>
+
+        <div id="questionNumber"></div>
+
+        <h2 id="question"></h2>
+
+        <div id="options"></div>
+
+        <button id="nextBtn"
+                onclick="nextQuestion()">
+            Next Question
+        </button>
+
+    </div>
+
+
+    <!-- Result Section -->
+
+    <div id="result">
+
+        <h2>🎉 Quiz Completed!</h2>
+
+        <p>Your Score</p>
+
+        <div class="score"
+             id="score">
+            0 / 10
+        </div>
+
+        <p id="message"></p>
+
+        <button class="restart"
+                onclick="restartQuiz()">
+            Restart Quiz
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    /* ==========================
+       QUIZ QUESTIONS
+    =========================== */
+
+    const questions = [
+
+        {
+            question:
+            "What does HTML stand for?",
+
+            options: [
+                "Hyper Text Markup Language",
+                "High Text Machine Language",
+                "Hyperlink Text Management Language",
+                "Home Tool Markup Language"
+            ],
+
+            answer: 0
+        },
+
+
+        {
+            question:
+            "Which language is used to style HTML pages?",
+
+            options: [
+                "Python",
+                "CSS",
+                "Java",
+                "C++"
+            ],
+
+            answer: 1
+        },
+
+
+        {
+            question:
+            "Which language is mainly used to add interactivity to webpages?",
+
+            options: [
+                "HTML",
+                "CSS",
+                "JavaScript",
+                "SQL"
+            ],
+
+            answer: 2
+        },
+
+
+        {
+            question:
+            "Which HTML tag is used to create a hyperlink?",
+
+            options: [
+                "<link>",
+                "<a>",
+                "<href>",
+                "<url>"
+            ],
+
+            answer: 1
+        },
+
+
+        {
+            question:
+            "Which CSS property changes text color?",
+
+            options: [
+                "font-style",
+                "background",
+                "color",
+                "text-design"
+            ],
+
+            answer: 2
+        },
+
+
+        {
+            question:
+            "Which symbol is used for an ID selector in CSS?",
+
+            options: [
+                ".",
+                "#",
+                "*",
+                "@"
+            ],
+
+            answer: 1
+        },
+
+
+        {
+            question:
+            "Which JavaScript method selects an element by ID?",
+
+            options: [
+                "getElementById()",
+                "getElement()",
+                "selectById()",
+                "findElement()"
+            ],
+
+            answer: 0
+        },
+
+
+        {
+            question:
+            "Which method displays a message box in JavaScript?",
+
+            options: [
+                "message()",
+                "alert()",
+                "display()",
+                "popup()"
+            ],
+
+            answer: 1
+        },
+
+
+        {
+            question:
+            "Which CSS layout system is useful for one-dimensional layouts?",
+
+            options: [
+                "Flexbox",
+                "Table",
+                "Float",
+                "Position"
+            ],
+
+            answer: 0
+        },
+
+
+        {
+            question:
+            "Which HTML tag is used to insert an image?",
+
+            options: [
+                "<picture>",
+                "<image>",
+                "<img>",
+                "<src>"
+            ],
+
+            answer: 2
+        }
+
+    ];
+
+
+    /* ==========================
+       VARIABLES
+    =========================== */
+
+    let currentQuestion = 0;
+
+    let score = 0;
+
+    let answered = false;
+
+
+    /* ==========================
+       LOAD QUESTION
+    =========================== */
+
+    function loadQuestion() {
+
+        answered = false;
+
+        let questionData =
+            questions[currentQuestion];
+
+
+        document.getElementById(
+            "questionNumber"
+        ).textContent =
+
+            "Question " +
+            (currentQuestion + 1) +
+            " of " +
+            questions.length;
+
+
+        document.getElementById(
+            "question"
+        ).textContent =
+
+            questionData.question;
+
+
+        let optionsContainer =
+            document.getElementById("options");
+
+
+        optionsContainer.innerHTML = "";
+
+
+        questionData.options.forEach(
+            function(option, index) {
+
+                let button =
+                    document.createElement("button");
+
+                button.className = "option";
+
+                button.textContent = option;
+
+
+                button.onclick =
+                    function() {
+
+                        selectAnswer(
+                            index,
+                            button
+                        );
+
+                    };
+
+
+                optionsContainer.appendChild(
+                    button
+                );
+
+            }
+        );
+
+
+        document.getElementById(
+            "nextBtn"
+        ).textContent =
+
+            currentQuestion ===
+            questions.length - 1
+
+            ? "Finish Quiz"
+
+            : "Next Question";
+
+
+        let progress =
+            ((currentQuestion) /
+            questions.length) * 100;
+
+
+        document.getElementById(
+            "progressBar"
+        ).style.width =
+            progress + "%";
+
+    }
+
+
+    /* ==========================
+       SELECT ANSWER
+    =========================== */
+
+    function selectAnswer(
+        selected,
+        selectedButton
+    ) {
+
+        if (answered) {
+            return;
+        }
+
+
+        answered = true;
+
+
+        let correctAnswer =
+            questions[currentQuestion].answer;
+
+
+        let buttons =
+            document.querySelectorAll(".option");
+
+
+        buttons.forEach(
+            function(button, index) {
+
+                button.disabled = true;
+
+
+                if (index === correctAnswer) {
+
+                    button.classList.add(
+                        "correct"
+                    );
+
+                }
+
+            }
+        );
+
+
+        if (selected === correctAnswer) {
+
+            selectedButton.classList.add(
+                "correct"
+            );
+
+            score++;
+
+        }
+        else {
+
+            selectedButton.classList.add(
+                "wrong"
+            );
+
+        }
+
+    }
+
+
+    /* ==========================
+       NEXT QUESTION
+    =========================== */
+
+    function nextQuestion() {
+
+        if (!answered) {
+
+            alert(
+                "Please select an answer first."
+            );
+
+            return;
+        }
+
+
+        currentQuestion++;
+
+
+        if (currentQuestion <
+            questions.length) {
+
+            loadQuestion();
+
+        }
+        else {
+
+            showResult();
+
+        }
+
+    }
+
+
+    /* ==========================
+       SHOW RESULT
+    =========================== */
+
+    function showResult() {
+
+        document.getElementById(
+            "quiz"
+        ).style.display = "none";
+
+
+        document.getElementById(
+            "result"
+        ).style.display = "block";
+
+
+        document.getElementById(
+            "score"
+        ).textContent =
+
+            score +
+            " / " +
+            questions.length;
+
+
+        let percentage =
+            (score / questions.length) * 100;
+
+
+        let message;
+
+
+        if (percentage >= 80) {
+
+            message =
+                "Excellent performance! 🌟";
+
+        }
+        else if (percentage >= 60) {
+
+            message =
+                "Very good! Keep learning. 👍";
+
+        }
+        else if (percentage >= 40) {
+
+            message =
+                "Good effort! Practice more. 📚";
+
+        }
+        else {
+
+            message =
+                "Keep practicing and try again! 💪";
+
+        }
+
+
+        document.getElementById(
+            "message"
+        ).textContent = message;
+
+    }
+
+
+    /* ==========================
+       RESTART QUIZ
+    =========================== */
+
+    function restartQuiz() {
+
+        currentQuestion = 0;
+
+        score = 0;
+
+        document.getElementById(
+            "result"
+        ).style.display = "none";
+
+
+        document.getElementById(
+            "quiz"
+        ).style.display = "block";
+
+
+        loadQuestion();
+
+    }
+
+
+    // Start quiz
+
+    loadQuestion();
+
+</script>
+
+</body>
+
+</html>

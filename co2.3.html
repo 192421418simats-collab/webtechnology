@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Scientific Calculator - ALUKA PARDHU</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 20px;
+        }
+
+        .calculator {
+            width: 380px;
+            max-width: 100%;
+            background: #171717;
+            padding: 25px;
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+
+        .student {
+            color: #b9b9ff;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        #display {
+            width: 100%;
+            height: 70px;
+            border: none;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            padding: 15px;
+            font-size: 26px;
+            text-align: right;
+            background: #292929;
+            color: white;
+            outline: none;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        button {
+            height: 55px;
+            border: none;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            background: #333;
+            color: white;
+        }
+
+        button:hover {
+            background: #555;
+            transform: scale(1.03);
+        }
+
+        .operator {
+            background: #667eea;
+        }
+
+        .scientific {
+            background: #764ba2;
+        }
+
+        .clear {
+            background: #e74c3c;
+        }
+
+        .equal {
+            background: #27ae60;
+        }
+
+        .zero {
+            grid-column: span 2;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="calculator">
+
+    <h1>Scientific Calculator</h1>
+
+    <div class="student">
+        ALUKA PARDHU
+    </div>
+
+    <input type="text"
+           id="display"
+           value="0"
+           readonly>
+
+    <div class="buttons">
+
+        <!-- First Row -->
+
+        <button class="clear"
+                onclick="clearDisplay()">
+            AC
+        </button>
+
+        <button class="scientific"
+                onclick="calculateSquare()">
+            x²
+        </button>
+
+        <button class="scientific"
+                onclick="calculateSquareRoot()">
+            √
+        </button>
+
+        <button class="operator"
+                onclick="appendValue('/')">
+            ÷
+        </button>
+
+
+        <!-- Second Row -->
+
+        <button onclick="appendValue('7')">7</button>
+
+        <button onclick="appendValue('8')">8</button>
+
+        <button onclick="appendValue('9')">9</button>
+
+        <button class="operator"
+                onclick="appendValue('*')">
+            ×
+        </button>
+
+
+        <!-- Third Row -->
+
+        <button onclick="appendValue('4')">4</button>
+
+        <button onclick="appendValue('5')">5</button>
+
+        <button onclick="appendValue('6')">6</button>
+
+        <button class="operator"
+                onclick="appendValue('-')">
+            −
+        </button>
+
+
+        <!-- Fourth Row -->
+
+        <button onclick="appendValue('1')">1</button>
+
+        <button onclick="appendValue('2')">2</button>
+
+        <button onclick="appendValue('3')">3</button>
+
+        <button class="operator"
+                onclick="appendValue('+')">
+            +
+        </button>
+
+
+        <!-- Fifth Row -->
+
+        <button class="zero"
+                onclick="appendValue('0')">
+            0
+        </button>
+
+        <button onclick="appendValue('.')">
+            .
+        </button>
+
+        <button class="equal"
+                onclick="calculate()">
+            =
+        </button>
+
+
+        <!-- Sixth Row -->
+
+        <button class="scientific"
+                onclick="calculateSin()">
+            sin
+        </button>
+
+        <button class="scientific"
+                onclick="calculateCos()">
+            cos
+        </button>
+
+        <button class="scientific"
+                onclick="calculateTan()">
+            tan
+        </button>
+
+        <button class="scientific"
+                onclick="calculateLog()">
+            log
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    // Get display element
+    let display = document.getElementById("display");
+
+
+    // Add value to display
+    function appendValue(value) {
+
+        if (display.value === "0") {
+            display.value = value;
+        }
+        else {
+            display.value += value;
+        }
+
+    }
+
+
+    // Clear calculator
+    function clearDisplay() {
+
+        display.value = "0";
+
+    }
+
+
+    // Basic arithmetic calculation
+    function calculate() {
+
+        try {
+
+            let expression = display.value;
+
+            let result = eval(expression);
+
+            display.value = result;
+
+        }
+        catch (error) {
+
+            display.value = "Error";
+
+        }
+
+    }
+
+
+    // Square
+    function calculateSquare() {
+
+        let number = Number(display.value);
+
+        display.value = Math.pow(number, 2);
+
+    }
+
+
+    // Square root
+    function calculateSquareRoot() {
+
+        let number = Number(display.value);
+
+        if (number >= 0) {
+            display.value = Math.sqrt(number);
+        }
+        else {
+            display.value = "Error";
+        }
+
+    }
+
+
+    // Sine function
+    function calculateSin() {
+
+        let number = Number(display.value);
+
+        display.value =
+            Math.sin(number * Math.PI / 180).toFixed(6);
+
+    }
+
+
+    // Cosine function
+    function calculateCos() {
+
+        let number = Number(display.value);
+
+        display.value =
+            Math.cos(number * Math.PI / 180).toFixed(6);
+
+    }
+
+
+    // Tangent function
+    function calculateTan() {
+
+        let number = Number(display.value);
+
+        display.value =
+            Math.tan(number * Math.PI / 180).toFixed(6);
+
+    }
+
+
+    // Logarithm
+    function calculateLog() {
+
+        let number = Number(display.value);
+
+        if (number > 0) {
+            display.value = Math.log10(number);
+        }
+        else {
+            display.value = "Error";
+        }
+
+    }
+
+</script>
+
+</body>
+
+</html>
