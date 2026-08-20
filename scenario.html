@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Campus Spark - Student Event Hub</title>
+
+<style>
+
+/* ---------- BASIC ---------- */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#fffaf5;
+    color:#333;
+    line-height:1.6;
+}
+
+a{
+    text-decoration:none;
+}
+
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+}
+
+/* ---------- HEADER ---------- */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:#ffffff;
+    box-shadow:0 3px 15px rgba(0,0,0,0.12);
+}
+
+.navbar{
+    min-height:75px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:21px;
+    font-weight:bold;
+    color:#6c2bd9;
+}
+
+.logo-icon{
+    width:45px;
+    height:45px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:13px;
+    background:linear-gradient(135deg,#6c2bd9,#ff6b35);
+    color:white;
+    font-size:20px;
+}
+
+.nav-links{
+    display:flex;
+    gap:28px;
+    list-style:none;
+}
+
+.nav-links a{
+    color:#333;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.nav-links a:hover{
+    color:#ff6b35;
+}
+
+/* ---------- HERO ---------- */
+
+.hero{
+    min-height:560px;
+    display:flex;
+    align-items:center;
+    position:relative;
+    overflow:hidden;
+    background:
+    linear-gradient(120deg,#4b1ca8,#7628d9,#ff6b35);
+    color:white;
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+    width:450px;
+    height:450px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.10);
+    right:-120px;
+    top:-180px;
+}
+
+.hero::after{
+    content:"";
+    position:absolute;
+    width:250px;
+    height:250px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.08);
+    left:-100px;
+    bottom:-100px;
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+}
+
+.hero-tag{
+    display:inline-block;
+    padding:8px 17px;
+    border-radius:30px;
+    background:rgba(255,255,255,0.17);
+    border:1px solid rgba(255,255,255,0.3);
+    font-size:13px;
+    font-weight:bold;
+}
+
+.hero h1{
+    max-width:760px;
+    margin:20px 0;
+    font-size:clamp(42px,6vw,72px);
+    line-height:1.05;
+}
+
+.hero h1 span{
+    color:#ffd166;
+}
+
+.hero p{
+    max-width:650px;
+    font-size:18px;
+    color:rgba(255,255,255,0.9);
+}
+
+.hero-buttons{
+    margin-top:30px;
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.hero-btn{
+    display:inline-block;
+    padding:14px 25px;
+    border-radius:30px;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.btn-main{
+    background:#ffd166;
+    color:#222;
+}
+
+.btn-main:hover{
+    transform:translateY(-4px);
+    box-shadow:0 10px 25px rgba(0,0,0,0.25);
+}
+
+.btn-outline{
+    border:2px solid white;
+    color:white;
+}
+
+.btn-outline:hover{
+    background:white;
+    color:#6c2bd9;
+}
+
+/* ---------- SECTIONS ---------- */
+
+section{
+    scroll-margin-top:80px;
+}
+
+.section{
+    padding:80px 0;
+}
+
+.section-heading{
+    text-align:center;
+    margin-bottom:45px;
+}
+
+.section-label{
+    color:#ff6b35;
+    font-size:13px;
+    font-weight:bold;
+    letter-spacing:2px;
+}
+
+.section-heading h2{
+    color:#3d176d;
+    font-size:36px;
+    margin:8px 0;
+}
+
+.section-heading p{
+    max-width:650px;
+    margin:auto;
+    color:#777;
+}
+
+/* ---------- CATEGORIES ---------- */
+
+.category-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:22px;
+}
+
+.category-card{
+    padding:30px 25px;
+    background:white;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 8px 25px rgba(70,40,100,0.10);
+    border-bottom:4px solid #ff6b35;
+    transition:0.3s;
+}
+
+.category-card:hover{
+    transform:translateY(-9px);
+    box-shadow:0 18px 35px rgba(70,40,100,0.18);
+}
+
+.category-icon{
+    width:65px;
+    height:65px;
+    margin:0 auto 18px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:50%;
+    background:#f2e9ff;
+    font-size:30px;
+}
+
+.category-card h3{
+    color:#4b1ca8;
+    margin-bottom:8px;
+}
+
+.category-card p{
+    color:#777;
+    font-size:14px;
+}
+
+/* ---------- EVENTS ---------- */
+
+#events{
+    background:#f4effb;
+}
+
+.event-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:30px;
+}
+
+.event-card{
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(60,30,90,0.12);
+    transition:0.3s;
+}
+
+.event-card:hover{
+    transform:translateY(-7px);
+    box-shadow:0 18px 40px rgba(60,30,90,0.20);
+}
+
+.event-banner{
+    height:190px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+    color:white;
+    font-size:27px;
+    font-weight:bold;
+    overflow:hidden;
+}
+
+.event-banner::before{
+    content:"";
+    position:absolute;
+    width:130px;
+    height:130px;
+    border:3px solid rgba(255,255,255,0.35);
+    border-radius:50%;
+}
+
+.event-banner span{
+    position:relative;
+    z-index:2;
+}
+
+.tech{
+    background:linear-gradient(135deg,#4b1ca8,#9b51e0);
+}
+
+.art{
+    background:linear-gradient(135deg,#ff416c,#ff6b35);
+}
+
+.sports{
+    background:linear-gradient(135deg,#009688,#43cea2);
+}
+
+.career{
+    background:linear-gradient(135deg,#ff9800,#ffcc33);
+}
+
+.event-content{
+    padding:27px;
+}
+
+.event-tag{
+    display:inline-block;
+    background:#f0e6ff;
+    color:#6c2bd9;
+    padding:5px 12px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:bold;
+}
+
+.event-content h3{
+    color:#3d176d;
+    font-size:24px;
+    margin:12px 0;
+}
+
+.event-info{
+    padding:13px 0;
+    margin:15px 0;
+    border-top:1px solid #eee;
+    border-bottom:1px solid #eee;
+}
+
+.event-info p{
+    font-size:13px;
+    margin:5px 0;
+}
+
+.event-description{
+    color:#777;
+    font-size:14px;
+}
+
+.event-status{
+    display:block;
+    color:#159957;
+    font-size:12px;
+    font-weight:bold;
+    margin:15px 0;
+}
+
+.register-btn{
+    display:block;
+    width:100%;
+    padding:13px;
+    text-align:center;
+    border-radius:10px;
+    background:#6c2bd9;
+    color:white;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.register-btn:hover{
+    background:#ff6b35;
+}
+
+/* ---------- REGISTRATION ---------- */
+
+#register{
+    background:#ffffff;
+}
+
+.registration-form{
+    max-width:900px;
+    margin:auto;
+    padding:40px;
+    background:#fffaf5;
+    border-radius:20px;
+    box-shadow:0 10px 35px rgba(60,30,90,0.12);
+    border:1px solid #eee;
+}
+
+.form-row{
+    display:flex;
+    gap:22px;
+}
+
+.form-group{
+    flex:1;
+    margin-bottom:20px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:7px;
+    color:#3d176d;
+    font-size:14px;
+    font-weight:bold;
+}
+
+input,
+select,
+textarea{
+    width:100%;
+    padding:13px 15px;
+    border:1px solid #d8cde5;
+    border-radius:10px;
+    outline:none;
+    background:white;
+    transition:0.3s;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    border-color:#6c2bd9;
+    box-shadow:0 0 0 3px rgba(108,43,217,0.12);
+}
+
+textarea{
+    resize:vertical;
+}
+
+.submit-btn{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    background:linear-gradient(90deg,#6c2bd9,#ff6b35);
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.submit-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(108,43,217,0.25);
+}
+
+/* ---------- CONTACT ---------- */
+
+#contact{
+    background:#f4effb;
+}
+
+.contact-box{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:40px;
+    padding:45px;
+    background:white;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(60,30,90,0.10);
+}
+
+.contact-box h2{
+    color:#3d176d;
+    margin:8px 0;
+}
+
+.contact-box p{
+    color:#777;
+}
+
+.contact-details{
+    min-width:300px;
+}
+
+.contact-details p{
+    margin:12px 0;
+    font-weight:bold;
+    color:#444;
+}
+
+/* ---------- CSS DEMO ---------- */
+
+.css-demo{
+    padding:35px;
+    background:white;
+    border-radius:20px;
+    box-shadow:0 8px 25px rgba(0,0,0,0.08);
+}
+
+.float-box{
+    float:left;
+    width:80px;
+    height:80px;
+    margin-right:20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:15px;
+    background:#6c2bd9;
+    color:white;
+    font-weight:bold;
+}
+
+.clear-box{
+    clear:both;
+}
+
+/* ---------- FOOTER ---------- */
+
+footer{
+    background:#24113d;
+    color:#ddd;
+}
+
+.footer-container{
+    padding:55px 0;
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr;
+    gap:50px;
+}
+
+footer h3,
+footer h4{
+    color:white;
+    margin-bottom:15px;
+}
+
+footer p{
+    color:#bbb;
+    font-size:14px;
+}
+
+.footer-links a{
+    display:block;
+    color:#bbb;
+    margin:8px 0;
+    transition:0.3s;
+}
+
+.footer-links a:hover{
+    color:#ffd166;
+}
+
+.footer-bottom{
+    text-align:center;
+    padding:18px;
+    border-top:1px solid rgba(255,255,255,0.15);
+    font-size:13px;
+}
+
+/* ---------- FLOATING BUTTON ---------- */
+
+.help-button{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    width:55px;
+    height:55px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    background:#ff6b35;
+    color:white;
+    font-size:24px;
+    font-weight:bold;
+    box-shadow:0 8px 20px rgba(0,0,0,0.25);
+    transition:0.3s;
+    z-index:2000;
+}
+
+.help-button:hover{
+    transform:scale(1.12) rotate(8deg);
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+@media(max-width:900px){
+
+    .category-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .event-grid{
+        grid-template-columns:1fr;
+    }
+
+    .footer-container{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+@media(max-width:600px){
+
+    .navbar{
+        flex-direction:column;
+        padding:15px 0;
+        gap:12px;
+    }
+
+    .nav-links{
+        gap:15px;
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .nav-links a{
+        font-size:13px;
+    }
+
+    .hero{
+        min-height:600px;
+        padding:70px 0;
+    }
+
+    .hero h1{
+        font-size:42px;
+    }
+
+    .category-grid{
+        grid-template-columns:1fr;
+    }
+
+    .event-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-row{
+        flex-direction:column;
+        gap:0;
+    }
+
+    .registration-form{
+        padding:25px;
+    }
+
+    .contact-box{
+        flex-direction:column;
+        align-items:flex-start;
+        padding:30px;
+    }
+
+    .contact-details{
+        min-width:auto;
+    }
+
+    .footer-container{
+        grid-template-columns:1fr;
+        gap:30px;
+    }
+
+    .help-button{
+        width:48px;
+        height:48px;
+        right:15px;
+        bottom:15px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+
+<nav class="navbar container">
+
+<div class="logo">
+    <div class="logo-icon">CS</div>
+    <span>Campus Spark</span>
+</div>
+
+<ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#register">Register</a></li>
+    <li><a href="#contact">Contact</a></li>
+</ul>
+
+</nav>
+
+</header>
+
+
+<main>
+
+<!-- HERO -->
+
+<section id="home" class="hero">
+
+<div class="hero-content container">
+
+<span class="hero-tag">CAMPUS EVENTS 2026</span>
+
+<h1>
+Make Your
+<span>Campus Moment</span>
+Memorable.
+</h1>
+
+<p>
+Discover exciting student activities, competitions,
+workshops and cultural programs happening across campus.
+</p>
+
+<div class="hero-buttons">
+
+<a href="#events" class="hero-btn btn-main">
+View Events
+</a>
+
+<a href="#register" class="hero-btn btn-outline">
+Join Now
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- CATEGORIES -->
+
+<section class="section">
+
+<div class="container">
+
+<div class="section-heading">
+
+<span class="section-label">EXPLORE</span>
+
+<h2>Find Your Passion</h2>
+
+<p>
+Choose from different campus activities and
+participate in something exciting.
+</p>
+
+</div>
+
+
+<div class="category-grid">
+
+<article class="category-card">
+
+<div class="category-icon">🚀</div>
+
+<h3>Innovation</h3>
+
+<p>
+Hackathons, coding challenges,
+robotics and technology workshops.
+</p>
+
+</article>
+
+
+<article class="category-card">
+
+<div class="category-icon">🎨</div>
+
+<h3>Arts & Culture</h3>
+
+<p>
+Dance, music, photography,
+drama and creative competitions.
+</p>
+
+</article>
+
+
+<article class="category-card">
+
+<div class="category-icon">⚽</div>
+
+<h3>Sports</h3>
+
+<p>
+Football, cricket, athletics,
+badminton and team competitions.
+</p>
+
+</article>
+
+
+<article class="category-card">
+
+<div class="category-icon">🌟</div>
+
+<h3>Career</h3>
+
+<p>
+Career talks, skill development,
+mock interviews and workshops.
+</p>
+
+</article>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- EVENTS -->
+
+<section id="events" class="section">
+
+<div class="container">
+
+<div class="section-heading">
+
+<span class="section-label">WHAT'S HAPPENING</span>
+
+<h2>Upcoming Campus Events</h2>
+
+<p>
+Pick an event, register and become part of
+the campus experience.
+</p>
+
+</div>
+
+
+<div class="event-grid">
+
+
+<!-- EVENT 1 -->
+
+<article class="event-card">
+
+<div class="event-banner tech">
+<span>CODE STORM</span>
+</div>
+
+<div class="event-content">
+
+<span class="event-tag">INNOVATION</span>
+
+<h3>Code Storm Challenge</h3>
+
+<div class="event-info">
+
+<p>📅 <strong>Date:</strong> 22 August 2026</p>
+
+<p>⏰ <strong>Time:</strong> 9:30 AM - 4:30 PM</p>
+
+<p>📍 <strong>Venue:</strong> Digital Innovation Lab</p>
+
+</div>
+
+<p class="event-description">
+Solve real-world programming problems and
+showcase your creative technical solutions.
+</p>
+
+<span class="event-status">
+● Seats Available
+</span>
+
+<a href="#register" class="register-btn">
+Join Event
+</a>
+
+</div>
+
+</article>
+
+
+<!-- EVENT 2 -->
+
+<article class="event-card">
+
+<div class="event-banner art">
+<span>VIBE FEST</span>
+</div>
+
+<div class="event-content">
+
+<span class="event-tag">CULTURAL</span>
+
+<h3>Campus Vibe Festival</h3>
+
+<div class="event-info">
+
+<p>📅 <strong>Date:</strong> 24 August 2026</p>
+
+<p>⏰ <strong>Time:</strong> 11:00 AM - 8:00 PM</p>
+
+<p>📍 <strong>Venue:</strong> Open Air Auditorium</p>
+
+</div>
+
+<p class="event-description">
+Enjoy live performances, dance battles,
+music shows and creative student activities.
+</p>
+
+<span class="event-status">
+● Registration Open
+</span>
+
+<a href="#register" class="register-btn">
+Join Event
+</a>
+
+</div>
+
+</article>
+
+
+<!-- EVENT 3 -->
+
+<article class="event-card">
+
+<div class="event-banner sports">
+<span>SPORTS ARENA</span>
+</div>
+
+<div class="event-content">
+
+<span class="event-tag">SPORTS</span>
+
+<h3>Campus Sports Carnival</h3>
+
+<div class="event-info">
+
+<p>📅 <strong>Date:</strong> 27 August 2026</p>
+
+<p>⏰ <strong>Time:</strong> 8:00 AM - 5:30 PM</p>
+
+<p>📍 <strong>Venue:</strong> Main Sports Arena</p>
+
+</div>
+
+<p class="event-description">
+Take part in cricket, football, volleyball,
+athletics and exciting team games.
+</p>
+
+<span class="event-status">
+● Team Registration Open
+</span>
+
+<a href="#register" class="register-btn">
+Join Event
+</a>
+
+</div>
+
+</article>
+
+
+<!-- EVENT 4 -->
+
+<article class="event-card">
+
+<div class="event-banner career">
+<span>CAREER BOOST</span>
+</div>
+
+<div class="event-content">
+
+<span class="event-tag">CAREER</span>
+
+<h3>Future Ready Workshop</h3>
+
+<div class="event-info">
+
+<p>📅 <strong>Date:</strong> 31 August 2026</p>
+
+<p>⏰ <strong>Time:</strong> 10:00 AM - 2:00 PM</p>
+
+<p>📍 <strong>Venue:</strong> Career Development Hall</p>
+
+</div>
+
+<p class="event-description">
+Improve your resume, communication,
+interview performance and career skills.
+</p>
+
+<span class="event-status">
+● Registration Open
+</span>
+
+<a href="#register" class="register-btn">
+Join Event
+</a>
+
+</div>
+
+</article>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- REGISTRATION -->
+
+<section id="register" class="section">
+
+<div class="container">
+
+<div class="section-heading">
+
+<span class="section-label">GET INVOLVED</span>
+
+<h2>Event Registration</h2>
+
+<p>
+Fill in your details below to reserve your place.
+</p>
+
+</div>
+
+
+<form class="registration-form" action="#" method="post">
+
+
+<div class="form-row">
+
+<div class="form-group">
+
+<label for="studentName">
+Full Name
+</label>
+
+<input
+type="text"
+id="studentName"
+name="studentName"
+placeholder="Enter your name"
+required
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label for="registerNumber">
+Student ID
+</label>
+
+<input
+type="text"
+id="registerNumber"
+name="registerNumber"
+placeholder="Enter student ID"
+required
+>
+
+</div>
+
+</div>
+
+
+<div class="form-row">
+
+<div class="form-group">
+
+<label for="department">
+Department
+</label>
+
+<select
+id="department"
+name="department"
+required
+>
+
+<option value="">
+Choose Department
+</option>
+
+<option>Computer Science</option>
+
+<option>Information Technology</option>
+
+<option>Electronics & Communication</option>
+
+<option>Electrical Engineering</option>
+
+<option>Mechanical Engineering</option>
+
+<option>Civil Engineering</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label for="email">
+Email
+</label>
+
+<input
+type="email"
+id="email"
+name="email"
+placeholder="yourname@example.com"
+required
+>
+
+</div>
+
+</div>
+
+
+<div class="form-group">
+
+<label for="event">
+Choose Event
+</label>
+
+<select
+id="event"
+name="event"
+required
+>
+
+<option value="">
+Select an Event
+</option>
+
+<option>Code Storm Challenge</option>
+
+<option>Campus Vibe Festival</option>
+
+<option>Campus Sports Carnival</option>
+
+<option>Future Ready Workshop</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label for="message">
+Message
+</label>
+
+<textarea
+id="message"
+name="message"
+rows="4"
+placeholder="Write your message or requirements..."
+></textarea>
+
+</div>
+
+
+<p style="font-size:13px;color:#777;margin-bottom:15px;">
+Please verify your information before submitting the registration.
+</p>
+
+
+<button
+type="submit"
+class="submit-btn"
+>
+Confirm Registration
+</button>
+
+
+</form>
+
+</div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section id="contact" class="section">
+
+<div class="container">
+
+<div class="contact-box">
+
+<div>
+
+<span class="section-label">
+SUPPORT
+</span>
+
+<h2>Need Event Assistance?</h2>
+
+<p>
+Our student activities team is available to
+help with registration and event-related questions.
+</p>
+
+</div>
+
+
+<div class="contact-details">
+
+<p>📧 campus@campusspark.edu</p>
+
+<p>☎ +91 98765 43210</p>
+
+<p>📍 Student Activity Centre</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- FLOAT DEMONSTRATION -->
+
+<section class="section">
+
+<div class="container">
+
+<div class="css-demo">
+
+<div class="float-box">
+CSS
+</div>
+
+<p>
+This area demonstrates the CSS float property.
+The text automatically flows around the floated box.
+This example also uses the clear property to return
+the following content to the normal document flow.
+</p>
+
+<div class="clear-box"></div>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<div class="container footer-container">
+
+
+<div>
+
+<h3>Campus Spark</h3>
+
+<p>
+Connect. Create. Compete.
+Make every campus experience count.
+</p>
+
+</div>
+
+
+<div class="footer-links">
+
+<h4>Navigation</h4>
+
+<a href="#home">Home</a>
+
+<a href="#events">Events</a>
+
+<a href="#register">Register</a>
+
+<a href="#contact">Contact</a>
+
+</div>
+
+
+<div>
+
+<h4>Student Hub</h4>
+
+<p>
+Campus Event Management Portal
+</p>
+
+<p style="margin-top:10px;">
+© 2026 Campus Spark
+</p>
+
+</div>
+
+
+</div>
+
+
+<div class="footer-bottom">
+
+© 2026 Campus Spark | All Rights Reserved
+
+</div>
+
+</footer>
+
+
+<!-- HELP BUTTON -->
+
+<a
+href="#contact"
+class="help-button"
+aria-label="Get help"
+>
+?
+</a>
+
+
+</body>
+</html>
