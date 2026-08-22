@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Responsive University Event Registration Portal">
+  <title>Saveetha University | Event Registration Portal</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .featured-event {
+      background: linear-gradient(135deg, #12304a 0%, #176b78 100%);
+      color: #ffffff;
+    }
+
+    .featured-event .eyebrow,
+    .featured-event .hero-date {
+      color: #bcebe5;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" id="top">
+    <nav class="navbar" aria-label="Main navigation">
+      <a class="brand" href="#top">
+        <span class="brand-mark" aria-hidden="true">SU</span>
+        <span>Saveetha University</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="#register">Register</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Student life, connected</p>
+        <h1 id="hero-title">Find your next <em>big moment.</em></h1>
+        <p class="hero-intro">Explore talks, showcases, competitions, and campus experiences built to spark your curiosity and bring the university community together.</p>
+        <a class="button button-primary" href="#events">Explore events <span aria-hidden="true">-&gt;</span></a>
+      </div>
+      <div class="hero-feature" aria-label="Featured event">
+        <span class="feature-label">Featured this month</span>
+        <p class="hero-date">18 OCTOBER 2026</p>
+        <h2>Hackathon</h2>
+        <p>Ideas, mentors, and a room full of possibilities.</p>
+      </div>
+    </section>
+
+    <section class="catalogue section-shell" id="events" aria-labelledby="events-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Make it count</p>
+          <h2 id="events-title">Browse the catalogue</h2>
+        </div>
+        <p class="section-note">Four ways to learn, compete, create, and connect.</p>
+      </div>
+
+      <div class="event-grid">
+        <article class="event-card featured-event">
+          <span class="status-badge open">Open</span>
+          <div class="event-icon" aria-hidden="true">01</div>
+          <p class="event-category">Technical</p>
+          <h3>Hackathon</h3>
+          <dl class="event-meta">
+            <div><dt>Date &amp; time</dt><dd>18 Oct, 9:30 AM</dd></div>
+            <div><dt>Venue</dt><dd>SAIL ground floor, Saveetha University</dd></div>
+          </dl>
+          <p class="event-description">Meet builders and mentors for a practical day of pitching, prototyping, and bold ideas.</p>
+          <a class="button button-light" href="#register">Register now <span aria-hidden="true">-&gt;</span></a>
+        </article>
+
+        <article class="event-card event-cultural">
+          <span class="status-badge open">Open</span>
+          <div class="event-icon" aria-hidden="true">02</div>
+          <p class="event-category">Cultural</p>
+          <h3>International Conference</h3>
+          <dl class="event-meta">
+            <div><dt>Date &amp; time</dt><dd>24 Oct, 11:00 AM</dd></div>
+            <div><dt>Venue</dt><dd>Kurunji Hall</dd></div>
+          </dl>
+          <p class="event-description">An evening of student music, movement, and stories from every corner of campus.</p>
+          <a class="button button-dark" href="#register">Register now <span aria-hidden="true">-&gt;</span></a>
+        </article>
+
+        <article class="event-card event-career">
+          <span class="status-badge closing">Closing soon</span>
+          <div class="event-icon" aria-hidden="true">03</div>
+          <p class="event-category">Placement</p>
+          <h3>NCC Camp</h3>
+          <dl class="event-meta">
+            <div><dt>Date &amp; time</dt><dd>02 Nov, 7:30 AM</dd></div>
+            <div><dt>Venue</dt><dd>Near Physical Academy, Saveetha College</dd></div>
+          </dl>
+          <p class="event-description">Get interview-ready with recruiters, portfolio reviews, and focused career workshops.</p>
+          <a class="button button-dark" href="#register">Register now <span aria-hidden="true">-&gt;</span></a>
+        </article>
+
+        <article class="event-card event-sports">
+          <span class="status-badge open">Open</span>
+          <div class="event-icon" aria-hidden="true">04</div>
+          <p class="event-category">Sports</p>
+          <h3>Sports Participation</h3>
+          <dl class="event-meta">
+            <div><dt>Date &amp; time</dt><dd>08 Nov, 4:00 PM</dd></div>
+            <div><dt>Venue</dt><dd>Near Ground, Saveetha College</dd></div>
+          </dl>
+          <p class="event-description">Bring your team spirit to a friendly campus tournament with games for every skill level.</p>
+          <a class="button button-dark" href="#register">Register now <span aria-hidden="true">-&gt;</span></a>
+        </article>
+      </div>
+    </section>
+
+    <section class="registration-section" id="register" aria-labelledby="register-title">
+      <div class="section-shell registration-layout">
+        <div class="registration-copy">
+          <p class="eyebrow">Save your seat</p>
+          <h2 id="register-title">Ready when you are.</h2>
+          <p>Complete the form and our student engagement team will send your confirmation and event details to your university email.</p>
+          <p class="small-note"><span style="color: #e6b65c; font-weight: 700;">Tip:</span> Use your official register number to speed up verification.</p>
+        </div>
+        <form class="registration-form" action="#" method="post">
+          <div class="form-row">
+            <label for="student-name">Student name</label>
+            <input type="text" id="student-name" name="student-name" placeholder="Aarav Menon" required>
+          </div>
+          <div class="form-row">
+            <label for="register-number">Register number</label>
+            <input type="text" id="register-number" name="register-number" placeholder="NU26CS0142" required>
+          </div>
+          <div class="form-row">
+            <label for="department">Department</label>
+            <select id="department" name="department" required>
+              <option value="">Select department</option>
+              <option>Computer Science</option>
+              <option>Business Administration</option>
+              <option>Arts and Humanities</option>
+              <option>Engineering</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="email">Email address</label>
+            <input type="email" id="email" name="email" placeholder="you@saveetha.edu" required>
+          </div>
+          <div class="form-row form-row-wide">
+            <label for="event-selection">Choose an event</label>
+            <select id="event-selection" name="event-selection" required>
+              <option value="">Select an event</option>
+              <option>Hackathon</option>
+              <option>International Conference</option>
+              <option>NCC Camp</option>
+              <option>Sports Participation</option>
+            </select>
+          </div>
+          <button class="button button-submit" type="submit">Complete registration <span aria-hidden="true">-&gt;</span></button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="contact">
+    <div class="section-shell footer-content">
+      <div>
+        <a class="brand footer-brand" href="#top"><span class="brand-mark" aria-hidden="true">SU</span><span>Saveetha University</span></a>
+        <p class="footer-tagline">A campus full of next chapters.</p>
+      </div>
+      <div class="footer-column">
+        <h2>Contact</h2>
+        <p>events@saveetha.edu<br>+1 (555) 018-2046</p>
+      </div>
+      <div class="footer-column">
+        <h2>Useful links</h2>
+        <a href="#events">Event catalogue</a>
+        <a href="#register">Registration help</a>
+        <a href="#top">Back to top</a>
+      </div>
+    </div>
+    <div class="section-shell footer-bottom">
+      <p>&copy; 2026 Saveetha University. All rights reserved.</p>
+      <p>Student Engagement Office</p>
+    </div>
+  </footer>
+</body>
+</html>
