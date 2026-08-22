@@ -1,0 +1,71 @@
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@WebServlet("/visitors")
+public class VisitorCounterServlet extends HttpServlet {
+
+    private final AtomicInteger visitorCount =
+            new AtomicInteger(0);
+
+    @Override
+    protected void doGet(HttpServletRequest request,
+                          HttpServletResponse response)
+            throws ServletException, IOException {
+
+        response.setContentType("text/html");
+
+        PrintWriter out = response.getWriter();
+
+        int count = visitorCount.incrementAndGet();
+
+        out.println("<!DOCTYPE html>");
+        out.println("<html>");
+
+        out.println("<head>");
+        out.println("<title>Visitor Counter</title>");
+        out.println("</head>");
+
+        out.println("<body>");
+
+        out.println("<h1>Thread-Safe Visitor Counter</h1>");
+
+        out.println("<p><b>Student Name:</b> ALUKA PARDHU</p>");
+        out.println("<p><b>Register Number:</b> 192421418</p>");
+
+        out.println("<hr>");
+
+        out.println("<h2>Total Visitors: "
+                + count + "</h2>");
+
+        out.println("<p>");
+        out.println("The visitor count is maintained using ");
+        out.println("<b>AtomicInteger</b>.");
+        out.println("</p>");
+
+        out.println("<p>");
+        out.println("AtomicInteger makes the increment operation ");
+        out.println("thread-safe when multiple users access the servlet ");
+        out.println("at the same time.");
+        out.println("</p>");
+
+        out.println("<h3>Concept Demonstrated</h3>");
+
+        out.println("<ul>");
+        out.println("<li>Servlet concurrency</li>");
+        out.println("<li>Shared variables</li>");
+        out.println("<li>Race conditions</li>");
+        out.println("<li>Thread safety</li>");
+        out.println("<li>AtomicInteger</li>");
+        out.println("</ul>");
+
+        out.println("</body>");
+        out.println("</html>");
+    }
+}
