@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Registration Preview</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="header">
+            <h1>Student Registration</h1>
+            <p>Enter your details to generate your student profile</p>
+        </div>
+
+        <div class="form-box">
+
+            <label>Student Name</label>
+            <input type="text" id="studentName" placeholder="Enter your name">
+
+            <label>Register Number</label>
+            <input type="text" id="registerNumber" placeholder="Enter register number">
+
+            <label>Department</label>
+            <select id="department">
+                <option value="">Select Department</option>
+                <option value="Computer Science and Engineering">
+                    Computer Science and Engineering
+                </option>
+                <option value="Information Technology">
+                    Information Technology
+                </option>
+                <option value="Electronics and Communication Engineering">
+                    Electronics and Communication Engineering
+                </option>
+                <option value="Electrical and Electronics Engineering">
+                    Electrical and Electronics Engineering
+                </option>
+                <option value="Mechanical Engineering">
+                    Mechanical Engineering
+                </option>
+            </select>
+
+            <label>Year of Study</label>
+            <select id="year">
+                <option value="">Select Year</option>
+                <option value="1st Year">1st Year</option>
+                <option value="2nd Year">2nd Year</option>
+                <option value="3rd Year">3rd Year</option>
+                <option value="4th Year">4th Year</option>
+            </select>
+
+            <div class="buttons">
+
+                <button id="displayBtn">
+                    Display Profile
+                </button>
+
+                <button id="removeBtn">
+                    Remove Profile
+                </button>
+
+            </div>
+
+            <p id="message"></p>
+
+        </div>
+
+        <div id="profileArea"></div>
+
+    </div>
+
+
+    <script>
+
+        // Selecting HTML elements using getElementById()
+
+        const studentName =
+            document.getElementById("studentName");
+
+        const registerNumber =
+            document.getElementById("registerNumber");
+
+        const department =
+            document.getElementById("department");
+
+        const year =
+            document.getElementById("year");
+
+        const displayBtn =
+            document.getElementById("displayBtn");
+
+        const removeBtn =
+            document.getElementById("removeBtn");
+
+        const profileArea =
+            document.getElementById("profileArea");
+
+        const message =
+            document.getElementById("message");
+
+
+        // Display Profile
+
+        displayBtn.addEventListener("click", function () {
+
+            let name = studentName.value.trim();
+            let regNo = registerNumber.value.trim();
+            let dept = department.value;
+            let studyYear = year.value;
+
+
+            // Validation
+
+            if (
+                name === "" ||
+                regNo === "" ||
+                dept === "" ||
+                studyYear === ""
+            ) {
+
+                message.textContent =
+                    "Please fill in all the details.";
+
+                message.classList.add("error");
+
+                return;
+            }
+
+
+            // Clear previous profile
+
+            profileArea.textContent = "";
+
+
+            // Create profile card
+
+            const card =
+                document.createElement("div");
+
+            card.classList.add("profile");
+
+
+            // Create heading
+
+            const title =
+                document.createElement("h2");
+
+            title.textContent =
+                "Student Profile";
+
+
+            // Create student information
+
+            const nameText =
+                document.createElement("p");
+
+            nameText.textContent =
+                "Name: " + name;
+
+
+            const regText =
+                document.createElement("p");
+
+            regText.textContent =
+                "Register Number: " + regNo;
+
+
+            const deptText =
+                document.createElement("p");
+
+            deptText.textContent =
+                "Department: " + dept;
+
+
+            const yearText =
+                document.createElement("p");
+
+            yearText.textContent =
+                "Year of Study: " + studyYear;
+
+
+            // Add elements to card
+
+            card.appendChild(title);
+
+            card.appendChild(nameText);
+
+            card.appendChild(regText);
+
+            card.appendChild(deptText);
+
+            card.appendChild(yearText);
+
+
+            // Add card to webpage
+
+            profileArea.appendChild(card);
+
+
+            // Success message
+
+            message.textContent =
+                "Profile generated successfully!";
+
+            message.classList.remove("error");
+
+            message.classList.add("success");
+
+        });
+
+
+        // Remove Profile
+
+        removeBtn.addEventListener("click", function () {
+
+            profileArea.textContent = "";
+
+            message.textContent =
+                "Student profile removed.";
+
+            message.classList.remove("error");
+
+            message.classList.add("success");
+
+        });
+
+    </script>
+
+</body>
+</html>
