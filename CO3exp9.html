@@ -1,0 +1,97 @@
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@WebServlet("/lifecycle")
+public class LifecycleServlet extends HttpServlet {
+
+    private static int constructorCount = 0;
+    private static int initCount = 0;
+    private static int serviceCount = 0;
+    private static int destroyCount = 0;
+
+    public LifecycleServlet() {
+
+        constructorCount++;
+
+        System.out.println("Constructor called");
+    }
+
+    @Override
+    public void init() throws ServletException {
+
+        initCount++;
+
+        System.out.println("init() called");
+    }
+
+    @Override
+    protected void service(HttpServletRequest request,
+                           HttpServletResponse response)
+            throws ServletException, IOException {
+
+        serviceCount++;
+
+        System.out.println("service() called");
+
+        response.setContentType("text/html");
+
+        PrintWriter out = response.getWriter();
+
+        out.println("<!DOCTYPE html>");
+        out.println("<html>");
+        out.println("<head>");
+        out.println("<title>Servlet Lifecycle</title>");
+        out.println("</head>");
+
+        out.println("<body>");
+
+        out.println("<h1>Servlet Lifecycle Demonstration</h1>");
+
+        out.println("<p><b>Student Name:</b> ALUKA PARDHU</p>");
+        out.println("<p><b>Register Number:</b> 192421418</p>");
+
+        out.println("<hr>");
+
+        out.println("<h3>Lifecycle Method Counts</h3>");
+
+        out.println("<p>Constructor called: "
+                + constructorCount + " time(s)</p>");
+
+        out.println("<p>init() called: "
+                + initCount + " time(s)</p>");
+
+        out.println("<p>service() called: "
+                + serviceCount + " time(s)</p>");
+
+        out.println("<p>destroy() called: "
+                + destroyCount + " time(s)</p>");
+
+        out.println("<hr>");
+
+        out.println("<h3>Lifecycle Order</h3>");
+
+        out.println("<ol>");
+        out.println("<li>Constructor</li>");
+        out.println("<li>init()</li>");
+        out.println("<li>service()</li>");
+        out.println("<li>destroy()</li>");
+        out.println("</ol>");
+
+        out.println("</body>");
+        out.println("</html>");
+    }
+
+    @Override
+    public void destroy() {
+
+        destroyCount++;
+
+        System.out.println("destroy() called");
+    }
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Experiment 2 - Student Registration</title>
+</head>
+<body>
+
+    <h1>Student Registration List</h1>
+
+    <input type="text" id="studentName" placeholder="Student Name">
+    <input type="text" id="regNo" placeholder="Register Number">
+    <input type="text" id="department" placeholder="Department">
+
+    <button onclick="addStudent()">Add Student</button>
+    <button onclick="clearAll()">Clear All</button>
+
+    <ul id="studentList"></ul>
+
+    <script>
+        function addStudent() {
+            let name = document.getElementById("studentName").value;
+            let reg = document.getElementById("regNo").value;
+            let dept = document.getElementById("department").value;
+
+            if (name === "" || reg === "" || dept === "") {
+                alert("Please fill all fields");
+                return;
+            }
+
+            let li = document.createElement("li");
+
+            li.textContent = name + " | " + reg + " | " + dept;
+
+            let removeButton = document.createElement("button");
+            removeButton.textContent = "Remove";
+
+            removeButton.onclick = function () {
+                li.remove();
+            };
+
+            li.appendChild(removeButton);
+            document.getElementById("studentList").appendChild(li);
+
+            document.getElementById("studentName").value = "";
+            document.getElementById("regNo").value = "";
+            document.getElementById("department").value = "";
+        }
+
+        function clearAll() {
+            document.getElementById("studentList").innerHTML = "";
+        }
+    </script>
+
+</body>
+</html>

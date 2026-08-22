@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Experiment 5 - Cross Browser Compatibility</title>
+
+    <style>
+
+        body {
+            font-family: Arial;
+            padding: 20px;
+        }
+
+        .box {
+            padding: 20px;
+            border: 2px solid black;
+        }
+
+        @supports (display: grid) {
+            .box {
+                display: grid;
+            }
+        }
+
+        @supports not (display: grid) {
+            .box {
+                display: block;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <h2>Cross-Browser Compatibility</h2>
+
+    <div class="box">
+
+        <p id="result">
+            Click the button to check browser support.
+        </p>
+
+        <button onclick="checkBrowser()">
+            Check Browser Features
+        </button>
+
+    </div>
+
+    <script>
+
+        function checkBrowser() {
+
+            let result = "";
+
+            // Check localStorage
+            if (typeof localStorage !== "undefined") {
+                result += "localStorage: Supported<br>";
+            } else {
+                result += "localStorage: Not Supported<br>";
+            }
+
+            // Check querySelector
+            if (document.querySelector) {
+                result += "querySelector(): Supported<br>";
+            } else {
+                result += "querySelector(): Not Supported<br>";
+            }
+
+            // Check addEventListener
+            if (window.addEventListener) {
+                result += "addEventListener(): Supported<br>";
+            } else {
+                result += "addEventListener(): Not Supported<br>";
+            }
+
+            // Check geolocation
+            if (navigator.geolocation) {
+                result += "Geolocation: Supported<br>";
+            } else {
+                result += "Geolocation: Not Supported<br>";
+            }
+
+            document.getElementById("result").innerHTML = result;
+        }
+
+    </script>
+
+</body>
+</html>

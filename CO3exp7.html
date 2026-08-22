@@ -1,0 +1,114 @@
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@WebServlet("/student")
+public class StudentRegistrationServlet extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest request,
+                          HttpServletResponse response)
+            throws ServletException, IOException {
+
+        response.setContentType("text/html");
+
+        PrintWriter out = response.getWriter();
+
+        out.println("<!DOCTYPE html>");
+        out.println("<html>");
+        out.println("<head>");
+        out.println("<title>Student Registration</title>");
+        out.println("</head>");
+
+        out.println("<body>");
+
+        out.println("<h1>Student Registration Form</h1>");
+
+        out.println("<form method='post' action='student'>");
+
+        out.println("Student Name: ");
+        out.println("<input type='text' name='name'><br><br>");
+
+        out.println("Register Number: ");
+        out.println("<input type='text' name='regno' "
+                + "value='192421418'><br><br>");
+
+        out.println("Email: ");
+        out.println("<input type='email' name='email'><br><br>");
+
+        out.println("Department: ");
+        out.println("<input type='text' name='department'><br><br>");
+
+        out.println("Semester: ");
+        out.println("<input type='text' name='semester'><br><br>");
+
+        out.println("<input type='submit' value='Register'>");
+
+        out.println("</form>");
+
+        out.println("</body>");
+        out.println("</html>");
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request,
+                           HttpServletResponse response)
+            throws ServletException, IOException {
+
+        response.setContentType("text/html");
+
+        String name = request.getParameter("name");
+        String regno = request.getParameter("regno");
+        String email = request.getParameter("email");
+        String department = request.getParameter("department");
+        String semester = request.getParameter("semester");
+
+        PrintWriter out = response.getWriter();
+
+        out.println("<!DOCTYPE html>");
+        out.println("<html>");
+        out.println("<head>");
+        out.println("<title>Registration Result</title>");
+        out.println("</head>");
+
+        out.println("<body>");
+
+        if (name == null || name.trim().isEmpty() ||
+            regno == null || regno.trim().isEmpty() ||
+            email == null || email.trim().isEmpty() ||
+            department == null || department.trim().isEmpty() ||
+            semester == null || semester.trim().isEmpty()) {
+
+            out.println("<h2>Please fill all the fields.</h2>");
+
+        } else {
+
+            out.println("<h1>Registration Successful</h1>");
+
+            out.println("<h2>Submitted Student Details</h2>");
+
+            out.println("<p><b>Student Name:</b> "
+                    + name + "</p>");
+
+            out.println("<p><b>Register Number:</b> "
+                    + regno + "</p>");
+
+            out.println("<p><b>Email:</b> "
+                    + email + "</p>");
+
+            out.println("<p><b>Department:</b> "
+                    + department + "</p>");
+
+            out.println("<p><b>Semester:</b> "
+                    + semester + "</p>");
+        }
+
+        out.println("</body>");
+        out.println("</html>");
+    }
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Experiment 4 - Browser Information</title>
+</head>
+
+<body>
+
+    <h2>Browser Information Dashboard</h2>
+
+    <button onclick="showInfo()">Show Browser Information</button>
+
+    <div id="info"></div>
+
+    <script>
+        function showInfo() {
+
+            document.getElementById("info").innerHTML =
+                "<h3>Browser Details</h3>" +
+
+                "Current URL: " + window.location.href + "<br><br>" +
+
+                "Browser Language: " + navigator.language + "<br><br>" +
+
+                "Online Status: " +
+                (navigator.onLine ? "Online" : "Offline") +
+                "<br><br>" +
+
+                "Screen Width: " + screen.width + "<br><br>" +
+
+                "Screen Height: " + screen.height + "<br><br>" +
+
+                "Window Width: " + window.innerWidth + "<br><br>" +
+
+                "Window Height: " + window.innerHeight + "<br><br>" +
+
+                "Scroll X: " + window.scrollX + "<br><br>" +
+
+                "Scroll Y: " + window.scrollY;
+        }
+    </script>
+
+</body>
+</html>

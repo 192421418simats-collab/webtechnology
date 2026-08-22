@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Experiment 1 - Student Profile</title>
+</head>
+<body>
+
+    <h1 id="heading">Student Profile</h1>
+
+    <div id="profile">
+        <p id="name">Name: ALUKA PARDHU</p>
+        <p id="reg">Register No: 192421418</p>
+        <p id="dept">Department: Information Technology</p>
+    </div>
+
+    <button onclick="changeHeading()">Change Heading</button>
+    <button onclick="changeColor()">Change Text Color</button>
+    <button onclick="changeBackground()">Change Background</button>
+    <button onclick="hideProfile()">Show / Hide Profile</button>
+
+    <script>
+        function changeHeading() {
+            document.getElementById("heading").textContent =
+                "My Student Profile";
+        }
+
+        function changeColor() {
+            document.querySelector("#profile").style.color = "blue";
+        }
+
+        function changeBackground() {
+            document.getElementById("profile").style.backgroundColor = "lightyellow";
+        }
+
+        function hideProfile() {
+            document.getElementById("profile").classList.toggle("hidden");
+            
+            if (document.getElementById("profile").style.display === "none") {
+                document.getElementById("profile").style.display = "block";
+            } else {
+                document.getElementById("profile").style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+</html>
