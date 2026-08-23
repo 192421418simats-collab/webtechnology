@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>02 Registration Form | Web Lab</title>
+<link rel="stylesheet" href="../experiments.css">
+</head>
+<body data-experiment="register">
+<div class="page">
+<div class="topbar">
+<a class="brand" href="../index.html">
+<span class="brand-mark">WL</span>WEB LAB</a>
+<a class="back" href="../index.html">ALL EXPERIMENTS</a>
+</div>
+<header>
+<p class="eyebrow">EXPERIMENT 02 / FORMS + JS</p>
+<h1>Student <em>Registration</em>
+</h1>
+<p>Use DOM events and regular expressions to validate a complete student account form.</p>
+</header>
+<main class="lab">
+<form class="panel" id="register-form">
+<h2>Create account</h2>
+<label>Full name<input class="field" name="name" required>
+</label>
+<label>Email<input class="field" name="email" type="email" required>
+</label>
+<label>Password<input class="field" name="password" type="password" required>
+</label>
+<label>Student ID<input class="field" name="id" placeholder="STU-2026" required>
+</label>
+<button class="button">Validate registration</button>
+</form>
+<section class="panel">
+<h2>Validation output</h2>
+<div class="output" id="output">Submit the form to run four checks.</div>
+</section>
+</main>
+<footer>
+<span>02 / 10</span>
+<span>HTML.CSS.JS</span>
+</footer>
+</div>
+<script src="../experiments.js">
+</script>
+</body>
+</html>

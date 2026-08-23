@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>03 Scientific Calculator | Web Lab</title>
+<link rel="stylesheet" href="../experiments.css">
+</head>
+<body data-experiment="calculator">
+<div class="page">
+<div class="topbar">
+<a class="brand" href="../index.html">
+<span class="brand-mark">WL</span>WEB LAB</a>
+<a class="back" href="../index.html">ALL EXPERIMENTS</a>
+</div>
+<header>
+<p class="eyebrow">EXPERIMENT 03 / MATH + JS</p>
+<h1>Scientific <em>Calculator</em>
+</h1>
+<p>Combine click events, arithmetic operators, and JavaScript's Math object.</p>
+</header>
+<main class="lab">
+<section class="panel" style="max-width:390px">
+<h2>Calculate</h2>
+<input class="display" id="display" value="0" readonly>
+<div class="keys">${['sin','cos','sqrt','C','7','8','9','/','4','5','6','*','1','2','3','-','0','.','=','+'].map(k=>`<button data-key="${k}">${k}</button>`).join('')}</div>
+</section>
+<section class="panel">
+<h2>Try these</h2>
+<p class="mono">sin(30)</p>
+<p class="mono">sqrt(81)</p>
+<p class="mono">12 / 4 + 8</p>
+<div class="output" id="output">Trigonometry uses degrees for classroom-friendly results.</div>
+</section>
+</main>
+<footer>
+<span>03 / 10</span>
+<span>HTML.CSS.JS</span>
+</footer>
+</div>
+<script>document.querySelector('.keys').innerHTML=['sin','cos','sqrt','C','7','8','9','/','4','5','6','*','1','2','3','-','0','.','=','+'].map(k=>`<button data-key="${k}">${k}</button>`).join('')</script>
+<script src="../experiments.js">
+</script>
+</body>
+</html>

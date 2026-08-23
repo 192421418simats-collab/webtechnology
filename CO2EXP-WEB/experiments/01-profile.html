@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>01 Student Profile | Web Lab</title>
+<link rel="stylesheet" href="../experiments.css">
+</head>
+<body data-experiment="profile">
+<div class="page">
+<div class="topbar">
+<a class="brand" href="../index.html">
+<span class="brand-mark">WL</span>WEB LAB</a>
+<a class="back" href="../index.html">ALL EXPERIMENTS</a>
+</div>
+<header>
+<p class="eyebrow">EXPERIMENT 01 / HTML + CSS</p>
+<h1>Student <em>Profile</em>
+</h1>
+<p>Build a semantic profile page with a responsive portrait and editable identity details.</p>
+</header>
+<main class="lab">
+<section class="panel">
+<h2>Profile preview</h2>
+<img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=500&q=80" alt="Student portrait" style="width:100%;max-width:260px;aspect-ratio:1;object-fit:cover;filter:grayscale(1)">
+<h2 id="profile-name">ALUKA PARDHU</h2>
+<p>Student / interface tinkerer</p>
+</section>
+<form class="panel" id="profile-form">
+<h2>Update details</h2>
+<label for="name">Display name</label>
+<input class="field" id="name" name="name" placeholder="ALUKA PARDHU">
+<button class="button">Update profile</button>
+<div class="output" id="output">A semantic profile with responsive behavior.</div>
+</form>
+</main>
+<footer>
+<span>01 / 10</span>
+<span>HTML.CSS.JS</span>
+</footer>
+</div>
+<script src="../experiments.js">
+</script>
+</body>
+</html>

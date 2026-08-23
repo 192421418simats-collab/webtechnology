@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>06 To-Do List | Web Lab</title>
+<link rel="stylesheet" href="../experiments.css">
+</head>
+<body data-experiment="todo">
+<div class="page">
+<div class="topbar">
+<a class="brand" href="../index.html">
+<span class="brand-mark">WL</span>WEB LAB</a>
+<a class="back" href="../index.html">ALL EXPERIMENTS</a>
+</div>
+<header>
+<p class="eyebrow">EXPERIMENT 06 / DOM + JS</p>
+<h1>To-Do <em>List</em>
+</h1>
+<p>Manage live DOM state with add and remove actions.</p>
+</header>
+<main class="lab">
+<form class="panel" id="todo-form">
+<h2>Add a task</h2>
+<label for="task">Task name</label>
+<input class="field" id="task" placeholder="Review CSS Grid">
+<button class="button">Add task</button>
+</form>
+<section class="panel">
+<h2>Today's list</h2>
+<ul class="todo-list" id="todo-list">
+<li>Review CSS Grid <button>Remove</button>
+</li>
+<li>Ship the experiment <button>Remove</button>
+</li>
+</ul>
+</section>
+</main>
+<footer>
+<span>06 / 10</span>
+<span>HTML.CSS.JS</span>
+</footer>
+</div>
+<script src="../experiments.js">
+</script>
+</body>
+</html>

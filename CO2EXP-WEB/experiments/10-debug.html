@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>10 Debug Lab | Web Lab</title>
+<link rel="stylesheet" href="../experiments.css">
+</head>
+<body data-experiment="debug">
+<div class="page">
+<div class="topbar">
+<a class="brand" href="../index.html">
+<span class="brand-mark">WL</span>WEB LAB</a>
+<a class="back" href="../index.html">ALL EXPERIMENTS</a>
+</div>
+<header>
+<p class="eyebrow">EXPERIMENT 10 / DEVTOOLS</p>
+<h1>Debug <em>Lab</em>
+</h1>
+<p>Use the Console and Sources panel to inspect the intentional runtime error.</p>
+</header>
+<main class="lab">
+<section class="panel">
+<h2>Broken enrollment widget</h2>
+<p>Set a breakpoint before the assignment, inspect the null value, and follow the caught error.</p>
+<button class="button" id="bug-button">Run broken code</button>
+<div class="output" id="output">Waiting for a breakpoint.</div>
+</section>
+<section class="panel">
+<h2>Code under inspection</h2>
+<pre>const student = null;
+student.name = 'Alex';
+
+const marks = [80, 90, 70];
+const average = marks.reduce(sum) / marks.length;</pre>
+</section>
+</main>
+<footer>
+<span>10 / 10</span>
+<span>HTML.CSS.JS</span>
+</footer>
+</div>
+<script src="../experiments.js">
+</script>
+</body>
+</html>
