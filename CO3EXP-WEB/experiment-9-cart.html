@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Experiment 9 | Shopping Cart</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        background: #f6f7f9;
+        color: #20242a;
+        font:
+          15px system-ui,
+          sans-serif;
+        margin: 0;
+      }
+      .wrap {
+        display: grid;
+        gap: 45px;
+        grid-template-columns: 1.4fr 0.8fr;
+        margin: 55px auto;
+        max-width: 950px;
+        padding: 0 22px;
+      }
+      .tag {
+        color: #d95d39;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      h1 {
+        font-size: 50px;
+        letter-spacing: -0.07em;
+        margin: 8px 0 35px;
+      }
+      .products {
+        display: grid;
+        gap: 12px;
+      }
+      .product {
+        align-items: center;
+        background: #fff;
+        border: 1px solid #e2e5e9;
+        display: flex;
+        gap: 16px;
+        justify-content: space-between;
+        padding: 18px;
+      }
+      .product h3 {
+        margin: 0 0 5px;
+      }
+      .price {
+        color: #78828b;
+      }
+      .product button {
+        background: #20242a;
+        border: 0;
+        color: #fff;
+        cursor: pointer;
+        padding: 9px 13px;
+      }
+      .bill {
+        background: #20242a;
+        color: #fff;
+        padding: 28px;
+      }
+      .bill h2 {
+        margin: 0 0 24px;
+      }
+      .line {
+        color: #ced3d8;
+        display: flex;
+        justify-content: space-between;
+        margin: 14px 0;
+      }
+      .total {
+        border-top: 1px solid #687079;
+        font-size: 20px;
+        margin-top: 22px;
+        padding-top: 20px;
+      }
+      .discount {
+        color: #9be3a4;
+        font-size: 12px;
+      }
+      .empty {
+        color: #78828b;
+      }
+      @media (max-width: 700px) {
+        .wrap {
+          display: block;
+        }
+        .bill {
+          margin-top: 35px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <section>
+        <div class="tag">Experiment 09 / Billing system</div>
+        <h1>Your study kit.</h1>
+        <div id="products" class="products"></div>
+      </section>
+      <aside class="bill">
+        <h2>Order summary</h2>
+        <div id="summary"></div>
+      </aside>
+    </main>
+    <script>
+      const inventory = [
+        { name: "Focus notebook", price: 12 },
+        { name: "Desk timer", price: 24 },
+        { name: "Study light", price: 38 },
+        { name: "Canvas tote", price: 16 },
+      ];
+      const cart = [];
+      products.innerHTML = inventory
+        .map(
+          (item, index) =>
+            `<article class="product"><div><h3>${item.name}</h3><span class="price">$${item.price.toFixed(2)}</span></div><button data-index="${index}">Add</button></article>`,
+        )
+        .join("");
+      products.addEventListener("click", (event) => {
+        if (!event.target.matches("button")) return;
+        cart.push(inventory[event.target.dataset.index]);
+        render();
+      });
+      function render() {
+        const subtotal = cart.reduce((sum, item) => sum + item.price, 0);
+        const discount = subtotal >= 70 ? subtotal * 0.1 : 0;
+        const tax = (subtotal - discount) * 0.08;
+        const total = subtotal - discount + tax;
+        summary.innerHTML = cart.length
+          ? `<div class="line"><span>Items (${cart.length})</span><span>$${subtotal.toFixed(2)}</span></div><div class="line discount"><span>Student discount</span><span>-$${discount.toFixed(2)}</span></div><div class="line"><span>Tax</span><span>$${tax.toFixed(2)}</span></div><div class="line total"><strong>Total</strong><strong>$${total.toFixed(2)}</strong></div>`
+          : '<p class="empty">Your cart is waiting for something useful.</p>';
+      }
+      render();
+    </script>
+  </body>
+</html>

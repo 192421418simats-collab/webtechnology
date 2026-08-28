@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Experiment 7 | Quiz</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        align-items: center;
+        background: #fff4e8;
+        color: #253237;
+        display: flex;
+        font-family: system-ui, sans-serif;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
+      }
+      .quiz {
+        background: #fff;
+        border-left: 8px solid #f4a261;
+        box-shadow: 0 20px 55px #9b6a3c1c;
+        max-width: 650px;
+        padding: 38px;
+        width: calc(100% - 30px);
+      }
+      .progress {
+        color: #e76f51;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      h1 {
+        font-size: clamp(28px, 5vw, 45px);
+        letter-spacing: -0.05em;
+        margin: 12px 0 28px;
+      }
+      .answers {
+        display: grid;
+        gap: 10px;
+      }
+      .answer {
+        background: #fff;
+        border: 1px solid #e5d8ca;
+        cursor: pointer;
+        font: inherit;
+        padding: 15px;
+        text-align: left;
+      }
+      .answer:hover,
+      .answer.selected {
+        background: #fff0dc;
+        border-color: #f4a261;
+      }
+      .next {
+        background: #253237;
+        border: 0;
+        color: #fff;
+        cursor: pointer;
+        margin-top: 22px;
+        padding: 14px 22px;
+      }
+      .result {
+        background: #fff0dc;
+        padding: 20px;
+      }
+      .result strong {
+        color: #e76f51;
+        font-size: 35px;
+        display: block;
+      }
+      .restart {
+        background: none;
+        border: 0;
+        color: #e76f51;
+        cursor: pointer;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="quiz">
+      <div class="progress" id="progress"></div>
+      <h1 id="question"></h1>
+      <div id="answers" class="answers"></div>
+      <button id="next" class="next">Next question →</button>
+    </main>
+    <script>
+      const questions = [
+        {
+          question: "Which HTML element represents the main content?",
+          answers: ["<section>", "<main>", "<content>", "<body>"],
+          correct: 1,
+        },
+        {
+          question: "Which CSS property controls layout direction?",
+          answers: ["display", "position", "flex-direction", "align-items"],
+          correct: 2,
+        },
+        {
+          question: "Which method adds an item to an array?",
+          answers: [
+            "array.add()",
+            "array.push()",
+            "array.insert()",
+            "array.append()",
+          ],
+          correct: 1,
+        },
+      ];
+      let current = 0;
+      let score = 0;
+      let selected = null;
+      const question = document.querySelector("#question");
+      const answers = document.querySelector("#answers");
+      const next = document.querySelector("#next");
+      function render() {
+        const item = questions[current];
+        progress.textContent = `Question ${current + 1} of ${questions.length}`;
+        question.textContent = item.question;
+        answers.innerHTML = item.answers
+          .map(
+            (answer, index) =>
+              `<button class="answer" data-index="${index}">${answer}</button>`,
+          )
+          .join("");
+        selected = null;
+        next.disabled = true;
+      }
+      answers.addEventListener("click", (event) => {
+        if (!event.target.matches(".answer")) return;
+        selected = Number(event.target.dataset.index);
+        document
+          .querySelectorAll(".answer")
+          .forEach((button) => button.classList.remove("selected"));
+        event.target.classList.add("selected");
+        next.disabled = false;
+      });
+      next.addEventListener("click", () => {
+        if (selected === null) return;
+        if (selected === questions[current].correct) score++;
+        current++;
+        if (current < questions.length) render();
+        else {
+          document.querySelector(".quiz").innerHTML =
+            `<div class="progress">Quiz complete</div><h1>Nice work.</h1><div class="result"><strong>${score} / ${questions.length}</strong>Your final score</div><br><button class="restart" onclick="location.reload()">Try again →</button>`;
+        }
+      });
+      render();
+    </script>
+  </body>
+</html>

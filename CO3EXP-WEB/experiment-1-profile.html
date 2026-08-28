@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Student profile for ALUKA PARDHU, a computer science student at Saveetha University."
+    />
+    <title>ALUKA PARDHU | Student Profile</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="ALUKA PARDHU profile home">
+        <span class="brand-mark">MT</span>
+        <span>Student profile</span>
+      </a>
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="main-nav"
+      >
+        <span class="menu-icon" aria-hidden="true">&#9776;</span>
+        <span class="menu-label">Menu</span>
+      </button>
+      <nav id="main-nav" class="main-nav" aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#focus">Focus areas</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="profile-name">
+        <div class="hero-copy">
+          <p class="eyebrow">Computer science · Class of 2027</p>
+          <h1 id="profile-name">ALUKA<br /><em>PARDHU</em></h1>
+          <p class="intro">
+            Curious builder, thoughtful teammate, and student of the ways
+            technology can make everyday systems more human.
+          </p>
+          <a class="text-link" href="#about"
+            >Explore profile <span aria-hidden="true">&#8594;</span></a
+          >
+        </div>
+        <div class="hero-visual">
+          <div class="image-frame">
+            <img
+              src="https://api.dicebear.com/9.x/adventurer/png?seed=Aluka-Pardhu&backgroundColor=b6e3f4"
+              alt="Cartoon portrait of ALUKA PARDHU"
+            />
+          </div>
+          <p class="image-note">
+            Saveetha University <span aria-hidden="true">&#8599;</span>
+          </p>
+        </div>
+        <div class="hero-stamp" aria-label="Available for collaboration">
+          Open to<br />good ideas
+        </div>
+      </section>
+
+      <section
+        id="about"
+        class="content-section about-section"
+        aria-labelledby="about-title"
+      >
+        <div class="section-label"><span>01</span> The short version</div>
+        <div class="about-content">
+          <h2 id="about-title">
+            A student with a soft spot for <span>useful things.</span>
+          </h2>
+          <div class="about-grid">
+            <p>
+              I’m currently exploring human-computer interaction and accessible
+              design at Saveetha University. I like projects with a clear
+              purpose, a generous team, and room to ask better questions.
+            </p>
+            <p>
+              Outside of class, you’ll find me running the campus makers’ club,
+              photographing local architecture, or testing a new recipe on
+              whoever happens to be nearby.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="focus"
+        class="content-section focus-section"
+        aria-labelledby="focus-title"
+      >
+        <div class="section-label"><span>02</span> What I’m into</div>
+        <div class="focus-content">
+          <h2 id="focus-title">Current <span>focus areas</span></h2>
+          <div class="focus-list">
+            <article class="focus-item">
+              <span class="focus-number">01</span>
+              <div>
+                <h3>Accessible interfaces</h3>
+                <p>
+                  Making digital spaces calmer, clearer, and easier for everyone
+                  to navigate.
+                </p>
+              </div>
+              <span class="focus-arrow" aria-hidden="true">&#8599;</span>
+            </article>
+            <article class="focus-item">
+              <span class="focus-number">02</span>
+              <div>
+                <h3>Creative coding</h3>
+                <p>
+                  Using code as a material for playful experiments, visual
+                  stories, and small tools.
+                </p>
+              </div>
+              <span class="focus-arrow" aria-hidden="true">&#8599;</span>
+            </article>
+            <article class="focus-item">
+              <span class="focus-number">03</span>
+              <div>
+                <h3>Community projects</h3>
+                <p>
+                  Connecting student talent with local organizations that need a
+                  fresh perspective.
+                </p>
+              </div>
+              <span class="focus-arrow" aria-hidden="true">&#8599;</span>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="contact"
+        class="contact-section"
+        aria-labelledby="contact-title"
+      >
+        <div>
+          <p class="eyebrow">Have a project in mind?</p>
+          <h2 id="contact-title">Let’s make<br /><em>something useful.</em></h2>
+        </div>
+        <a class="contact-button" href="mailto:aluka.pardhu@example.com"
+          >Send a note <span aria-hidden="true">&#8599;</span></a
+        >
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>© 2026 ALUKA PARDHU</span
+      ><span>Saveetha University · Student of the world</span>
+    </footer>
+  </body>
+</html>
