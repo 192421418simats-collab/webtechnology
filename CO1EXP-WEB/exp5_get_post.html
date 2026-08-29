@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Experiment 5: GET and POST Methods</title>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #e0f2fe, #fef3c7, #fce7f3);
+      font-family: Arial, sans-serif;
+      color: #1f2937;
+      padding: 30px;
+    }
+    h1 {
+      text-align: center;
+      color: #0f172a;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 22px;
+      margin-top: 30px;
+    }
+    .card {
+      background: rgba(255,255,255,0.82);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 10px 24px rgba(14,116,144,0.12);
+      border: 2px solid #bae6fd;
+    }
+    h2 { color: #0369a1; }
+    form {
+      margin-top: 18px;
+    }
+    input {
+      width: 100%;
+      padding: 10px 12px;
+      margin: 8px 0 12px;
+      border-radius: 10px;
+      border: 2px solid #7dd3fc;
+    }
+    input[type="submit"] {
+      width: auto;
+      background: linear-gradient(135deg, #14b8a6, #0ea5e9);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-weight: bold;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+    .note {
+      background: #fff7ed;
+      border-left: 5px solid #f59e0b;
+      padding: 12px 16px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>GET and POST Form Demonstration</h1>
+
+  <!--
+    Instructions:
+    1. Submit the GET form below.
+    2. Observe the URL in the browser address bar.
+    3. Notice that form data appears in the query string after '?'.
+    4. Submit the POST form and observe that the URL stays mostly unchanged while data is sent in the request body.
+  -->
+
+  <h2>Form using GET Method</h2>
+  <form method="GET" action="#">
+    <label for="search">Search:</label>
+    <input type="text" id="search" name="q" placeholder="Type your search" />
+    <input type="submit" value="Search" />
+  </form>
+
+  <h2>Form using POST Method</h2>
+  <form method="POST" action="#">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" /><br /><br />
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" /><br /><br />
+
+    <input type="submit" value="Login" />
+  </form>
+</body>
+</html>

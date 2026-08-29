@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Experiment 9: Observing Internet Protocols</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" />
+  <style>
+    body {
+      padding: 30px;
+      background: linear-gradient(135deg, #eef2ff, #dbeafe, #ecfeff);
+      color: #1e293b;
+    }
+    .box {
+      background: linear-gradient(135deg, #ffffff, #dbeafe);
+      padding: 28px;
+      border-radius: 18px;
+      box-shadow: 0 15px 30px rgba(37,99,235,0.15);
+      border: 2px solid #bfdbfe;
+    }
+    h1, h2 {
+      color: #1d4ed8;
+    }
+    img {
+      border-radius: 14px;
+      margin-top: 20px;
+      box-shadow: 0 14px 22px rgba(59,130,246,0.18);
+    }
+    ol, ul {
+      background: rgba(255,255,255,0.6);
+      border-radius: 12px;
+      padding: 18px 26px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container box">
+    <h1>Network Observation Demo</h1>
+    <p>This page loads a remote stylesheet from a CDN and an image from a remote URL.</p>
+    <img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=400&q=80" alt="Sample landscape" width="400" />
+  </div>
+
+  <h2>How to Observe Network Requests</h2>
+  <ol>
+    <li>Open this page in a browser.</li>
+    <li>Press <strong>F12</strong> or right-click and choose <strong>Inspect</strong>.</li>
+    <li>Go to the <strong>Network</strong> tab.</li>
+    <li>Refresh the page.</li>
+    <li>Click any loaded item such as the CSS file or the image.</li>
+  </ol>
+
+  <p>In the Network tab, check the following fields:</p>
+  <ul>
+    <li><strong>URL:</strong> Shows the exact file path being requested.</li>
+    <li><strong>Protocol:</strong> Such as HTTP/1.1 or HTTPS.</li>
+    <li><strong>Method:</strong> Usually GET for loading resources.</li>
+    <li><strong>Status:</strong> Example: 200 OK, 404 Not Found.</li>
+    <li><strong>Type:</strong> File type such as stylesheet, image, script, or document.</li>
+    <li><strong>Size:</strong> Download size of the resource.</li>
+    <li><strong>Time:</strong> How long it took to load.</li>
+  </ul>
+
+  <p>Use the <strong>Headers</strong> and <strong>Preview</strong> panels to inspect details of a selected request.</p>
+</body>
+</html>

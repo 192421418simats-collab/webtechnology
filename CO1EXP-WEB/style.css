@@ -1,0 +1,146 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: #1f2937;
+  line-height: 1.6;
+}
+
+body.theme-home {
+  background: linear-gradient(135deg, #eff6ff, #e0f2fe, #fdf2f8);
+}
+
+body.theme-about {
+  background: linear-gradient(135deg, #fef3c7, #ffedd5, #fef2f2);
+}
+
+body.theme-courses {
+  background: linear-gradient(135deg, #dcfce7, #ecfeff, #e0f2fe);
+}
+
+body.theme-registration {
+  background: linear-gradient(135deg, #f3e8ff, #ede9fe, #fdf2f8);
+}
+
+body.theme-contact {
+  background: linear-gradient(135deg, #f0fdf4, #ecfccb, #e0f2fe);
+}
+
+header {
+  padding: 20px 30px;
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+body.theme-home header { background: linear-gradient(135deg, #2563eb, #7c3aed); }
+body.theme-about header { background: linear-gradient(135deg, #f59e0b, #ef4444); }
+body.theme-courses header { background: linear-gradient(135deg, #10b981, #06b6d4); }
+body.theme-registration header { background: linear-gradient(135deg, #8b5cf6, #ec4899); }
+body.theme-contact header { background: linear-gradient(135deg, #22c55e, #14b8a6); }
+
+h1, h2, h3 {
+  margin-top: 0;
+}
+
+nav {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  background: rgba(255,255,255,0.12);
+  padding: 8px 12px;
+  border-radius: 20px;
+}
+
+nav a:hover {
+  text-decoration: none;
+  background: rgba(255,255,255,0.22);
+}
+
+main {
+  max-width: 1000px;
+  margin: 30px auto;
+  background: rgba(255,255,255,0.82);
+  padding: 30px;
+  border-radius: 18px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 20px 0;
+  border-radius: 12px;
+  box-shadow: 0 12px 25px rgba(0,0,0,0.10);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  border: 1px solid #cbd5e1;
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+}
+
+form {
+  max-width: 500px;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0 15px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+}
+
+input[type="submit"], input[type="reset"] {
+  width: auto;
+  padding: 12px 20px;
+  cursor: pointer;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-weight: bold;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+input[type="submit"] {
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+}
+
+input[type="reset"] {
+  background: linear-gradient(135deg, #f59e0b, #ef4444);
+  margin-left: 10px;
+}
+
+ul, ol {
+  padding-left: 25px;
+}
+
+iframe {
+  width: 100%;
+  max-width: 700px;
+  height: 300px;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  margin-top: 20px;
+}

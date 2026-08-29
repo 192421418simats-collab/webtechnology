@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="#"?>
+<students>
+  <student>
+    <rollno>101</rollno>
+    <name>Rahul Sharma</name>
+    <department>Computer Science</department>
+    <year>2nd Year</year>
+    <email>rahul.sharma@example.com</email>
+    <mobile>9876543210</mobile>
+  </student>
+
+  <student>
+    <rollno>102</rollno>
+    <name>Priya Verma</name>
+    <department>Information Technology</department>
+    <year>3rd Year</year>
+    <email>priya.verma@example.com</email>
+    <mobile>9123456780</mobile>
+  </student>
+</students>

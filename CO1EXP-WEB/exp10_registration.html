@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registration</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="theme-registration">
+  <header>
+    <h1>Student Registration</h1>
+    <nav>
+      <a href="index.html">Home</a> |
+      <a href="about.html">About</a> |
+      <a href="courses.html">Courses</a> |
+      <a href="registration.html">Registration</a> |
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <form>
+      <label for="student-name">Name:</label><br />
+      <input type="text" id="student-name" name="student-name" /><br /><br />
+
+      <label for="email">Email:</label><br />
+      <input type="email" id="email" name="email" /><br /><br />
+
+      <label for="course">Course:</label><br />
+      <select id="course" name="course">
+        <option value="BCA">BCA</option>
+        <option value="BSc">BSc</option>
+        <option value="BTech">BTech</option>
+      </select><br /><br />
+
+      <input type="submit" value="Register" />
+      <input type="reset" value="Clear" />
+    </form>
+  </main>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Experiment 4: Student Registration Form</title>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #f3e8ff, #ede9fe, #fdf2f8);
+      font-family: Arial, sans-serif;
+      color: #4c1d95;
+      padding: 30px;
+    }
+    h1 {
+      color: #6d28d9;
+      text-align: center;
+    }
+    form {
+      max-width: 550px;
+      margin: 30px auto;
+      background: rgba(255,255,255,0.8);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 12px 30px rgba(109,40,217,0.2);
+      border: 2px solid #c4b5fd;
+    }
+    label {
+      font-weight: bold;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px 12px;
+      margin-top: 6px;
+      margin-bottom: 16px;
+      border: 2px solid #d8b4fe;
+      border-radius: 10px;
+      background: #faf5ff;
+    }
+    input[type="radio"], input[type="checkbox"] {
+      width: auto;
+      margin-right: 8px;
+    }
+    input[type="submit"], input[type="reset"] {
+      width: auto;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 30px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      margin-right: 12px;
+      box-shadow: 0 6px 18px rgba(124,58,237,0.3);
+    }
+    input[type="submit"] { background: linear-gradient(135deg, #8b5cf6, #ec4899); }
+    input[type="reset"] { background: linear-gradient(135deg, #fb7185, #f97316); }
+  </style>
+</head>
+<body>
+  <h1>Student Registration Form</h1>
+
+  <form>
+    <label for="name">Full Name:</label><br />
+    <input type="text" id="name" name="name" /><br /><br />
+
+    <label for="password">Password:</label><br />
+    <input type="password" id="password" name="password" /><br /><br />
+
+    <label for="email">Email:</label><br />
+    <input type="email" id="email" name="email" /><br /><br />
+
+    <label>Gender:</label><br />
+    <input type="radio" id="male" name="gender" value="Male" />
+    <label for="male">Male</label>
+    <input type="radio" id="female" name="gender" value="Female" />
+    <label for="female">Female</label>
+    <input type="radio" id="other" name="gender" value="Other" />
+    <label for="other">Other</label><br /><br />
+
+    <label>Hobbies:</label><br />
+    <input type="checkbox" id="reading" name="hobby" value="Reading" />
+    <label for="reading">Reading</label>
+    <input type="checkbox" id="music" name="hobby" value="Music" />
+    <label for="music">Music</label>
+    <input type="checkbox" id="sports" name="hobby" value="Sports" />
+    <label for="sports">Sports</label><br /><br />
+
+    <label for="course">Course:</label><br />
+    <select id="course" name="course">
+      <option value="BCA">BCA</option>
+      <option value="BSc CS">BSc CS</option>
+      <option value="BTech">BTech</option>
+      <option value="MBA">MBA</option>
+    </select><br /><br />
+
+    <label for="address">Address:</label><br />
+    <textarea id="address" name="address" rows="4" cols="40"></textarea><br /><br />
+
+    <input type="submit" value="Submit" />
+    <input type="reset" value="Reset" />
+  </form>
+</body>
+</html>
