@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Question 1: Interpret the XML Structure | ALUKA PARDHU</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="shared.js"></script>
+</head>
+<body>
+
+  <!-- Top Sticky Navigation -->
+  <header>
+    <div class="nav-container">
+      <div class="student-badge">
+        <span>🎓 Student: <span class="name">ALUKA PARDHU</span></span>
+        <span>|</span>
+        <span>🏫 College: <span class="college">Saveetha University</span></span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="question1.html" class="active">Q1: XML Structure</a></li>
+        <li><a href="question2.html">Q2: XPath Queries</a></li>
+        <li><a href="question3.html">Q3: XSLT Table</a></li>
+        <li><a href="question4.html">Q4: Data Analytics</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="hero">
+      <h1>Question 1: Interpret the XML Structure</h1>
+      <p style="color: var(--accent-blue); font-weight: 600;">5 Marks Assessment Solution</p>
+    </div>
+
+    <!-- Live Status Banner -->
+    <div class="card" style="margin-bottom: 2rem; border-left: 4px solid var(--accent-emerald);">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <h3 style="color: var(--accent-emerald); display: flex; align-items: center; gap: 0.5rem;">
+            <span>✓</span> XML Document Validation Status: Well-Formed & Valid
+          </h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Parsed dynamically using Browser DOMParser against <code>courses.xml</code>.</p>
+        </div>
+        <span class="badge badge-emerald">Parsed Successfully</span>
+      </div>
+    </div>
+
+    <!-- Answers Grid -->
+    <div class="grid">
+
+      <!-- Q1 (a) -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">a. Root Element</span>
+          <span class="badge badge-emerald">Top Level</span>
+        </div>
+        <div style="font-size: 1.25rem; font-weight: 700; color: var(--accent-blue); margin-bottom: 0.5rem;">
+          <code>&lt;courses&gt;</code>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">
+          <strong>Explanation:</strong> <code>&lt;courses&gt;</code> is the outermost top-level parent container element that encapsulates all child course records in the document hierarchy.
+        </p>
+      </div>
+
+      <!-- Q1 (b) -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">b. Repeating Record Element</span>
+          <span class="badge badge-purple">Repeats 5 Times</span>
+        </div>
+        <div style="font-size: 1.25rem; font-weight: 700; color: var(--accent-purple); margin-bottom: 0.5rem;">
+          <code>&lt;course&gt;</code>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">
+          <strong>Explanation:</strong> <code>&lt;course&gt;</code> is the repeating entity element. It recurs 5 times within the parent <code>&lt;courses&gt;</code> root, representing individual course records.
+        </p>
+      </div>
+
+      <!-- Q1 (c) -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">c. Unique Identification Attribute</span>
+          <span class="badge badge-amber">Primary Key</span>
+        </div>
+        <div style="font-size: 1.25rem; font-weight: 700; color: var(--accent-amber); margin-bottom: 0.5rem;">
+          <code>id</code> attribute
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">
+          <strong>Explanation:</strong> The <code>id</code> attribute attached to the <code>&lt;course&gt;</code> tag (e.g., <code>id="C101"</code>, <code>id="C102"</code>, <code>id="C103"</code>, <code>id="C104"</code>, <code>id="C105"</code>) provides a unique identifier for every course.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Q1 (d) Child Elements Table -->
+    <div class="card" style="margin-bottom: 2rem;">
+      <div class="card-header">
+        <span class="card-title">d. Elements Representing Course Information</span>
+        <span class="badge badge-purple">Schema Breakdown</span>
+      </div>
+      <div class="table-responsive">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Element Tag</th>
+              <th>Data Type</th>
+              <th>Purpose / Representation</th>
+              <th>Example Value from Dataset</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>&lt;code&gt;</code></td>
+              <td>String</td>
+              <td>Unique course registration code</td>
+              <td><code>WEB303</code></td>
+            </tr>
+            <tr>
+              <td><code>&lt;name&gt;</code></td>
+              <td>String</td>
+              <td>Official title/name of the course</td>
+              <td><code>Web Technology</code></td>
+            </tr>
+            <tr>
+              <td><code>&lt;faculty&gt;</code></td>
+              <td>String</td>
+              <td>Faculty instructor in charge</td>
+              <td><code>Dr. Arun</code></td>
+            </tr>
+            <tr>
+              <td><code>&lt;students&gt;</code></td>
+              <td>Integer</td>
+              <td>Total number of enrolled students</td>
+              <td><code>58</code></td>
+            </tr>
+            <tr>
+              <td><code>&lt;credits&gt;</code></td>
+              <td>Integer</td>
+              <td>Academic credit weightage</td>
+              <td><code>4</code></td>
+            </tr>
+            <tr>
+              <td><code>&lt;type&gt;</code></td>
+              <td>Enum String</td>
+              <td>Course delivery format (Theory / Practical)</td>
+              <td><code>Theory</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Q1 (e) Well-Formedness Justification -->
+    <div class="card" style="margin-bottom: 2rem;">
+      <div class="card-header">
+        <span class="card-title">e. Structural Well-Formedness & Justification</span>
+        <span class="badge badge-emerald">Verified ✓</span>
+      </div>
+      
+      <p style="font-size: 1.1rem; font-weight: 600; color: var(--accent-emerald); margin-bottom: 1rem;">
+        Verdict: The XML document IS structurally well-formed.
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 1rem; border-radius: 0.5rem; border: 1px solid var(--border-color);">
+          <strong style="color: var(--accent-blue);">1. Single Root Element:</strong>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.25rem;">
+            Contains exactly one root element <code>&lt;courses&gt;</code> enclosing all child elements.
+          </p>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 1rem; border-radius: 0.5rem; border: 1px solid var(--border-color);">
+          <strong style="color: var(--accent-blue);">2. Complete Tag Matching:</strong>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.25rem;">
+            Every start tag has an exact corresponding end tag (e.g., <code>&lt;course&gt;</code> ... <code>&lt;/course&gt;</code>).
+          </p>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 1rem; border-radius: 0.5rem; border: 1px solid var(--border-color);">
+          <strong style="color: var(--accent-blue);">3. Proper Nesting:</strong>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.25rem;">
+            All inner tags (e.g., <code>&lt;name&gt;</code>) are fully closed before parent tags (e.g., <code>&lt;course&gt;</code>) close.
+          </p>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 1rem; border-radius: 0.5rem; border: 1px solid var(--border-color);">
+          <strong style="color: var(--accent-blue);">4. Quoted Attributes:</strong>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.25rem;">
+            Attribute values are strictly enclosed in double quotation marks (e.g., <code>id="C101"</code>).
+          </p>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 1rem; border-radius: 0.5rem; border: 1px solid var(--border-color);">
+          <strong style="color: var(--accent-blue);">5. Valid XML Declaration:</strong>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.25rem;">
+            Begins with standard XML declaration <code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;</code>.
+          </p>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 1rem; border-radius: 0.5rem; border: 1px solid var(--border-color);">
+          <strong style="color: var(--accent-blue);">6. Case Sensitivity:</strong>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.25rem;">
+            Element names maintain consistent lowercase casing throughout opening and closing tags.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live XML Source Code View -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Parsed XML Dataset</span>
+        <span class="badge badge-purple">courses.xml</span>
+      </div>
+      <pre class="code-block" id="xml-display"></pre>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>Web Technologies Assessment Solutions &bull; <strong>Student:</strong> ALUKA PARDHU &bull; <strong>College:</strong> Saveetha University</p>
+  </footer>
+
+  <script>
+    document.getElementById('xml-display').innerHTML = escapeXmlHtml(window.XML_DATASET);
+  </script>
+</body>
+</html>

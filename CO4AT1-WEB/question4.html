@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Question 4: Interpret the Advanced Data | ALUKA PARDHU</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="shared.js"></script>
+</head>
+<body>
+
+  <!-- Top Sticky Navigation -->
+  <header>
+    <div class="nav-container">
+      <div class="student-badge">
+        <span>🎓 Student: <span class="name">ALUKA PARDHU</span></span>
+        <span>|</span>
+        <span>🏫 College: <span class="college">Saveetha University</span></span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="question1.html">Q1: XML Structure</a></li>
+        <li><a href="question2.html">Q2: XPath Queries</a></li>
+        <li><a href="question3.html">Q3: XSLT Table</a></li>
+        <li><a href="question4.html" class="active">Q4: Data Analytics</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="hero">
+      <h1>Question 4: Interpret the Advanced Data</h1>
+      <p style="color: var(--accent-emerald); font-weight: 600;">5 Marks Assessment Solution - Dataset Analytics</p>
+    </div>
+
+    <!-- Analytics Quick Metrics Cards -->
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-label">Highest Enrollment</div>
+        <div class="stat-value" style="color: var(--accent-emerald)">72 Students</div>
+        <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">AI302 (Artificial Intelligence)</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-label">Lowest Enrollment</div>
+        <div class="stat-value" style="color: var(--accent-amber)">42 Students</div>
+        <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">DB305 (Database Systems)</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-label">Theory Courses</div>
+        <div class="stat-value" style="color: var(--accent-purple)">4 Courses</div>
+        <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">Out of 5 Total Courses</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-label">Courses with 4 Credits</div>
+        <div class="stat-value" style="color: var(--accent-blue)">3 Courses</div>
+        <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">WEB303, AI302, ML304</div>
+      </div>
+    </div>
+
+    <!-- Answers Breakdown Grid -->
+    <div class="grid">
+
+      <!-- Q4 (a) -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">a. Highest Enrollment Course</span>
+          <span class="badge badge-emerald">Max Value</span>
+        </div>
+        <h3 style="color: var(--accent-emerald); margin-bottom: 0.5rem;">Artificial Intelligence (AI302)</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">
+          <strong>Course ID:</strong> <code>C102</code> | <strong>Faculty:</strong> Dr. Meena | <strong>Enrollment:</strong> <strong style="color: var(--accent-emerald);">72 Students</strong>
+        </p>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem; background: rgba(15,23,42,0.6); padding: 0.75rem; border-radius: 0.5rem;">
+          <strong>Reasoning:</strong> Comparing student numbers: 58 (C101), <strong>72 (C102)</strong>, 56 (C103), 64 (C104), 42 (C105). 72 is the maximum enrollment value.
+        </p>
+      </div>
+
+      <!-- Q4 (b) -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">b. Lowest Enrollment Course</span>
+          <span class="badge badge-amber">Min Value</span>
+        </div>
+        <h3 style="color: var(--accent-amber); margin-bottom: 0.5rem;">Database Systems (DB305)</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">
+          <strong>Course ID:</strong> <code>C105</code> | <strong>Faculty:</strong> Dr. Kumar | <strong>Enrollment:</strong> <strong style="color: var(--accent-amber);">42 Students</strong>
+        </p>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem; background: rgba(15,23,42,0.6); padding: 0.75rem; border-radius: 0.5rem;">
+          <strong>Reasoning:</strong> The smallest enrollment value in the <code>&lt;students&gt;</code> element dataset is 42.
+        </p>
+      </div>
+
+      <!-- Q4 (c) -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">c. Count of Theory Courses</span>
+          <span class="badge badge-purple">4 Courses</span>
+        </div>
+        <h3 style="color: var(--accent-purple); margin-bottom: 0.5rem;">4 Theory Courses</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">
+          <strong>Matching Records:</strong> WEB303 (C101), AI302 (C102), ML304 (C104), DB305 (C105).
+        </p>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem; background: rgba(15,23,42,0.6); padding: 0.75rem; border-radius: 0.5rem;">
+          <strong>Reasoning:</strong> Inspecting <code>&lt;type&gt;</code> tags shows 4 entries equal to <code>'Theory'</code> and 1 entry equal to <code>'Practical'</code> (C103).
+        </p>
+      </div>
+
+      <!-- Q4 (d) -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">d. Courses Carrying Exactly 4 Credits</span>
+          <span class="badge badge-blue">3 Courses</span>
+        </div>
+        <h3 style="color: var(--accent-blue); margin-bottom: 0.5rem;">3 Courses with 4 Credits</h3>
+        <ul style="color: var(--text-muted); font-size: 0.95rem; margin-left: 1.25rem; margin-bottom: 0.5rem;">
+          <li><code>C101</code> - WEB303 (Web Technology)</li>
+          <li><code>C102</code> - AI302 (Artificial Intelligence)</li>
+          <li><code>C104</code> - ML304 (Machine Learning)</li>
+        </ul>
+        <p style="color: var(--text-muted); font-size: 0.9rem; background: rgba(15,23,42,0.6); padding: 0.75rem; border-radius: 0.5rem;">
+          <strong>Reasoning:</strong> Filtering tags with <code>&lt;credits&gt;4&lt;/credits&gt;</code> matches C101, C102, and C104.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Q4 (e) High Enrollment Breakdown (>60 Students) -->
+    <div class="card" style="margin-bottom: 2rem;">
+      <div class="card-header">
+        <span class="card-title">e. Courses Exceeding 60 Enrolled Students & XML Breakdown</span>
+        <span class="badge badge-emerald">2 Courses Identified</span>
+      </div>
+
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;">
+        There are <strong>2 courses</strong> in the XML dataset with student enrollment greater than 60 students:
+      </p>
+
+      <div class="table-responsive">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Course ID</th>
+              <th>Course Code</th>
+              <th>Course Name</th>
+              <th>Faculty</th>
+              <th>Enrolled Students</th>
+              <th>Credits</th>
+              <th>Course Type</th>
+              <th>XML Node View</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>C102</strong></td>
+              <td><code>AI302</code></td>
+              <td>Artificial Intelligence</td>
+              <td>Dr. Meena</td>
+              <td><strong style="color: var(--accent-emerald);">72 Students</strong></td>
+              <td>4</td>
+              <td><span class="badge badge-purple">Theory</span></td>
+              <td><pre class="code-block" style="padding: 0.5rem; font-size: 0.75rem; margin: 0;">&lt;course id="C102"&gt;...&lt;/course&gt;</pre></td>
+            </tr>
+            <tr>
+              <td><strong>C104</strong></td>
+              <td><code>ML304</code></td>
+              <td>Machine Learning</td>
+              <td>Dr. Priya</td>
+              <td><strong style="color: var(--accent-emerald);">64 Students</strong></td>
+              <td>4</td>
+              <td><span class="badge badge-purple">Theory</span></td>
+              <td><pre class="code-block" style="padding: 0.5rem; font-size: 0.75rem; margin: 0;">&lt;course id="C104"&gt;...&lt;/course&gt;</pre></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>Web Technologies Assessment Solutions &bull; <strong>Student:</strong> ALUKA PARDHU &bull; <strong>College:</strong> Saveetha University</p>
+  </footer>
+
+</body>
+</html>

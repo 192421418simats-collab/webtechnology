@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XML Assessment Solutions | ALUKA PARDHU - Saveetha University</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="shared.js"></script>
+</head>
+<body>
+
+  <!-- Top Sticky Navigation -->
+  <header>
+    <div class="nav-container">
+      <div class="student-badge">
+        <span>🎓 Student: <span class="name">ALUKA PARDHU</span></span>
+        <span>|</span>
+        <span>🏫 College: <span class="college">Saveetha University</span></span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Overview</a></li>
+        <li><a href="question1.html">Q1: XML Structure</a></li>
+        <li><a href="question2.html">Q2: XPath Queries</a></li>
+        <li><a href="question3.html">Q3: XSLT Table</a></li>
+        <li><a href="question4.html">Q4: Data Analytics</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Hero Section -->
+    <div class="hero">
+      <h1>Web Technologies Assessment Suite</h1>
+      <p>Interactive, Runnable Solutions for XML, XPath, XSLT & Data Analytics</p>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-label">Total Questions</div>
+        <div class="stat-value" style="color: var(--accent-blue)">4</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Assessment Marks</div>
+        <div class="stat-value" style="color: var(--accent-purple)">30 Marks</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Course Records</div>
+        <div class="stat-value" style="color: var(--accent-emerald)">5 Courses</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">XML Status</div>
+        <div class="stat-value" style="color: var(--accent-amber)">Well-Formed ✓</div>
+      </div>
+    </div>
+
+    <!-- Question Cards Navigation Grid -->
+    <h2 style="margin-bottom: 1.5rem; color: var(--accent-blue);">Select Assessment Question</h2>
+    <div class="grid">
+      
+      <!-- Q1 Card -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Question 1</span>
+          <span class="badge badge-emerald">5 Marks</span>
+        </div>
+        <h3 style="margin-bottom: 0.5rem;">Interpret the XML Structure</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.25rem;">
+          Identification of root element, repeating record tags, unique identifier attribute, child elements, and structural well-formedness justification.
+        </p>
+        <a href="question1.html" class="btn">View Q1 Solution &rarr;</a>
+      </div>
+
+      <!-- Q2 Card -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Question 2</span>
+          <span class="badge badge-purple">10 Marks</span>
+        </div>
+        <h3 style="margin-bottom: 0.5rem;">Apply XPath for Data Selection</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.25rem;">
+          Dynamic evaluation of 10 XPath queries (a through j) live against the XML dataset with output node inspection.
+        </p>
+        <a href="question2.html" class="btn">View Q2 Solution &rarr;</a>
+      </div>
+
+      <!-- Q3 Card -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Question 3</span>
+          <span class="badge badge-amber">10 Marks</span>
+        </div>
+        <h3 style="margin-bottom: 0.5rem;">Apply XSLT for Data Presentation</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.25rem;">
+          Live XSLT processor transformation filtering courses with >60 students and sorting in descending order into a formatted HTML table.
+        </p>
+        <a href="question3.html" class="btn">View Q3 Solution &rarr;</a>
+      </div>
+
+      <!-- Q4 Card -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Question 4</span>
+          <span class="badge badge-emerald">5 Marks</span>
+        </div>
+        <h3 style="margin-bottom: 0.5rem;">Interpret the Advanced Data</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.25rem;">
+          Analytical breakdown of highest/lowest enrollment, Theory count, 4-credit courses, and courses exceeding 60 students.
+        </p>
+        <a href="question4.html" class="btn">View Q4 Solution &rarr;</a>
+      </div>
+
+    </div>
+
+    <!-- Active Dataset View -->
+    <div class="card" style="margin-top: 2rem;">
+      <div class="card-header">
+        <span class="card-title">📄 Active XML Dataset (courses.xml)</span>
+        <span class="badge badge-purple">Source Dataset</span>
+      </div>
+      <pre class="code-block" id="xml-display"></pre>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>Web Technologies Assessment Solutions &bull; <strong>Student:</strong> ALUKA PARDHU &bull; <strong>College:</strong> Saveetha University</p>
+  </footer>
+
+  <script>
+    document.getElementById('xml-display').innerHTML = escapeXmlHtml(window.XML_DATASET);
+  </script>
+</body>
+</html>

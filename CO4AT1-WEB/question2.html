@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Question 2: Apply XPath for Data Selection | ALUKA PARDHU</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="shared.js"></script>
+</head>
+<body>
+
+  <!-- Top Sticky Navigation -->
+  <header>
+    <div class="nav-container">
+      <div class="student-badge">
+        <span>🎓 Student: <span class="name">ALUKA PARDHU</span></span>
+        <span>|</span>
+        <span>🏫 College: <span class="college">Saveetha University</span></span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="question1.html">Q1: XML Structure</a></li>
+        <li><a href="question2.html" class="active">Q2: XPath Queries</a></li>
+        <li><a href="question3.html">Q3: XSLT Table</a></li>
+        <li><a href="question4.html">Q4: Data Analytics</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="hero">
+      <h1>Question 2: Apply XPath for Data Selection</h1>
+      <p style="color: var(--accent-purple); font-weight: 600;">10 Marks Assessment Solution - Live XPath Evaluator</p>
+    </div>
+
+    <!-- Live Evaluator Notice -->
+    <div class="card" style="margin-bottom: 2rem; border-left: 4px solid var(--accent-purple);">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <h3 style="color: var(--accent-purple); display: flex; align-items: center; gap: 0.5rem;">
+            <span>⚡</span> Dynamic Live Execution
+          </h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">
+            All 10 XPath expressions below are evaluated live in your browser against the <code>courses.xml</code> DOM structure.
+          </p>
+        </div>
+        <span class="badge badge-purple">10 / 10 Queries Evaluated</span>
+      </div>
+    </div>
+
+    <!-- XPath Queries Grid -->
+    <div id="xpath-container"></div>
+
+  </main>
+
+  <footer>
+    <p>Web Technologies Assessment Solutions &bull; <strong>Student:</strong> ALUKA PARDHU &bull; <strong>College:</strong> Saveetha University</p>
+  </footer>
+
+  <script>
+    const xpathQueries = [
+      {
+        id: 'a',
+        req: 'All course records',
+        xpath: '/courses/course',
+        desc: 'Selects all <course> element nodes directly under the root <courses> element.'
+      },
+      {
+        id: 'b',
+        req: 'Name of all elements',
+        xpath: '//name',
+        desc: '//name selects all course title elements. Alternatively, name(//*) evaluates element tag names in the XML DOM.'
+      },
+      {
+        id: 'c',
+        req: 'Courses having more than 50 students',
+        xpath: '/courses/course[students > 50]',
+        desc: 'Filters and selects <course> nodes where the child <students> numerical value is strictly greater than 50.'
+      },
+      {
+        id: 'd',
+        req: 'Courses carrying 4 credits',
+        xpath: '/courses/course[credits = 4]',
+        desc: 'Selects all <course> nodes whose <credits> element equals 4.'
+      },
+      {
+        id: 'e',
+        req: 'Courses whose grade is Theory',
+        xpath: "/courses/course[type = 'Theory']",
+        desc: "Selects <course> nodes where the course classification <type> child tag matches string value 'Theory'."
+      },
+      {
+        id: 'f',
+        req: 'Name of Theory courses having more than 50 students',
+        xpath: "/courses/course[type = 'Theory' and students > 50]/name",
+        desc: 'Combines two predicates with logical AND, then navigates to select the text/element of the <name> tag.'
+      },
+      {
+        id: 'g',
+        req: 'Faculty members teaching courses with at least 4 credits',
+        xpath: '/courses/course[credits >= 4]/faculty',
+        desc: 'Filters courses with credits >= 4 and selects their corresponding <faculty> instructor tags.'
+      },
+      {
+        id: 'h',
+        req: 'The course whose value is 10 credits',
+        xpath: '/courses/course[credits = 10]',
+        desc: 'Selects <course> nodes with <credits> equal to 10. Returns an empty node-set as max credit in XML is 4.'
+      },
+      {
+        id: 'i',
+        req: 'The first course available in the XML document',
+        xpath: '/courses/course[1]',
+        desc: 'Uses 1-based index position predicate [1] to select the very first <course> element.'
+      },
+      {
+        id: 'j',
+        req: 'The last course available in the XML document',
+        xpath: '/courses/course[last()]',
+        desc: 'Uses the XPath function last() to dynamically select the final <course> record in the document.'
+      }
+    ];
+
+    const xmlDoc = getXmlDocument();
+    const container = document.getElementById('xpath-container');
+
+    xpathQueries.forEach(q => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.style.marginBottom = '1.5rem';
+
+      const results = evaluateXPath(q.xpath, xmlDoc);
+      let outputHtml = '';
+
+      if (typeof results === 'string') {
+        outputHtml = `<span style="color: var(--accent-emerald); font-weight: bold;">${results}</span>`;
+      } else if (Array.isArray(results)) {
+        if (results.length === 0) {
+          outputHtml = `<span style="color: var(--accent-rose); font-style: italic;">No matching elements found (Empty Node-Set)</span>`;
+        } else {
+          outputHtml = `<div class="table-responsive"><table class="data-table"><thead><tr><th>Match #</th><th>Node Representation / Extracted Text</th></tr></thead><tbody>`;
+          results.forEach((node, idx) => {
+            let content = '';
+            if (node.nodeType === Node.ELEMENT_NODE) {
+              const serializer = new XMLSerializer();
+              content = escapeXmlHtml(serializer.serializeToString(node));
+            } else {
+              content = node.textContent;
+            }
+            outputHtml += `<tr><td>${idx + 1}</td><td><code>${content}</code></td></tr>`;
+          });
+          outputHtml += `</tbody></table></div>`;
+        }
+      }
+
+      card.innerHTML = `
+        <div class="card-header">
+          <span class="card-title">
+            <span style="color: var(--accent-purple); font-size: 1.1rem;">Part (${q.id})</span>
+            ${q.req}
+          </span>
+          <span class="badge badge-purple">XPath Query</span>
+        </div>
+        <div style="margin-bottom: 0.75rem;">
+          <strong style="color: var(--accent-blue); font-size: 0.9rem;">XPath Expression:</strong>
+          <pre class="code-block" style="margin-top: 0.25rem; color: var(--accent-amber);">${q.xpath}</pre>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">
+          <strong>Selection Logic:</strong> ${q.desc}
+        </p>
+        <div>
+          <strong style="color: var(--accent-emerald); font-size: 0.9rem;">Live Evaluation Output:</strong>
+          <div style="margin-top: 0.5rem;">${outputHtml}</div>
+        </div>
+      `;
+
+      container.appendChild(card);
+    });
+  </script>
+</body>
+</html>

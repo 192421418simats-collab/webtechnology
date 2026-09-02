@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Question 3: Apply XSLT for Data Presentation | ALUKA PARDHU</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="shared.js"></script>
+</head>
+<body>
+
+  <!-- Top Sticky Navigation -->
+  <header>
+    <div class="nav-container">
+      <div class="student-badge">
+        <span>🎓 Student: <span class="name">ALUKA PARDHU</span></span>
+        <span>|</span>
+        <span>🏫 College: <span class="college">Saveetha University</span></span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="question1.html">Q1: XML Structure</a></li>
+        <li><a href="question2.html">Q2: XPath Queries</a></li>
+        <li><a href="question3.html" class="active">Q3: XSLT Table</a></li>
+        <li><a href="question4.html">Q4: Data Analytics</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="hero">
+      <h1>Question 3: Apply XSLT for Data Presentation</h1>
+      <p style="color: var(--accent-amber); font-weight: 600;">10 Marks Assessment Solution - Live XSLT Processor</p>
+    </div>
+
+    <!-- Transformation Result Card -->
+    <div class="card" style="margin-bottom: 2rem; border-left: 4px solid var(--accent-amber);">
+      <div class="card-header">
+        <span class="card-title">
+          <span>📊</span> Live XSLT Transformation Output Table
+        </span>
+        <span class="badge badge-amber">Rendered HTML Output</span>
+      </div>
+
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;">
+        The table below is generated dynamically by applying <code>transform.xslt</code> against <code>courses.xml</code> in your browser. It filters courses with <strong>students &gt; 60</strong> and sorts them in <strong>descending order</strong> of enrollment.
+      </p>
+
+      <div id="xslt-render-container" class="table-responsive"></div>
+    </div>
+
+    <!-- Explanations Breakdown Card -->
+    <div class="card" style="margin-bottom: 2rem;">
+      <div class="card-header">
+        <span class="card-title">Explanation of XSLT Components</span>
+        <span class="badge badge-emerald">Code Guide</span>
+      </div>
+
+      <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-bottom: 0;">
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 1rem; border-radius: 0.5rem; border: 1px solid var(--border-color);">
+          <strong style="color: var(--accent-blue);">1. <code>&lt;xsl:stylesheet&gt;</code></strong>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.25rem;">
+            Declares the root XSLT element and defines the W3C transformation namespace <code>xmlns:xsl="http://www.w3.org/1999/XSL/Transform"</code>.
+          </p>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 1rem; border-radius: 0.5rem; border: 1px solid var(--border-color);">
+          <strong style="color: var(--accent-blue);">2. <code>&lt;xsl:output method="html" .../&gt;</code></strong>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.25rem;">
+            Instructs the engine to format the result tree as valid HTML4/5 markup with proper indenting.
+          </p>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 1rem; border-radius: 0.5rem; border: 1px solid var(--border-color);">
+          <strong style="color: var(--accent-blue);">3. <code>&lt;xsl:template match="/"&gt;</code></strong>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.25rem;">
+            Matches the XML document root node, serving as the entry point to construct the HTML page shell.
+          </p>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 1rem; border-radius: 0.5rem; border: 1px solid var(--border-color);">
+          <strong style="color: var(--accent-amber);">4. <code>&lt;xsl:for-each select="...[students &gt; 60]"&gt;</code></strong>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.25rem;">
+            Iterates through <code>&lt;course&gt;</code> elements and applies predicate filtering for enrollment greater than 60.
+          </p>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 1rem; border-radius: 0.5rem; border: 1px solid var(--border-color);">
+          <strong style="color: var(--accent-purple);">5. <code>&lt;xsl:sort select="students" .../&gt;</code></strong>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.25rem;">
+            Sorts matched courses numerically (<code>data-type="number"</code>) in descending sequence (<code>order="descending"</code>).
+          </p>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 1rem; border-radius: 0.5rem; border: 1px solid var(--border-color);">
+          <strong style="color: var(--accent-emerald);">6. <code>&lt;xsl:value-of select="..."/&gt;</code></strong>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.25rem;">
+            Extracts values from tags (e.g., <code>code</code>, <code>name</code>) and attribute <code>@id</code> into HTML table cells.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Complete XSLT Source Code Card -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Complete XSLT Source Code (transform.xslt)</span>
+        <span class="badge badge-purple">XSLT 1.0</span>
+      </div>
+      <pre class="code-block" id="xslt-display"></pre>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>Web Technologies Assessment Solutions &bull; <strong>Student:</strong> ALUKA PARDHU &bull; <strong>College:</strong> Saveetha University</p>
+  </footer>
+
+  <script>
+    // Render XSLT source code
+    document.getElementById('xslt-display').innerHTML = escapeXmlHtml(window.XSLT_DATASET);
+
+    // Perform Live Browser XSLT Transformation
+    function renderXslt() {
+      const container = document.getElementById('xslt-render-container');
+      try {
+        const xmlDoc = getXmlDocument();
+        const parser = new DOMParser();
+        const xsltDoc = parser.parseFromString(window.XSLT_DATASET, 'text/xml');
+
+        if (window.XSLTProcessor) {
+          const xsltProcessor = new XSLTProcessor();
+          xsltProcessor.importStylesheet(xsltDoc);
+          const resultDocument = xsltProcessor.transformToFragment(xmlDoc, document);
+          container.appendChild(resultDocument);
+          
+          // Apply custom table styling to transformed elements
+          const table = container.querySelector('table');
+          if (table) {
+            table.className = 'data-table';
+          }
+          return;
+        }
+      } catch (err) {
+        console.warn('XSLTProcessor fallback activated:', err);
+      }
+
+      // Pure JS fallback renderer if XSLTProcessor is not supported
+      const courses = Array.from(getXmlDocument().querySelectorAll('course'))
+        .filter(c => parseInt(c.querySelector('students').textContent) > 60)
+        .sort((a, b) => parseInt(b.querySelector('students').textContent) - parseInt(a.querySelector('students').textContent));
+
+      let tableHtml = `
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Course ID</th>
+              <th>Course Code</th>
+              <th>Course Name</th>
+              <th>Faculty</th>
+              <th>Students</th>
+              <th>Credits</th>
+              <th>Type</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+
+      courses.forEach(c => {
+        tableHtml += `
+          <tr>
+            <td><strong>${c.getAttribute('id')}</strong></td>
+            <td><code>${c.querySelector('code').textContent}</code></td>
+            <td>${c.querySelector('name').textContent}</td>
+            <td>${c.querySelector('faculty').textContent}</td>
+            <td><strong style="color: var(--accent-emerald);">${c.querySelector('students').textContent}</strong></td>
+            <td>${c.querySelector('credits').textContent}</td>
+            <td><span class="badge badge-purple">${c.querySelector('type').textContent}</span></td>
+          </tr>
+        `;
+      });
+
+      tableHtml += `</tbody></table>`;
+      container.innerHTML = tableHtml;
+    }
+
+    renderXslt();
+  </script>
+</body>
+</html>
