@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q1: Employee IQ - View Component</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="question1.css">
+</head>
+<body>
+    <div class="background-globes">
+        <div class="globe globe-1"></div>
+        <div class="globe globe-2"></div>
+    </div>
+
+    <div class="container">
+        <!-- Header Section -->
+        <header class="app-header">
+            <div class="badge">MVC Architecture • View Layer</div>
+            <h1>Employee IQ Management System</h1>
+            <p class="subtitle">Question 1 — Develop the View Interface</p>
+            <div class="student-info">
+                <span><strong>Student:</strong> ALUKA PARDHU</span>
+                <span class="dot">•</span>
+                <span><strong>Institution:</strong> Saveetha University</span>
+            </div>
+        </header>
+
+        <!-- Main Content Grid -->
+        <main class="content-grid">
+            <!-- Form View Section -->
+            <section class="card form-card">
+                <div class="card-header">
+                    <h2><span class="icon">📝</span> Employee Registration Form</h2>
+                    <p>Enter details below to generate structured View output</p>
+                </div>
+
+                <form id="employeeForm" novalidate>
+                    <!-- Row 1: ID & Name -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="employeeID">Employee ID <span class="required">*</span></label>
+                            <div class="input-wrapper">
+                                <input type="text" id="employeeID" name="employeeID" placeholder="e.g. EMP-1001" required>
+                                <span class="field-icon">🆔</span>
+                            </div>
+                            <small class="error-msg" id="err-employeeID"></small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="employeeName">Employee Name <span class="required">*</span></label>
+                            <div class="input-wrapper">
+                                <input type="text" id="employeeName" name="employeeName" placeholder="e.g. Alex Morgan" required>
+                                <span class="field-icon">👤</span>
+                            </div>
+                            <small class="error-msg" id="err-employeeName"></small>
+                        </div>
+                    </div>
+
+                    <!-- Row 2: Department -->
+                    <div class="form-group">
+                        <label for="department">Department <span class="required">*</span></label>
+                        <div class="input-wrapper">
+                            <select id="department" name="department" required>
+                                <option value="" disabled selected>Select Department...</option>
+                                <option value="Engineering & IT">Engineering & IT</option>
+                                <option value="Research & Development">Research & Development</option>
+                                <option value="Product Operations">Product Operations</option>
+                                <option value="Human Resources">Human Resources</option>
+                                <option value="Finance & Legal">Finance & Legal</option>
+                            </select>
+                            <span class="field-icon">🏢</span>
+                        </div>
+                        <small class="error-msg" id="err-department"></small>
+                    </div>
+
+                    <!-- Row 3: Position Category (Radio Buttons) -->
+                    <div class="form-group">
+                        <label class="group-label">Position Category <span class="required">*</span></label>
+                        <div class="radio-grid category-grid">
+                            <label class="radio-card">
+                                <input type="radio" name="positionCategory" value="Research" required>
+                                <div class="radio-content">
+                                    <span class="radio-icon">🔬</span>
+                                    <span class="radio-text">Research</span>
+                                </div>
+                            </label>
+                            <label class="radio-card">
+                                <input type="radio" name="positionCategory" value="Software">
+                                <div class="radio-content">
+                                    <span class="radio-icon">💻</span>
+                                    <span class="radio-text">Software</span>
+                                </div>
+                            </label>
+                            <label class="radio-card">
+                                <input type="radio" name="positionCategory" value="Hardware">
+                                <div class="radio-content">
+                                    <span class="radio-icon">⚙️</span>
+                                    <span class="radio-text">Hardware</span>
+                                </div>
+                            </label>
+                            <label class="radio-card">
+                                <input type="radio" name="positionCategory" value="Management">
+                                <div class="radio-content">
+                                    <span class="radio-icon">📊</span>
+                                    <span class="radio-text">Management</span>
+                                </div>
+                            </label>
+                            <label class="radio-card">
+                                <input type="radio" name="positionCategory" value="Others">
+                                <div class="radio-content">
+                                    <span class="radio-icon">🌐</span>
+                                    <span class="radio-text">Others</span>
+                                </div>
+                            </label>
+                        </div>
+                        <small class="error-msg" id="err-positionCategory"></small>
+                    </div>
+
+                    <!-- Row 4: Position Description (Multi-line Input) -->
+                    <div class="form-group">
+                        <div class="label-with-counter">
+                            <label for="positionDescription">Position Description <span class="required">*</span></label>
+                            <span class="char-counter" id="charCounter">0 / 250</span>
+                        </div>
+                        <textarea id="positionDescription" name="positionDescription" rows="4" maxlength="250" placeholder="Provide a brief overview of key responsibilities, qualifications, or tasks..." required></textarea>
+                        <small class="error-msg" id="err-positionDescription"></small>
+                    </div>
+
+                    <!-- Row 5: Priority (Radio Buttons) -->
+                    <div class="form-group">
+                        <label class="group-label">Assignment Priority <span class="required">*</span></label>
+                        <div class="radio-group priority-group">
+                            <label class="radio-pill priority-low">
+                                <input type="radio" name="priority" value="Low" required>
+                                <span class="pill-badge">🟢 Low</span>
+                            </label>
+                            <label class="radio-pill priority-medium">
+                                <input type="radio" name="priority" value="Medium">
+                                <span class="pill-badge">🟡 Medium</span>
+                            </label>
+                            <label class="radio-pill priority-high">
+                                <input type="radio" name="priority" value="High">
+                                <span class="pill-badge">🔴 High</span>
+                            </label>
+                        </div>
+                        <small class="error-msg" id="err-priority"></small>
+                    </div>
+
+                    <!-- Form Action Buttons -->
+                    <div class="button-group">
+                        <button type="submit" class="btn btn-primary" id="submitBtn">
+                            <span>Submit Record</span>
+                            <span class="btn-arrow">→</span>
+                        </button>
+                        <button type="button" class="btn btn-secondary" id="resetBtn">
+                            <span>Reset Form</span>
+                            <span class="btn-icon">🔄</span>
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Live View Render Section -->
+            <section class="card output-card">
+                <div class="card-header">
+                    <h2><span class="icon">🖥️</span> View State Preview</h2>
+                    <p>Dynamic View Component Output</p>
+                </div>
+
+                <div id="emptyState" class="empty-state">
+                    <div class="empty-icon">📂</div>
+                    <h3>No View Data Rendered</h3>
+                    <p>Fill out the form controls and click <strong>Submit Record</strong> to display the rendered View state.</p>
+                </div>
+
+                <div id="viewOutput" class="view-output hidden">
+                    <div class="status-banner success">
+                        <span class="banner-icon">✅</span>
+                        <div>
+                            <strong>View Rendered Successfully</strong>
+                            <p>Form state validated and transformed into DOM nodes.</p>
+                        </div>
+                    </div>
+
+                    <div class="rendered-card">
+                        <div class="rendered-header">
+                            <div class="emp-avatar" id="outputAvatar">EX</div>
+                            <div class="emp-title">
+                                <h3 id="outputName">Employee Name</h3>
+                                <span class="id-tag" id="outputID">EMP-XXXX</span>
+                            </div>
+                            <span class="priority-badge" id="outputPriority">Medium</span>
+                        </div>
+
+                        <div class="rendered-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Department</span>
+                                <span class="detail-value" id="outputDept">-</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Category</span>
+                                <span class="detail-value" id="outputCategory">-</span>
+                            </div>
+                        </div>
+
+                        <div class="description-box">
+                            <span class="detail-label">Position Description</span>
+                            <p id="outputDesc">-</p>
+                        </div>
+
+                        <div class="card-footer">
+                            <small id="timestamp">Rendered at: --:--:--</small>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="app-footer">
+            <a href="index.html" class="back-link">← Back to Master Dashboard</a>
+            <p>Saveetha University • Web Application Development Assessment • ALUKA PARDHU</p>
+        </footer>
+    </div>
+
+    <script src="question1.js"></script>
+</body>
+</html>

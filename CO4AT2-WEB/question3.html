@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q3: Employee IQ - Controller Service Layer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="question3.css">
+</head>
+<body>
+    <div class="svc-layout">
+        <!-- Main Top Bar -->
+        <header class="svc-header">
+            <div class="header-left">
+                <span class="header-chip">CONTROLLER / SERVICE ARCHITECTURE</span>
+                <h1>Employee IQ — Controller & Service Hub</h1>
+                <p>Question 3 — Form Interception, Validation Pipeline & Controller Orchestration</p>
+            </div>
+            <div class="header-right">
+                <div class="student-pill">
+                    <span>Student: <strong>ALUKA PARDHU</strong></span>
+                    <span>•</span>
+                    <span>College: <strong>Saveetha University</strong></span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dynamic Pipeline Flow Visualization Tracker -->
+        <section class="pipeline-bar">
+            <div class="pipeline-title">CONTROLLER EXECUTION PIPELINE:</div>
+            <div class="pipeline-steps">
+                <div class="step-card" id="step-1">
+                    <span class="step-num">1</span>
+                    <div class="step-info">
+                        <strong>View Form</strong>
+                        <small>DOM Event</small>
+                    </div>
+                </div>
+                <div class="step-arrow">➔</div>
+                <div class="step-card" id="step-2">
+                    <span class="step-num">2</span>
+                    <div class="step-info">
+                        <strong>Controller</strong>
+                        <small>Request Handler</small>
+                    </div>
+                </div>
+                <div class="step-arrow">➔</div>
+                <div class="step-card" id="step-3">
+                    <span class="step-num">3</span>
+                    <div class="step-info">
+                        <strong>Service Layer</strong>
+                        <small>Validation Check</small>
+                    </div>
+                </div>
+                <div class="step-arrow">➔</div>
+                <div class="step-card" id="step-4">
+                    <span class="step-num">4</span>
+                    <div class="step-info">
+                        <strong>Model Process</strong>
+                        <small>Data Persistence</small>
+                    </div>
+                </div>
+                <div class="step-arrow">➔</div>
+                <div class="step-card" id="step-5">
+                    <span class="step-num">5</span>
+                    <div class="step-info">
+                        <strong>Result Response</strong>
+                        <small>View Update</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content Area -->
+        <div class="svc-grid">
+            <!-- Left Column: Form (View Input) -->
+            <main class="svc-card">
+                <div class="svc-card-head">
+                    <span class="card-tag">INPUT VIEW</span>
+                    <h2>Employee Record Form</h2>
+                </div>
+
+                <form id="controllerForm" novalidate>
+                    <div class="form-row-2">
+                        <div class="ctrl-group">
+                            <label for="empID">Employee ID <span class="star">*</span></label>
+                            <input type="text" id="empID" name="employeeID" placeholder="e.g. EMP-3001" required>
+                            <span class="ctrl-hint">Processed by Service Validator</span>
+                        </div>
+                        <div class="ctrl-group">
+                            <label for="empName">Employee Name <span class="star">*</span></label>
+                            <input type="text" id="empName" name="employeeName" placeholder="e.g. Elena Rostova" required>
+                        </div>
+                    </div>
+
+                    <div class="ctrl-group">
+                        <label for="dept">Department <span class="star">*</span></label>
+                        <select id="dept" name="department" required>
+                            <option value="" disabled selected>Select Department...</option>
+                            <option value="Software Systems">Software Systems</option>
+                            <option value="Research & Development">Research & Development</option>
+                            <option value="Hardware Engineering">Hardware Engineering</option>
+                            <option value="Product Management">Product Management</option>
+                            <option value="Human Operations">Human Operations</option>
+                        </select>
+                    </div>
+
+                    <div class="ctrl-group">
+                        <label>Position Category <span class="star">*</span></label>
+                        <div class="cat-options">
+                            <label class="cat-pill"><input type="radio" name="positionCategory" value="Research" required><span>Research</span></label>
+                            <label class="cat-pill"><input type="radio" name="positionCategory" value="Software"><span>Software</span></label>
+                            <label class="cat-pill"><input type="radio" name="positionCategory" value="Hardware"><span>Hardware</span></label>
+                            <label class="cat-pill"><input type="radio" name="positionCategory" value="Management"><span>Management</span></label>
+                            <label class="cat-pill"><input type="radio" name="positionCategory" value="Others"><span>Others</span></label>
+                        </div>
+                    </div>
+
+                    <div class="ctrl-group">
+                        <label for="desc">Position Description <span class="star">*</span></label>
+                        <textarea id="desc" name="positionDescription" rows="3" placeholder="Describe role, scope, and technical responsibilities..." required></textarea>
+                    </div>
+
+                    <div class="ctrl-group">
+                        <label>Priority Level <span class="star">*</span></label>
+                        <div class="prio-select">
+                            <label class="prio-box low"><input type="radio" name="priority" value="Low" required> Low Priority</label>
+                            <label class="prio-box med"><input type="radio" name="priority" value="Medium"> Medium Priority</label>
+                            <label class="prio-box high"><input type="radio" name="priority" value="High"> High Priority</label>
+                        </div>
+                    </div>
+
+                    <div class="ctrl-actions">
+                        <button type="submit" class="btn-dispatch">Dispatch to Controller Service ➔</button>
+                        <button type="button" id="btnReset" class="btn-reset">Clear</button>
+                    </div>
+                </form>
+            </main>
+
+            <!-- Right Column: Controller & Service Telemetry -->
+            <aside class="svc-card telemetry-card">
+                <div class="svc-card-head">
+                    <span class="card-tag">CONTROLLER TELEMETRY</span>
+                    <h2>Service Response & Execution Log</h2>
+                </div>
+
+                <!-- Controller Response Callout Banner -->
+                <div id="responseBanner" class="response-banner idle">
+                    <div class="res-icon" id="resIcon">💤</div>
+                    <div class="res-content">
+                        <h4 id="resTitle">Controller Awaiting Request</h4>
+                        <p id="resSub">Submit the form to initiate Controller Service orchestration flow.</p>
+                    </div>
+                </div>
+
+                <!-- Live Controller Log -->
+                <div class="log-container">
+                    <div class="log-head">
+                        <span>SERVICE EXECUTION TELEMETRY</span>
+                        <button id="btnClearLog" class="btn-text">Clear Console</button>
+                    </div>
+                    <div class="log-body" id="logConsole">
+                        <div class="log-line sys">[SYSTEM INIT] EmployeeController & EmployeeService initialized.</div>
+                    </div>
+                </div>
+
+                <!-- Service Storage Table -->
+                <div class="processed-table-wrapper">
+                    <div class="table-title">PROCESSED MODEL REPOSITORY (SERVICE STORE)</div>
+                    <table class="svc-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Department</th>
+                                <th>Category</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="svcTableBody">
+                            <tr class="empty-tr"><td colspan="5">No records processed yet.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </aside>
+        </div>
+
+        <footer class="svc-footer">
+            <a href="index.html" class="back-link">← Return to Master Dashboard</a>
+            <p>Saveetha University • Web Application Development Assessment • ALUKA PARDHU</p>
+        </footer>
+    </div>
+
+    <script src="question3.js"></script>
+</body>
+</html>

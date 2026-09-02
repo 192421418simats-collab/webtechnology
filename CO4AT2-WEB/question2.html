@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q2: Employee IQ - Model Architecture</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="question2.css">
+</head>
+<body>
+    <div class="grid-overlay"></div>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="model-header">
+            <div class="sys-tag">⚙️ MODEL ENGINE LAYER</div>
+            <h1>Employee IQ — Model & Validation System</h1>
+            <p class="subtitle">Question 2 — Object Modeling, Schema Constraints & Uniqueness Validation</p>
+            <div class="meta-strip">
+                <span>Student: <strong>ALUKA PARDHU</strong></span>
+                <span>•</span>
+                <span>Institution: <strong>Saveetha University</strong></span>
+            </div>
+        </header>
+
+        <!-- Grid Layout -->
+        <div class="model-grid">
+            <!-- Left: Entry Form -->
+            <section class="panel form-panel">
+                <div class="panel-head">
+                    <span class="panel-icon">📥</span>
+                    <h3>Model Data Entry</h3>
+                </div>
+
+                <form id="modelForm" novalidate>
+                    <div class="field-pair">
+                        <div class="field">
+                            <label for="empID">Employee ID <span class="req">*</span></label>
+                            <input type="text" id="empID" name="employeeID" placeholder="EMP-2001" required>
+                            <span class="field-hint">Must be unique in Model Store</span>
+                        </div>
+                        <div class="field">
+                            <label for="empName">Employee Name <span class="req">*</span></label>
+                            <input type="text" id="empName" name="employeeName" placeholder="Dr. Sarah Connor" required>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label for="dept">Department <span class="req">*</span></label>
+                        <select id="dept" name="department" required>
+                            <option value="" disabled selected>Choose Department...</option>
+                            <option value="Research & Development">Research & Development</option>
+                            <option value="Software Systems">Software Systems</option>
+                            <option value="Hardware Architecture">Hardware Architecture</option>
+                            <option value="Executive Management">Executive Management</option>
+                            <option value="General Operations">General Operations</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Position Category <span class="req">*</span></label>
+                        <div class="radio-tiles">
+                            <label class="tile"><input type="radio" name="positionCategory" value="Research" required><span>🔬 Research</span></label>
+                            <label class="tile"><input type="radio" name="positionCategory" value="Software"><span>💻 Software</span></label>
+                            <label class="tile"><input type="radio" name="positionCategory" value="Hardware"><span>⚙️ Hardware</span></label>
+                            <label class="tile"><input type="radio" name="positionCategory" value="Management"><span>📊 Management</span></label>
+                            <label class="tile"><input type="radio" name="positionCategory" value="Others"><span>🌐 Others</span></label>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label for="desc">Position Description <span class="req">*</span></label>
+                        <textarea id="desc" name="positionDescription" rows="3" placeholder="Specify technical duties and domain responsibilities..." required></textarea>
+                    </div>
+
+                    <div class="field">
+                        <label>Priority Level <span class="req">*</span></label>
+                        <div class="radio-rows">
+                            <label class="prio-tag prio-low"><input type="radio" name="priority" value="Low" required> Low Priority</label>
+                            <label class="prio-tag prio-med"><input type="radio" name="priority" value="Medium"> Medium Priority</label>
+                            <label class="prio-tag prio-high"><input type="radio" name="priority" value="High"> High Priority</label>
+                        </div>
+                    </div>
+
+                    <div class="actions">
+                        <button type="submit" class="btn btn-save">Execute Model Validation & Save</button>
+                        <button type="button" id="btnSeed" class="btn btn-seed">Seed Sample DB Data</button>
+                        <button type="button" id="btnReset" class="btn btn-clear">Clear Form</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Right: Model Inspector -->
+            <section class="panel inspector-panel">
+                <div class="panel-head">
+                    <span class="panel-icon">🔍</span>
+                    <h3>Model Validation Inspector</h3>
+                </div>
+
+                <!-- Validation Output Box -->
+                <div class="val-console" id="valConsole">
+                    <div class="console-head">Validation Engine Status: <span id="statusIndicator" class="status-ready">READY</span></div>
+                    <ul id="errorList" class="error-log">
+                        <li class="log-item info">Fill out the model fields to test verification algorithms.</li>
+                    </ul>
+                </div>
+
+                <!-- Live Model Object Viewer -->
+                <div class="json-inspector">
+                    <div class="json-head">Current Employee Model Payload (JS Object):</div>
+                    <pre><code id="jsonDisplay">// Awaiting Model instantiation...</code></pre>
+                </div>
+
+                <!-- Stored Model Database Table -->
+                <div class="db-inspector">
+                    <div class="db-head">
+                        <h4>Stored Model Records (<span id="recordCount">0</span>)</h4>
+                        <button id="btnClearDB" class="btn-sm">Purge Repository</button>
+                    </div>
+                    <div class="table-wrap">
+                        <table id="modelTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Dept</th>
+                                    <th>Category</th>
+                                    <th>Priority</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody">
+                                <tr class="empty-row"><td colspan="5">No Model instances created yet in Model Repository.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <footer class="app-footer">
+            <a href="index.html" class="back-btn">← Back to Master Dashboard</a>
+            <p>Saveetha University • Web Application Development Assessment • ALUKA PARDHU</p>
+        </footer>
+    </div>
+
+    <script src="question2.js"></script>
+</body>
+</html>
