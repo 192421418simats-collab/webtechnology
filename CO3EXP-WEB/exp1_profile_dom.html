@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exp 1 - DOM-Based Student Profile Manipulation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #020617 0%, #0f172a 50%, #1e1b4b 100%);
+      --accent-cyan: #38bdf8;
+      --accent-blue: #3b82f6;
+      --glass-bg: rgba(15, 23, 42, 0.65);
+      --glass-border: rgba(56, 189, 248, 0.2);
+      --glass-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      background: var(--bg-gradient);
+      min-height: 100vh;
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+      overflow-x: hidden;
+    }
+
+    .top-nav {
+      width: 100%;
+      max-width: 1100px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .back-btn {
+      text-decoration: none;
+      color: var(--accent-cyan);
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid var(--glass-border);
+      padding: 0.5rem 1.25rem;
+      border-radius: 9999px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .back-btn:hover {
+      background: var(--accent-cyan);
+      color: #0f172a;
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+    }
+
+    .exp-badge {
+      background: linear-gradient(90deg, #38bdf8, #818cf8);
+      color: #020617;
+      font-weight: 800;
+      padding: 0.35rem 0.9rem;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .header {
+      text-align: center;
+      max-width: 750px;
+      margin-bottom: 2.5rem;
+    }
+
+    .header h1 {
+      font-size: 2.3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ffffff 0%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .header p {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    @media (max-width: 900px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .profile-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .profile-card {
+      width: 100%;
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 2.5rem;
+      box-shadow: var(--glass-shadow);
+      text-align: center;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .profile-card.hidden {
+      opacity: 0;
+      transform: scale(0.9) translateY(20px);
+      pointer-events: none;
+      visibility: hidden;
+    }
+
+    .avatar-wrapper {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 1.5rem auto;
+    }
+
+    .avatar-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid var(--accent-cyan);
+      box-shadow: 0 0 25px rgba(56, 189, 248, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .status-ring {
+      position: absolute;
+      bottom: 6px;
+      right: 6px;
+      width: 20px;
+      height: 20px;
+      background: #10b981;
+      border: 3px solid #0f172a;
+      border-radius: 50%;
+    }
+
+    .card-heading {
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent-cyan);
+      margin-bottom: 0.5rem;
+      transition: color 0.3s ease;
+    }
+
+    .student-name {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 0.25rem;
+      transition: color 0.3s ease;
+    }
+
+    .student-role {
+      display: inline-block;
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      margin-bottom: 1.25rem;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .student-bio {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      transition: color 0.3s ease;
+    }
+
+    .profile-meta {
+      display: flex;
+      justify-content: space-around;
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .meta-item h4 {
+      font-size: 1.1rem;
+      color: var(--text-main);
+      font-weight: 700;
+    }
+
+    .meta-item span {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .controls-card {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      padding: 2rem;
+      box-shadow: var(--glass-shadow);
+    }
+
+    .controls-card h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--accent-cyan);
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .input-field {
+      width: 100%;
+      background: rgba(2, 6, 23, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 0.75rem 1rem;
+      color: var(--text-main);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    .input-field:focus {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+    }
+
+    .color-row {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .color-picker {
+      width: 50px;
+      height: 42px;
+      padding: 0;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: none;
+    }
+
+    .preset-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+    }
+
+    .btn-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .action-btn {
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+      color: #020617;
+      border: none;
+      border-radius: 12px;
+      padding: 0.85rem 1rem;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .action-btn.secondary {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-main);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .code-inspect {
+      margin-top: 2rem;
+      background: rgba(2, 6, 23, 0.8);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 12px;
+      padding: 1rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: #38bdf8;
+      max-height: 140px;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="index.html" class="back-btn">← Back to Hub</a>
+    <span class="exp-badge">EXP 01 | DOM Profile Manipulation</span>
+  </div>
+
+  <div class="header">
+    <h1>DOM-Based Student Profile Manipulation</h1>
+    <p>Student: <strong>ALUKA PARDHU</strong> (Saveetha University)<br>
+    Modify profile details using <code>getElementById()</code>, <code>querySelector()</code>, <code>textContent</code>, <code>style</code>, <code>classList</code>, and <code>setAttribute()</code>.</p>
+  </div>
+
+  <div class="container">
+    
+    <div class="profile-section">
+      <div id="studentCard" class="profile-card" data-student-id="SU-717822CS101">
+        <div class="avatar-wrapper">
+          <img id="avatarImage" class="avatar-img" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%2338bdf8'/><stop offset='100%' stop-color='%233b82f6'/></linearGradient></defs><rect width='200' height='200' rx='100' fill='url(%23g)'/><text x='50%' y='54%' dominant-baseline='middle' text-anchor='middle' fill='%230f172a' font-family='sans-serif' font-weight='900' font-size='72'>AP</text></svg>" alt="Aluka Pardhu Avatar">
+          <div class="status-ring" title="Active Student"></div>
+        </div>
+        <div id="cardHeading" class="card-heading">Saveetha University | CSE</div>
+        <h2 id="studentName" class="student-name">Aluka Pardhu</h2>
+        <span id="studentRole" class="student-role">Saveetha Student & Developer</span>
+        <p id="studentBio" class="student-bio">
+          Student at Saveetha University building dynamic responsive web applications with JavaScript DOM manipulation.
+        </p>
+        <div class="profile-meta">
+          <div class="meta-item">
+            <h4 id="metaGPA">3.95</h4>
+            <span>CGPA</span>
+          </div>
+          <div class="meta-item">
+            <h4 id="metaCredits">128</h4>
+            <span>Credits</span>
+          </div>
+          <div class="meta-item">
+            <h4 id="metaTerm">Sem 6</h4>
+            <span>Status</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls-card">
+      <h2>⚙️ DOM Controls</h2>
+
+      <div class="form-group">
+        <label for="inputHeading">Modify Card Subheading (textContent)</label>
+        <input type="text" id="inputHeading" class="input-field" value="Saveetha University | CSE">
+      </div>
+
+      <div class="form-group">
+        <label for="inputName">Update Student Name (textContent)</label>
+        <input type="text" id="inputName" class="input-field" value="Aluka Pardhu">
+      </div>
+
+      <div class="form-group">
+        <label for="inputRole">Update Role / Title</label>
+        <input type="text" id="inputRole" class="input-field" value="Saveetha Student & Developer">
+      </div>
+
+      <div class="form-group">
+        <label>Text Color Accent (style.color)</label>
+        <div class="color-row">
+          <input type="color" id="textColorPicker" class="color-picker" value="#38bdf8">
+          <button class="preset-btn" style="background: #38bdf8;" onclick="applyColor('#38bdf8')"></button>
+          <button class="preset-btn" style="background: #f43f5e;" onclick="applyColor('#f43f5e')"></button>
+          <button class="preset-btn" style="background: #10b981;" onclick="applyColor('#10b981')"></button>
+          <button class="preset-btn" style="background: #a855f7;" onclick="applyColor('#a855f7')"></button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="inputAvatarUrl">Update Avatar Image URL (setAttribute)</label>
+        <input type="text" id="inputAvatarUrl" class="input-field" value="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%23a855f7'/><stop offset='100%' stop-color='%23ec4899'/></linearGradient></defs><rect width='200' height='200' rx='100' fill='url(%23g)'/><text x='50%' y='54%' dominant-baseline='middle' text-anchor='middle' fill='%23fff' font-family='sans-serif' font-weight='900' font-size='72'>AP</text></svg>">
+      </div>
+
+      <div class="btn-grid">
+        <button id="btnUpdateImg" class="action-btn">🖼️ Set Attribute</button>
+        <button id="btnToggleVisibility" class="action-btn secondary">👁️ Toggle Visibility</button>
+        <button id="btnGlassTheme" class="action-btn secondary">✨ Custom Glow</button>
+        <button id="btnReset" class="action-btn secondary">🔄 Reset Card</button>
+      </div>
+
+      <div class="code-inspect" id="codeLog">
+        <span>// DOM Mutation Log</span><br>
+        Ready for DOM actions...
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const studentCard = document.getElementById('studentCard');
+    const cardHeading = document.getElementById('cardHeading');
+    const studentName = document.getElementById('studentName');
+    const studentRole = document.getElementById('studentRole');
+    const avatarImage = document.querySelector('#avatarImage');
+    const codeLog = document.getElementById('codeLog');
+
+    const inputHeading = document.getElementById('inputHeading');
+    const inputName = document.getElementById('inputName');
+    const inputRole = document.getElementById('inputRole');
+    const textColorPicker = document.getElementById('textColorPicker');
+    const inputAvatarUrl = document.getElementById('inputAvatarUrl');
+
+    const btnUpdateImg = document.getElementById('btnUpdateImg');
+    const btnToggleVisibility = document.getElementById('btnToggleVisibility');
+    const btnGlassTheme = document.getElementById('btnGlassTheme');
+    const btnReset = document.getElementById('btnReset');
+
+    function logDOMAction(actionText) {
+      const time = new Date().toLocaleTimeString();
+      codeLog.innerHTML = `<span>[${time}]</span> ${actionText}<br>` + codeLog.innerHTML;
+    }
+
+    inputHeading.addEventListener('input', function() {
+      cardHeading.textContent = this.value || 'Subheading';
+      logDOMAction(`cardHeading.textContent = "${this.value}"`);
+    });
+
+    inputName.addEventListener('input', function() {
+      studentName.textContent = this.value || 'Student Name';
+      logDOMAction(`studentName.textContent = "${this.value}"`);
+    });
+
+    inputRole.addEventListener('input', function() {
+      studentRole.textContent = this.value || 'Role';
+      logDOMAction(`studentRole.textContent = "${this.value}"`);
+    });
+
+    function applyColor(colorHex) {
+      textColorPicker.value = colorHex;
+      cardHeading.style.color = colorHex;
+      studentName.style.color = colorHex;
+      studentRole.style.color = colorHex;
+      studentRole.style.borderColor = colorHex;
+      logDOMAction(`cardHeading.style.color = "${colorHex}"`);
+    }
+
+    textColorPicker.addEventListener('input', function() {
+      applyColor(this.value);
+    });
+
+    btnUpdateImg.addEventListener('click', function() {
+      const newUrl = inputAvatarUrl.value.trim();
+      if(newUrl) {
+        avatarImage.setAttribute('src', newUrl);
+        logDOMAction(`avatarImage.setAttribute('src', '${newUrl.substring(0, 25)}...')`);
+      }
+    });
+
+    btnToggleVisibility.addEventListener('click', function() {
+      studentCard.classList.toggle('hidden');
+      logDOMAction(`studentCard.classList.toggle('hidden')`);
+    });
+
+    let isCustomGlow = false;
+    btnGlassTheme.addEventListener('click', function() {
+      isCustomGlow = !isCustomGlow;
+      studentCard.style.boxShadow = isCustomGlow ? '0 0 50px rgba(56, 189, 248, 0.4)' : '';
+      logDOMAction(`Toggled custom glow style`);
+    });
+
+    btnReset.addEventListener('click', function() {
+      cardHeading.textContent = "Saveetha University | CSE";
+      studentName.textContent = "Aluka Pardhu";
+      studentRole.textContent = "Saveetha Student & Developer";
+      inputHeading.value = "Saveetha University | CSE";
+      inputName.value = "Aluka Pardhu";
+      inputRole.value = "Saveetha Student & Developer";
+      applyColor('#38bdf8');
+      studentCard.classList.remove('hidden');
+      studentCard.style.boxShadow = '';
+      logDOMAction(`Card reset`);
+    });
+  </script>
+</body>
+</html>

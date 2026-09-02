@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exp 3 - Interactive Event Registration Using JavaScript Events</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #2a030e 0%, #4c0519 50%, #881337 100%);
+      --accent-coral: #fb923c;
+      --accent-amber: #f59e0b;
+      --glass-bg: rgba(76, 5, 25, 0.65);
+      --glass-border: rgba(251, 146, 60, 0.25);
+      --text-bright: #fff7ed;
+      --text-muted: #fca5a5;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Outfit', sans-serif; }
+    body { background: var(--bg-gradient); min-height: 100vh; color: var(--text-bright); padding: 2rem 1.5rem; display: flex; flex-direction: column; align-items: center; }
+    .top-nav { width: 100%; max-width: 1200px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+    .back-btn { text-decoration: none; color: var(--accent-coral); background: rgba(251, 146, 60, 0.15); border: 1px solid var(--glass-border); padding: 0.5rem 1.25rem; border-radius: 9999px; font-size: 0.9rem; font-weight: 600; }
+    .exp-badge { background: linear-gradient(90deg, #fb923c, #f43f5e); color: #2a030e; font-weight: 800; padding: 0.35rem 0.9rem; border-radius: 9999px; font-size: 0.8rem; text-transform: uppercase; }
+    .header { text-align: center; max-width: 800px; margin-bottom: 2.5rem; }
+    .header h1 { font-size: 2.3rem; font-weight: 800; color: #fff; margin-bottom: 0.5rem; }
+    .layout-grid { width: 100%; max-width: 1200px; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2.5rem; }
+    @media (max-width: 900px) { .layout-grid { grid-template-columns: 1fr; } }
+    .panel-card { background: var(--glass-bg); backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: 24px; padding: 2rem; }
+    .form-field { margin-bottom: 1.25rem; }
+    .form-field label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.4rem; }
+    .form-field input, .form-field select { width: 100%; background: rgba(42, 3, 14, 0.6); border: 1px solid rgba(251, 146, 60, 0.3); border-radius: 12px; padding: 0.8rem 1rem; color: #fff; outline: none; }
+    .console-card { background: #180208; border: 1px solid rgba(251, 146, 60, 0.3); border-radius: 24px; padding: 1.5rem; display: flex; flex-direction: column; height: 400px; }
+    .console-stream { flex: 1; overflow-y: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; display: flex; flex-direction: column; gap: 0.4rem; }
+    .log-line { padding: 0.4rem 0.6rem; border-radius: 6px; background: rgba(255, 255, 255, 0.03); border-left: 3px solid #fb923c; }
+    .comp-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    .comp-table th, .comp-table td { padding: 1rem; text-align: left; border-bottom: 1px solid rgba(251, 146, 60, 0.2); }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="index.html" class="back-btn">← Back to Hub</a>
+    <span class="exp-badge">EXP 03 | Event Registration</span>
+  </div>
+
+  <div class="header">
+    <h1>Interactive Event Registration Using JavaScript Events</h1>
+    <p>Student: <strong>ALUKA PARDHU</strong> (Saveetha University)<br>
+    Demonstrating <code>onclick</code>, <code>onchange</code>, <code>input</code>, <code>focus</code>, <code>blur</code>, <code>mouseover</code>, <code>mouseout</code>, and <code>addEventListener()</code>.</p>
+  </div>
+
+  <div class="layout-grid">
+    <div class="panel-card">
+      <h3 style="color: var(--accent-coral); margin-bottom: 1rem;">🎟️ Saveetha Event Registration</h3>
+      <div class="form-field">
+        <label for="fullName">Participant Full Name (Intrinsic Events)</label>
+        <input type="text" id="fullName" value="Aluka Pardhu"
+               onclick="logEvent('Intrinsic', 'onclick', 'fullName')"
+               onfocus="logEvent('Intrinsic', 'onfocus', 'fullName')"
+               onblur="logEvent('Intrinsic', 'onblur', 'fullName')"
+               oninput="logEvent('Intrinsic', 'input', 'fullName', this.value)">
+      </div>
+      <div class="form-field">
+        <label for="emailAddr">Email Address (addEventListener)</label>
+        <input type="email" id="emailAddr" value="alukapardhu@saveetha.ac.in">
+      </div>
+      <div class="form-field">
+        <label for="eventCategory">Event Track (onchange demo)</label>
+        <select id="eventCategory" onchange="logEvent('Intrinsic', 'onchange', 'eventCategory', this.value)">
+          <option value="Web Engineering">Web Engineering</option>
+          <option value="Cloud Architecture">Cloud Architecture</option>
+          <option value="Cyber Security">Cyber Security</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="console-card">
+      <h3 style="color: var(--accent-coral); margin-bottom: 1rem;">⚡ Live Event Console</h3>
+      <div class="console-stream" id="consoleStream">
+        <div class="log-line">> Ready for event interactions.</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="width: 100%; max-width: 1200px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 24px; padding: 2rem;">
+    <h2 style="color: var(--accent-coral); margin-bottom: 1rem;">📊 Intrinsic Handling vs. addEventListener()</h2>
+    <table class="comp-table">
+      <thead>
+        <tr><th>Feature</th><th>Intrinsic Handlers (onclick="...")</th><th>addEventListener()</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Binding</td><td>Inline HTML attribute</td><td>JavaScript method call</td></tr>
+        <tr><td>Multiple Handlers</td><td>❌ Overwrites previous handler</td><td>✅ Supports multiple callbacks</td></tr>
+        <tr><td>Separation</td><td>❌ Mixes markup with JS</td><td>✅ High separation of concerns</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    const consoleStream = document.getElementById('consoleStream');
+    const emailAddr = document.getElementById('emailAddr');
+
+    function logEvent(mode, eventName, targetId, val = '') {
+      const line = document.createElement('div');
+      line.className = 'log-line';
+      line.innerHTML = `<span style="color: #fb923c;">[${new Date().toLocaleTimeString()}]</span> [${mode}] <strong>${eventName}</strong> on #${targetId} ${val ? '| val: ' + val : ''}`;
+      consoleStream.appendChild(line);
+      consoleStream.scrollTop = consoleStream.scrollHeight;
+    }
+
+    emailAddr.addEventListener('focus', () => logEvent('Listener', 'focus', 'emailAddr'));
+    emailAddr.addEventListener('blur', () => logEvent('Listener', 'blur', 'emailAddr'));
+    emailAddr.addEventListener('input', (e) => logEvent('Listener', 'input', 'emailAddr', e.target.value));
+  </script>
+</body>
+</html>

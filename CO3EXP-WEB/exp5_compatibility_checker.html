@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exp 5 - Cross-Browser Compatible Interactive Webpage</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-cream: #fffbeb;
+      --primary-terracotta: #451a03;
+      --accent-orange: #f97316;
+      --border-warm: #fed7aa;
+      --text-dark: #292524;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { background: var(--bg-cream); color: var(--text-dark); padding: 2.5rem 1.5rem; display: flex; flex-direction: column; align-items: center; }
+    .top-nav { width: 100%; max-width: 1000px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+    .back-btn { text-decoration: none; color: var(--primary-terracotta); background: #ffedd5; border: 1px solid var(--border-warm); padding: 0.5rem 1.25rem; border-radius: 9999px; font-weight: 600; }
+    .badge { background: var(--primary-terracotta); color: #fff; padding: 0.4rem 1rem; border-radius: 9999px; font-size: 0.8rem; }
+    .header { text-align: center; max-width: 800px; margin-bottom: 2.5rem; }
+    .header h1 { font-size: 2.2rem; color: var(--primary-terracotta); margin-bottom: 0.5rem; }
+    .card { width: 100%; max-width: 1000px; background: #fff; border: 1px solid var(--border-warm); border-radius: 20px; padding: 2rem; margin-bottom: 2rem; }
+    .feat-row { display: flex; justify-content: space-between; padding: 0.8rem; background: #fff7ed; border-radius: 10px; margin-bottom: 0.75rem; }
+    .pass-badge { background: #dcfce7; color: #16a34a; padding: 0.2rem 0.6rem; border-radius: 6px; font-weight: 700; font-size: 0.8rem; }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="index.html" class="back-btn">← Back to Hub</a>
+    <span class="badge">EXP 05 | Compatibility Checker</span>
+  </div>
+
+  <div class="header">
+    <h1>Cross-Browser Compatible Interactive Webpage</h1>
+    <p>Student: <strong>ALUKA PARDHU</strong> (Saveetha University)<br>
+    Feature detection for <code>localStorage</code>, <code>querySelector()</code>, and CSS <code>@supports</code> layout fallbacks.</p>
+  </div>
+
+  <div class="card">
+    <h3 style="color: var(--primary-terracotta); margin-bottom: 1rem;">⚡ JS Feature Audit</h3>
+    <div id="featAudit"></div>
+  </div>
+
+  <script>
+    const feats = [
+      { name: 'document.querySelector()', pass: typeof document.querySelector === 'function' },
+      { name: 'window.localStorage', pass: (() => { try { return 'localStorage' in window; } catch(e) { return false; } })() },
+      { name: 'window.fetch()', pass: 'fetch' in window },
+      { name: 'CSS.supports()', pass: 'CSS' in window && typeof CSS.supports === 'function' }
+    ];
+
+    const container = document.getElementById('featAudit');
+    feats.forEach(f => {
+      container.innerHTML += `<div class="feat-row"><span><strong>${f.name}</strong></span><span class="pass-badge">${f.pass ? '✓ Supported' : '✕ Unsupported'}</span></div>`;
+    });
+  </script>
+</body>
+</html>

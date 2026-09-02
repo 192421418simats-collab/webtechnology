@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exp 8 - Online Student Result Processing Using Servlet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg-dark: #2a030e; --card-bg: rgba(136, 19, 55, 0.65); --accent-crimson: #fb7185; --border-rose: rgba(251, 113, 133, 0.25); --text-bright: #fff1f2; --text-muted: #fecdd3; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Outfit', sans-serif; }
+    body { background: radial-gradient(circle at top left, #881337, #2a030e 80%); min-height: 100vh; color: var(--text-bright); padding: 2.5rem 1.5rem; display: flex; flex-direction: column; align-items: center; }
+    .top-nav { width: 100%; max-width: 900px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+    .back-btn { text-decoration: none; color: var(--accent-crimson); background: rgba(251, 113, 133, 0.15); border: 1px solid var(--border-rose); padding: 0.5rem 1.25rem; border-radius: 9999px; font-weight: 600; }
+    .badge { background: var(--accent-crimson); color: #2a030e; font-weight: 800; padding: 0.35rem 0.9rem; border-radius: 9999px; font-size: 0.8rem; text-transform: uppercase; }
+    .header { text-align: center; max-width: 750px; margin-bottom: 2.5rem; }
+    .form-card { width: 100%; max-width: 900px; background: var(--card-bg); border: 1px solid var(--border-rose); border-radius: 24px; padding: 2.5rem; }
+    .grid-5 { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+    .form-control { width: 100%; background: rgba(42, 3, 14, 0.7); border: 1px solid var(--border-rose); border-radius: 12px; padding: 0.75rem 1rem; color: #fff; outline: none; }
+    .btn-submit { width: 100%; background: linear-gradient(135deg, var(--accent-crimson), #f43f5e); color: #2a030e; border: none; border-radius: 12px; padding: 1rem; font-weight: 700; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="index.html" class="back-btn">← Back to Hub</a>
+    <span class="badge">EXP 08 | Result Processing Servlet</span>
+  </div>
+
+  <div class="header">
+    <h1 style="font-size: 2.2rem; margin-bottom: 0.5rem;">Online Student Result Processing Using Servlet</h1>
+    <p style="color: var(--text-muted);">Student: <strong>ALUKA PARDHU</strong> (Saveetha University)<br>Calculates Total, Average %, Highest/Lowest Mark, Grade, and Pass/Fail status with validation.</p>
+  </div>
+
+  <div class="form-card">
+    <form action="Exp8ResultServlet" method="POST">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+        <div><label style="color: var(--text-muted); font-size: 0.85rem;">Student Name</label><input type="text" name="studentName" class="form-control" value="Aluka Pardhu" required></div>
+        <div><label style="color: var(--text-muted); font-size: 0.85rem;">Register Number</label><input type="text" name="regNumber" class="form-control" value="SU-717822CS101" required></div>
+      </div>
+      <div class="grid-5">
+        <div><label style="font-size: 0.8rem; color: var(--text-muted);">Data Struct</label><input type="number" name="m1" min="0" max="100" class="form-control" value="92" required></div>
+        <div><label style="font-size: 0.8rem; color: var(--text-muted);">Web Tech</label><input type="number" name="m2" min="0" max="100" class="form-control" value="88" required></div>
+        <div><label style="font-size: 0.8rem; color: var(--text-muted);">OS</label><input type="number" name="m3" min="0" max="100" class="form-control" value="85" required></div>
+        <div><label style="font-size: 0.8rem; color: var(--text-muted);">DBMS</label><input type="number" name="m4" min="0" max="100" class="form-control" value="95" required></div>
+        <div><label style="font-size: 0.8rem; color: var(--text-muted);">Software Eng</label><input type="number" name="m5" min="0" max="100" class="form-control" value="90" required></div>
+      </div>
+      <button type="submit" class="btn-submit">📊 Calculate Results via Exp8ResultServlet</button>
+    </form>
+  </div>
+</body>
+</html>

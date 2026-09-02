@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exp 7 - Student Registration Form Processing Using Servlet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg-dark: #042f2e; --card-bg: rgba(19, 78, 74, 0.65); --accent-teal: #2dd4bf; --accent-cyan: #22d3ee; --border-teal: rgba(45, 212, 191, 0.25); --text-bright: #f0fdfa; --text-muted: #99f6e4; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { background: radial-gradient(circle at top right, #134e4a, #042f2e 75%); min-height: 100vh; color: var(--text-bright); padding: 2.5rem 1.5rem; display: flex; flex-direction: column; align-items: center; }
+    .top-nav { width: 100%; max-width: 800px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+    .back-btn { text-decoration: none; color: var(--accent-teal); background: rgba(45, 212, 191, 0.15); border: 1px solid var(--border-teal); padding: 0.5rem 1.25rem; border-radius: 9999px; font-weight: 600; }
+    .badge { background: var(--accent-teal); color: #042f2e; font-weight: 800; padding: 0.35rem 0.9rem; border-radius: 9999px; font-size: 0.8rem; text-transform: uppercase; }
+    .header { text-align: center; max-width: 700px; margin-bottom: 2.5rem; }
+    .form-card { width: 100%; max-width: 800px; background: var(--card-bg); border: 1px solid var(--border-teal); border-radius: 24px; padding: 2.5rem; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .form-group label { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem; display: block; }
+    .form-control { width: 100%; background: rgba(4, 47, 46, 0.8); border: 1px solid var(--border-teal); border-radius: 12px; padding: 0.8rem 1rem; color: #fff; outline: none; }
+    .btn-submit { width: 100%; background: linear-gradient(135deg, var(--accent-teal), var(--accent-cyan)); color: #042f2e; border: none; border-radius: 12px; padding: 1rem; font-weight: 700; cursor: pointer; margin-top: 1.5rem; }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="index.html" class="back-btn">← Back to Hub</a>
+    <span class="badge">EXP 07 | Form Processing Servlet</span>
+  </div>
+
+  <div class="header">
+    <h1 style="font-size: 2.2rem; margin-bottom: 0.5rem;">Student Registration Form Processing Using Servlet</h1>
+    <p style="color: var(--text-muted);">Student: <strong>ALUKA PARDHU</strong> (Saveetha University)<br>Submits data via HTTP POST to <code>Exp7FormServlet.java</code> using <code>request.getParameter()</code>.</p>
+  </div>
+
+  <div class="form-card">
+    <form action="Exp7FormServlet" method="POST">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Student Full Name *</label>
+          <input type="text" name="studentName" class="form-control" value="Aluka Pardhu" required>
+        </div>
+        <div class="form-group">
+          <label>Register Number *</label>
+          <input type="text" name="registerNo" class="form-control" value="SU-717822CS101" required>
+        </div>
+        <div class="form-group">
+          <label>Institutional Email *</label>
+          <input type="email" name="email" class="form-control" value="alukapardhu@saveetha.ac.in" required>
+        </div>
+        <div class="form-group">
+          <label>Department *</label>
+          <select name="department" class="form-control" required>
+            <option value="Computer Science & Engineering">Computer Science & Engineering</option>
+            <option value="Artificial Intelligence">Artificial Intelligence</option>
+          </select>
+        </div>
+        <div class="form-group" style="grid-column: 1 / -1;">
+          <label>Current Semester *</label>
+          <select name="semester" class="form-control" required>
+            <option value="Semester 6">Semester 6 (Third Year)</option>
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="btn-submit">🚀 Submit Form to Exp7FormServlet</button>
+    </form>
+  </div>
+</body>
+</html>

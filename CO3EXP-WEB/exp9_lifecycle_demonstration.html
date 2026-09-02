@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exp 9 - Servlet Lifecycle Demonstration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg-dark: #011914; --card-bg: #022c22; --accent-green: #4ade80; --border-green: rgba(74, 222, 128, 0.3); --text-light: #f0fdf4; --text-muted: #a7f3d0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'JetBrains Mono', monospace; }
+    body { background: #011914; color: var(--text-light); padding: 2.5rem 1.5rem; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+    .top-nav { width: 100%; max-width: 1000px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+    .back-btn { text-decoration: none; color: var(--accent-green); background: rgba(74, 222, 128, 0.1); border: 1px solid var(--border-green); padding: 0.5rem 1.25rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600; }
+    .badge { background: var(--accent-green); color: #011914; font-weight: 800; padding: 0.35rem 0.9rem; border-radius: 9999px; font-size: 0.8rem; text-transform: uppercase; }
+    .terminal-card { width: 100%; max-width: 1000px; background: var(--card-bg); border: 1px solid var(--border-green); border-radius: 24px; padding: 2.5rem; }
+    .phase-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; margin-bottom: 2rem; }
+    .phase-card { background: #011914; border: 1px solid var(--border-green); border-radius: 16px; padding: 1.5rem; text-align: center; }
+    .btn-ctrl { background: var(--accent-green); color: #011914; border: none; padding: 0.85rem 1.5rem; border-radius: 12px; font-weight: 700; cursor: pointer; }
+    .console-stream { background: #000; border: 1px solid var(--border-green); border-radius: 16px; padding: 1.5rem; height: 220px; overflow-y: auto; color: var(--accent-green); font-size: 0.85rem; margin-top: 1.5rem; }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="index.html" class="back-btn">← Back to Hub</a>
+    <span class="badge">EXP 09 | Servlet Lifecycle Demonstration</span>
+  </div>
+
+  <div class="terminal-card">
+    <div style="text-align: center; margin-bottom: 2rem;">
+      <h1 style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2.2rem; color: var(--accent-green); margin-bottom: 0.5rem;">Servlet Lifecycle Demonstration</h1>
+      <p style="color: var(--text-muted); font-size: 0.9rem;">
+        Student: <strong>ALUKA PARDHU</strong> (Saveetha University)<br>
+        Demonstrates constructor, <code>init()</code>, <code>service()/doGet()</code>, and <code>destroy()</code> execution phases.
+      </p>
+    </div>
+
+    <div class="phase-grid">
+      <div class="phase-card"><span>Constructor</span><h2 id="n1" style="color: var(--accent-green); font-size: 2.2rem;">1</h2><p>Instantiated</p></div>
+      <div class="phase-card"><span>init()</span><h2 id="n2" style="color: var(--accent-green); font-size: 2.2rem;">1</h2><p>Initialized</p></div>
+      <div class="phase-card"><span>service()</span><h2 id="n3" style="color: var(--accent-green); font-size: 2.2rem;">0</h2><p>Request Hits</p></div>
+      <div class="phase-card"><span>destroy()</span><h2 id="n4" style="color: var(--accent-green); font-size: 2.2rem;">0</h2><p>Unloaded</p></div>
+    </div>
+
+    <div style="display: flex; gap: 1rem; justify-content: center;">
+      <button class="btn-ctrl" onclick="hitService()">🔄 Simulate service() / doGet() Hit</button>
+      <button class="btn-ctrl" style="background: #f43f5e; color: #fff;" onclick="hitDestroy()">🛑 Destroy Servlet</button>
+    </div>
+
+    <div class="console-stream" id="stream">> Initialized Exp9LifecycleServlet instance.</div>
+  </div>
+
+  <script>
+    let sHits = 0, dHits = 0;
+    function hitService() {
+      sHits++;
+      document.getElementById('n3').textContent = sHits;
+      document.getElementById('stream').innerHTML += `<br>[LIFECYCLE] 3. service() -> doGet() executed. Total hits: ${sHits}`;
+    }
+    function hitDestroy() {
+      dHits++;
+      document.getElementById('n4').textContent = dHits;
+      document.getElementById('stream').innerHTML += `<br>[LIFECYCLE] 4. destroy() executed. Servlet instance removed from memory.`;
+    }
+  </script>
+</body>
+</html>

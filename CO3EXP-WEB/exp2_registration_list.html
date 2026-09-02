@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exp 2 - Dynamic Student Registration List Using DOM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #022c22;
+      --bg-card: #064e3b;
+      --border-emerald: rgba(52, 211, 153, 0.2);
+      --accent-mint: #34d399;
+      --accent-emerald: #059669;
+      --text-bright: #ecfdf5;
+      --text-muted: #a7f3d0;
+      --danger: #f43f5e;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+    body { background: radial-gradient(circle at top left, #064e3b, #022c22 70%); min-height: 100vh; color: var(--text-bright); padding: 2rem 1.5rem; display: flex; flex-direction: column; align-items: center; }
+    .top-bar { width: 100%; max-width: 1200px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+    .back-btn { text-decoration: none; color: var(--accent-mint); background: rgba(52, 211, 153, 0.1); border: 1px solid var(--border-emerald); padding: 0.5rem 1.2rem; border-radius: 9999px; font-size: 0.9rem; font-weight: 600; transition: all 0.3s ease; }
+    .back-btn:hover { background: var(--accent-mint); color: #022c22; }
+    .badge { background: var(--accent-mint); color: #022c22; font-weight: 800; padding: 0.35rem 0.9rem; border-radius: 9999px; font-size: 0.8rem; text-transform: uppercase; }
+    .header { text-align: center; margin-bottom: 2.5rem; max-width: 750px; }
+    .header h1 { font-size: 2.3rem; font-weight: 800; color: var(--text-bright); margin-bottom: 0.5rem; }
+    .header p { color: var(--text-muted); font-size: 0.95rem; }
+    .main-grid { width: 100%; max-width: 1200px; display: grid; grid-template-columns: 380px 1fr; gap: 2rem; }
+    @media (max-width: 900px) { .main-grid { grid-template-columns: 1fr; } }
+    .form-card { background: rgba(6, 78, 59, 0.6); backdrop-filter: blur(12px); border: 1px solid var(--border-emerald); border-radius: 20px; padding: 2rem; }
+    .form-card h2 { font-size: 1.3rem; font-weight: 700; margin-bottom: 1.5rem; color: var(--accent-mint); }
+    .input-group { margin-bottom: 1.25rem; }
+    .input-group label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.5rem; }
+    .form-control { width: 100%; background: rgba(2, 44, 34, 0.7); border: 1px solid var(--border-emerald); border-radius: 10px; padding: 0.8rem 1rem; color: var(--text-bright); font-size: 0.95rem; outline: none; }
+    .btn-add { width: 100%; background: linear-gradient(135deg, var(--accent-mint), var(--accent-emerald)); color: #022c22; border: none; border-radius: 12px; padding: 0.9rem; font-weight: 700; cursor: pointer; }
+    .list-card { background: rgba(6, 78, 59, 0.6); backdrop-filter: blur(12px); border: 1px solid var(--border-emerald); border-radius: 20px; padding: 2rem; display: flex; flex-direction: column; }
+    .list-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-emerald); }
+    .counter-badge { background: rgba(52, 211, 153, 0.15); color: var(--accent-mint); border: 1px solid var(--border-emerald); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
+    .btn-clear { background: rgba(244, 63, 94, 0.15); color: var(--danger); border: 1px solid rgba(244, 63, 94, 0.3); padding: 0.4rem 0.9rem; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; }
+    .student-table { width: 100%; border-collapse: collapse; text-align: left; }
+    .student-table th { padding: 0.85rem 1rem; font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); border-bottom: 1px solid var(--border-emerald); }
+    .student-table td { padding: 1rem; font-size: 0.95rem; border-bottom: 1px solid rgba(52, 211, 153, 0.1); }
+    .btn-remove { background: rgba(244, 63, 94, 0.1); color: var(--danger); border: 1px solid rgba(244, 63, 94, 0.3); border-radius: 6px; padding: 0.35rem 0.7rem; font-size: 0.8rem; cursor: pointer; }
+    .dom-log { margin-top: 1.5rem; background: #011d17; border: 1px solid var(--border-emerald); border-radius: 10px; padding: 0.85rem 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--accent-mint); }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <a href="index.html" class="back-btn">← Back to Hub</a>
+    <span class="badge">EXP 02 | Dynamic Registration List</span>
+  </div>
+
+  <div class="header">
+    <h1>Dynamic Student Registration List Using DOM</h1>
+    <p>Student: <strong>ALUKA PARDHU</strong> (Saveetha University)<br>
+    Constructed strictly using DOM operations: <code>createElement()</code>, <code>appendChild()</code>, <code>remove()</code>, <code>parentElement</code>, and <code>children</code>.</p>
+  </div>
+
+  <div class="main-grid">
+    <div class="form-card">
+      <h2>📝 New Student Entry</h2>
+      <form id="regForm" onsubmit="event.preventDefault();">
+        <div class="input-group">
+          <label for="studentName">Student Name</label>
+          <input type="text" id="studentName" class="form-control" value="Aluka Pardhu" placeholder="Student Name" required>
+        </div>
+        <div class="input-group">
+          <label for="regNumber">Register Number</label>
+          <input type="text" id="regNumber" class="form-control" value="SU-717822CS101" placeholder="Reg Number" required>
+        </div>
+        <div class="input-group">
+          <label for="department">Department</label>
+          <select id="department" class="form-control" required>
+            <option value="Computer Science">Computer Science</option>
+            <option value="Artificial Intelligence">Artificial Intelligence</option>
+            <option value="Information Tech">Information Tech</option>
+          </select>
+        </div>
+        <button type="button" id="btnAddStudent" class="btn-add">➕ Add Student Node</button>
+      </form>
+    </div>
+
+    <div class="list-card">
+      <div class="list-header">
+        <h2 style="color: var(--accent-mint); font-size: 1.3rem;">📋 Registered Roster</h2>
+        <div>
+          <span id="totalBadge" class="counter-badge">Total: 0</span>
+          <button id="btnClearAll" class="btn-clear">Clear All</button>
+        </div>
+      </div>
+      <table class="student-table">
+        <thead>
+          <tr><th>#</th><th>Reg Number</th><th>Student Name</th><th>Department</th><th>Action</th></tr>
+        </thead>
+        <tbody id="studentTbody"></tbody>
+      </table>
+      <div class="dom-log" id="domLog">> DOM Engine initialized.</div>
+    </div>
+  </div>
+
+  <script>
+    const inputName = document.getElementById('studentName');
+    const inputReg = document.getElementById('regNumber');
+    const inputDept = document.getElementById('department');
+    const btnAddStudent = document.getElementById('btnAddStudent');
+    const btnClearAll = document.getElementById('btnClearAll');
+    const studentTbody = document.getElementById('studentTbody');
+    const totalBadge = document.getElementById('totalBadge');
+    const domLog = document.getElementById('domLog');
+
+    function updateStats() {
+      const len = studentTbody.children.length;
+      totalBadge.textContent = `Total: ${len}`;
+      for (let i = 0; i < len; i++) {
+        studentTbody.children[i].children[0].textContent = i + 1;
+      }
+    }
+
+    btnAddStudent.addEventListener('click', function() {
+      const nameVal = inputName.value.trim();
+      const regVal = inputReg.value.trim();
+      if (!nameVal || !regVal) return;
+
+      const tr = document.createElement('tr');
+      const tdIdx = document.createElement('td');
+      const tdReg = document.createElement('td');
+      tdReg.textContent = regVal;
+      tdReg.style.fontFamily = 'monospace';
+
+      const tdName = document.createElement('td');
+      tdName.textContent = nameVal;
+
+      const tdDept = document.createElement('td');
+      tdDept.textContent = inputDept.value;
+
+      const tdAct = document.createElement('td');
+      const removeBtn = document.createElement('button');
+      removeBtn.className = 'btn-remove';
+      removeBtn.textContent = 'Remove';
+      removeBtn.onclick = function() {
+        removeBtn.parentElement.parentElement.remove();
+        updateStats();
+        domLog.textContent = `> Removed node "${nameVal}" via remove()`;
+      };
+      tdAct.appendChild(removeBtn);
+
+      tr.appendChild(tdIdx);
+      tr.appendChild(tdReg);
+      tr.appendChild(tdName);
+      tr.appendChild(tdDept);
+      tr.appendChild(tdAct);
+      studentTbody.appendChild(tr);
+
+      updateStats();
+      domLog.textContent = `> Created & appended <tr> for "${nameVal}"`;
+    });
+
+    btnClearAll.addEventListener('click', function() {
+      while (studentTbody.firstChild) {
+        studentTbody.removeChild(studentTbody.firstChild);
+      }
+      updateStats();
+      domLog.textContent = `> Cleared all nodes via removeChild() loop`;
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      btnAddStudent.click();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exp 4 - Browser Information Dashboard Using Window Object</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #090514;
+      --bg-card: rgba(30, 27, 75, 0.65);
+      --accent-purple: #a855f7;
+      --border-purple: rgba(168, 85, 247, 0.25);
+      --text-bright: #f3e8ff;
+      --text-muted: #c084fc;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Space Grotesk', sans-serif; }
+    body { background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #090514 80%); min-height: 150vh; color: var(--text-bright); padding: 2rem 1.5rem; display: flex; flex-direction: column; align-items: center; }
+    .top-nav { width: 100%; max-width: 1200px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+    .back-btn { text-decoration: none; color: var(--accent-purple); background: rgba(168, 85, 247, 0.15); border: 1px solid var(--border-purple); padding: 0.5rem 1.25rem; border-radius: 9999px; font-weight: 600; }
+    .badge { font-family: 'Orbitron', sans-serif; background: linear-gradient(90deg, #a855f7, #ec4899); color: #090514; font-weight: 800; padding: 0.35rem 0.9rem; border-radius: 9999px; font-size: 0.75rem; text-transform: uppercase; }
+    .header { text-align: center; max-width: 800px; margin-bottom: 2.5rem; }
+    .header h1 { font-family: 'Orbitron', sans-serif; font-size: 2.2rem; color: var(--accent-purple); margin-bottom: 0.5rem; }
+    .metrics-grid { width: 100%; max-width: 1200px; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+    .card { background: var(--bg-card); border: 1px solid var(--border-purple); border-radius: 20px; padding: 1.5rem; }
+    .metric-row { display: flex; justify-content: space-between; margin-bottom: 0.75rem; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+  <div class="top-nav">
+    <a href="index.html" class="back-btn">← Back to Hub</a>
+    <span class="badge">EXP 04 | Window Dashboard</span>
+  </div>
+
+  <div class="header">
+    <h1>Browser Information Dashboard Using Window Object</h1>
+    <p>Student: <strong>ALUKA PARDHU</strong> (Saveetha University)<br>
+    Live telemetry extracted via <code>window.location</code>, <code>innerWidth</code>, <code>innerHeight</code>, <code>scrollX</code>, <code>scrollY</code>, <code>navigator</code>, <code>screen</code>.</p>
+  </div>
+
+  <div class="metrics-grid">
+    <div class="card">
+      <h3 style="color: var(--accent-purple); margin-bottom: 1rem;">📐 Window & Viewport</h3>
+      <div class="metric-row"><span>window.innerWidth:</span><strong id="wWidth">0 px</strong></div>
+      <div class="metric-row"><span>window.innerHeight:</span><strong id="wHeight">0 px</strong></div>
+      <div class="metric-row"><span>screen.width:</span><strong id="sWidth">0 px</strong></div>
+      <div class="metric-row"><span>screen.height:</span><strong id="sHeight">0 px</strong></div>
+    </div>
+
+    <div class="card">
+      <h3 style="color: var(--accent-purple); margin-bottom: 1rem;">📜 Dynamic Scroll Telemetry</h3>
+      <div class="metric-row"><span>window.scrollX:</span><strong id="sX">0 px</strong></div>
+      <div class="metric-row"><span>window.scrollY:</span><strong id="sY">0 px</strong></div>
+      <div class="metric-row"><span>Resize Events:</span><strong id="cResize" style="color: #ec4899;">0</strong></div>
+      <div class="metric-row"><span>Scroll Events:</span><strong id="cScroll" style="color: #38bdf8;">0</strong></div>
+    </div>
+
+    <div class="card">
+      <h3 style="color: var(--accent-purple); margin-bottom: 1rem;">🌐 window.location & navigator</h3>
+      <div class="metric-row"><span>Protocol:</span><strong id="locProto">http:</strong></div>
+      <div class="metric-row"><span>Online Status:</span><strong id="navOnline" style="color: #10b981;">Online</strong></div>
+      <div class="metric-row"><span>Language:</span><strong id="navLang">en-US</strong></div>
+    </div>
+  </div>
+
+  <script>
+    let rCnt = 0, sCnt = 0;
+    function updateMetrics() {
+      document.getElementById('wWidth').textContent = `${window.innerWidth} px`;
+      document.getElementById('wHeight').textContent = `${window.innerHeight} px`;
+      document.getElementById('sWidth').textContent = `${screen.width} px`;
+      document.getElementById('sHeight').textContent = `${screen.height} px`;
+      document.getElementById('sX').textContent = `${Math.round(window.scrollX)} px`;
+      document.getElementById('sY').textContent = `${Math.round(window.scrollY)} px`;
+      document.getElementById('locProto').textContent = window.location.protocol;
+      document.getElementById('navOnline').textContent = navigator.onLine ? 'Online' : 'Offline';
+      document.getElementById('navLang').textContent = navigator.language;
+    }
+
+    window.addEventListener('resize', () => { rCnt++; document.getElementById('cResize').textContent = rCnt; updateMetrics(); });
+    window.addEventListener('scroll', () => { sCnt++; document.getElementById('cScroll').textContent = sCnt; updateMetrics(); });
+    window.addEventListener('DOMContentLoaded', updateMetrics);
+  </script>
+</body>
+</html>
