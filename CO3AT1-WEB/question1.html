@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saveetha University - Question 1: DOM-Based Interactive Student Registration</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --accent-cyan: #06b6d4;
+            --accent-pink: #ec4899;
+            --success: #10b981;
+            --error: #ef4444;
+            --warning: #f59e0b;
+            --radius-lg: 16px;
+            --radius-md: 10px;
+            --shadow-glow: 0 10px 30px -10px rgba(99, 102, 241, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.15) 0px, transparent 50%);
+            background-attachment: fixed;
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        header h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #818cf8 0%, #c084fc 50%, #38bdf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        .badge-exp {
+            display: inline-block;
+            background: rgba(99, 102, 241, 0.15);
+            color: #818cf8;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            padding: 0.35rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 900px) {
+            .grid-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .card-header h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.3rem;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #cbd5e1;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group label span {
+            color: var(--error);
+        }
+
+        .input-control {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius-md);
+            color: #fff;
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.25s ease;
+        }
+
+        .input-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+            background: rgba(15, 23, 42, 0.85);
+        }
+
+        .input-control.invalid {
+            border-color: var(--error);
+            animation: shake 0.3s ease-in-out;
+        }
+
+        select.input-control option {
+            background-color: #1e293b;
+            color: #fff;
+        }
+
+        .radio-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+        }
+
+        .radio-card {
+            position: relative;
+        }
+
+        .radio-card input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .radio-label {
+            display: block;
+            padding: 0.75rem 1rem;
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-md);
+            text-align: center;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.25s ease;
+        }
+
+        .radio-card input[type="radio"]:checked + .radio-label {
+            background: rgba(99, 102, 241, 0.2);
+            border-color: var(--primary);
+            color: #a5b4fc;
+            font-weight: 600;
+        }
+
+        .error-msg {
+            color: var(--error);
+            font-size: 0.8rem;
+            margin-top: 0.35rem;
+            display: none;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .error-msg.visible {
+            display: flex;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 0.9rem 1.5rem;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.25s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+            color: #fff;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px -8px rgba(99, 102, 241, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.06);
+            color: #cbd5e1;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+        }
+
+        .results-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .count-pill {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .search-bar {
+            margin-bottom: 1.5rem;
+        }
+
+        .students-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-height: 540px;
+            overflow-y: auto;
+            padding-right: 0.3rem;
+        }
+
+        .students-grid::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .students-grid::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 10px;
+        }
+
+        .students-grid::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+        }
+
+        .student-card {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            animation: fadeIn 0.4s ease-out forwards;
+            transition: all 0.25s ease;
+        }
+
+        .student-card:hover {
+            border-color: rgba(99, 102, 241, 0.4);
+            transform: translateX(4px);
+            background: rgba(15, 23, 42, 0.8);
+        }
+
+        .student-info-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+            flex-shrink: 0;
+        }
+
+        .student-details h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.2rem;
+        }
+
+        .student-details p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+        }
+
+        .dept-tag {
+            background: rgba(6, 182, 212, 0.15);
+            color: #22d3ee;
+            padding: 0.15rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .year-tag {
+            background: rgba(236, 72, 153, 0.15);
+            color: #f472b6;
+            padding: 0.15rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .btn-delete {
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            padding: 0.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-delete:hover {
+            background: rgba(239, 68, 68, 0.3);
+            color: #fff;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-muted);
+        }
+
+        .empty-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #1e293b;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 4px solid var(--success);
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            color: #fff;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-6px); }
+            40%, 80% { transform: translateX(6px); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge-exp">Saveetha University • Question 01</span>
+        <h1>Interactive Student Registration</h1>
+        <p>DOM & Event Handling Portal • Student: <strong>ALUKA PARDHU</strong></p>
+    </header>
+
+    <div class="grid-layout">
+        <!-- Form Section -->
+        <section class="glass-card">
+            <div class="card-header">
+                <h2>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="17" y1="11" x2="23" y2="11"></line></svg>
+                    Student Details Form
+                </h2>
+            </div>
+
+            <form id="registrationForm" novalidate>
+                <!-- Student Name -->
+                <div class="form-group">
+                    <label for="studentName">Student Full Name <span>*</span></label>
+                    <input type="text" id="studentName" class="input-control" placeholder="e.g., ALUKA PARDHU" autocomplete="off">
+                    <div class="error-msg" id="nameError">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                        <span>Please enter a valid student name (at least 3 characters).</span>
+                    </div>
+                </div>
+
+                <!-- Register Number -->
+                <div class="form-group">
+                    <label for="registerNo">Register Number <span>*</span></label>
+                    <input type="text" id="registerNo" class="input-control" placeholder="e.g., 21CS042" autocomplete="off">
+                    <div class="error-msg" id="regError">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                        <span>Please enter a valid alphanumeric Register Number.</span>
+                    </div>
+                </div>
+
+                <!-- Department -->
+                <div class="form-group">
+                    <label for="department">Department <span>*</span></label>
+                    <select id="department" class="input-control">
+                        <option value="">-- Select Department --</option>
+                        <option value="CSE">Computer Science & Engineering</option>
+                        <option value="IT">Information Technology</option>
+                        <option value="AI&DS">Artificial Intelligence & Data Science</option>
+                        <option value="ECE">Electronics & Communication</option>
+                        <option value="EEE">Electrical & Electronics</option>
+                        <option value="MECH">Mechanical Engineering</option>
+                        <option value="CIVIL">Civil Engineering</option>
+                    </select>
+                    <div class="error-msg" id="deptError">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                        <span>Please select a department.</span>
+                    </div>
+                </div>
+
+                <!-- Year of Study -->
+                <div class="form-group">
+                    <label>Year of Study <span>*</span></label>
+                    <div class="radio-group">
+                        <div class="radio-card">
+                            <input type="radio" name="yearOfStudy" id="year1" value="1st Year">
+                            <label for="year1" class="radio-label">1st Year</label>
+                        </div>
+                        <div class="radio-card">
+                            <input type="radio" name="yearOfStudy" id="year2" value="2nd Year">
+                            <label for="year2" class="radio-label">2nd Year</label>
+                        </div>
+                        <div class="radio-card">
+                            <input type="radio" name="yearOfStudy" id="year3" value="3rd Year">
+                            <label for="year3" class="radio-label">3rd Year</label>
+                        </div>
+                        <div class="radio-card">
+                            <input type="radio" name="yearOfStudy" id="year4" value="4th Year">
+                            <label for="year4" class="radio-label">4th Year</label>
+                        </div>
+                    </div>
+                    <div class="error-msg" id="yearError">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                        <span>Please choose a Year of Study.</span>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-primary" id="btnSubmit">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                        Submit Student
+                    </button>
+                    <button type="button" class="btn btn-secondary" id="btnReset">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+                        Reset Form
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Dynamic Results Display Section -->
+        <section class="glass-card">
+            <div class="results-header">
+                <h2>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    Registered Students Profile
+                </h2>
+                <span class="count-pill" id="studentCount">Total: 0</span>
+            </div>
+
+            <!-- Search Filter -->
+            <div class="search-bar">
+                <input type="text" id="searchInput" class="input-control" placeholder="Search by name, reg no, or department...">
+            </div>
+
+            <!-- Dynamic Profile Container -->
+            <div class="students-grid" id="studentsContainer">
+                <div class="empty-state" id="emptyState">
+                    <div class="empty-icon">🎓</div>
+                    <p>No registered students yet.</p>
+                    <small>Submit the registration form on the left to see dynamic profiles update instantly without refreshing!</small>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<!-- Toast Alert Popup -->
+<div class="toast" id="toast">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+    <span id="toastMsg">Student registered successfully!</span>
+</div>
+
+<script>
+    let registeredStudents = [
+        {
+            id: 1001,
+            name: "ALUKA PARDHU",
+            regNo: "21CS001",
+            dept: "CSE",
+            deptText: "Computer Science & Engineering",
+            year: "3rd Year"
+        }
+    ];
+
+    const form = document.getElementById('registrationForm');
+    const studentNameInput = document.getElementById('studentName');
+    const registerNoInput = document.getElementById('registerNo');
+    const departmentInput = document.getElementById('department');
+    const btnReset = document.getElementById('btnReset');
+    const studentsContainer = document.getElementById('studentsContainer');
+    const emptyState = document.getElementById('emptyState');
+    const studentCountEl = document.getElementById('studentCount');
+    const searchInput = document.getElementById('searchInput');
+    const toast = document.getElementById('toast');
+    const toastMsg = document.getElementById('toastMsg');
+
+    const nameError = document.getElementById('nameError');
+    const regError = document.getElementById('regError');
+    const deptError = document.getElementById('deptError');
+    const yearError = document.getElementById('yearError');
+
+    function showToast(message, type = 'success') {
+        toastMsg.textContent = message;
+        if (type === 'error') {
+            toast.style.borderLeftColor = 'var(--error)';
+        } else {
+            toast.style.borderLeftColor = 'var(--success)';
+        }
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3500);
+    }
+
+    function getInitials(name) {
+        if (!name) return 'ST';
+        const parts = name.trim().split(' ');
+        if (parts.length >= 2) {
+            return (parts[0][0] + parts[1][0]).toUpperCase();
+        }
+        return parts[0].substring(0, 2).toUpperCase();
+    }
+
+    function validateForm() {
+        let isValid = true;
+
+        nameError.classList.remove('visible');
+        regError.classList.remove('visible');
+        deptError.classList.remove('visible');
+        yearError.classList.remove('visible');
+        
+        studentNameInput.classList.remove('invalid');
+        registerNoInput.classList.remove('invalid');
+        departmentInput.classList.remove('invalid');
+
+        const nameVal = studentNameInput.value.trim();
+        if (!nameVal || nameVal.length < 3 || !/^[a-zA-Z\s.]+$/.test(nameVal)) {
+            nameError.classList.add('visible');
+            studentNameInput.classList.add('invalid');
+            isValid = false;
+        }
+
+        const regVal = registerNoInput.value.trim();
+        if (!regVal || regVal.length < 3 || !/^[a-zA-Z0-9]+$/.test(regVal)) {
+            regError.classList.add('visible');
+            registerNoInput.classList.add('invalid');
+            isValid = false;
+        }
+
+        const deptVal = departmentInput.value;
+        if (!deptVal) {
+            deptError.classList.add('visible');
+            departmentInput.classList.add('invalid');
+            isValid = false;
+        }
+
+        const selectedYear = document.querySelector('input[name="yearOfStudy"]:checked');
+        if (!selectedYear) {
+            yearError.classList.add('visible');
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        if (!validateForm()) {
+            return;
+        }
+
+        const name = studentNameInput.value.trim();
+        const regNo = registerNoInput.value.trim().toUpperCase();
+        const dept = departmentInput.value;
+        const deptText = departmentInput.options[departmentInput.selectedIndex].text;
+        const year = document.querySelector('input[name="yearOfStudy"]:checked').value;
+
+        if (registeredStudents.some(s => s.regNo === regNo)) {
+            regError.querySelector('span').textContent = 'Register Number already exists!';
+            regError.classList.add('visible');
+            registerNoInput.classList.add('invalid');
+            return;
+        }
+
+        const studentObj = {
+            id: Date.now(),
+            name: name,
+            regNo: regNo,
+            dept: dept,
+            deptText: deptText,
+            year: year
+        };
+
+        registeredStudents.unshift(studentObj);
+        renderStudents();
+        resetFormInputs();
+        showToast(`Student ${name} registered successfully!`);
+    });
+
+    function renderStudents(filterQuery = '') {
+        const query = filterQuery.toLowerCase().trim();
+        const filtered = registeredStudents.filter(s => 
+            s.name.toLowerCase().includes(query) ||
+            s.regNo.toLowerCase().includes(query) ||
+            s.dept.toLowerCase().includes(query) ||
+            s.year.toLowerCase().includes(query)
+        );
+
+        studentCountEl.textContent = `Total: ${registeredStudents.length}`;
+        studentsContainer.innerHTML = '';
+
+        if (filtered.length === 0) {
+            const noMatchMsg = registeredStudents.length > 0 ? 'No matching student records found.' : 'No registered students yet.';
+            studentsContainer.appendChild(emptyState);
+            emptyState.querySelector('p').textContent = noMatchMsg;
+            emptyState.style.display = 'block';
+            return;
+        }
+
+        emptyState.style.display = 'none';
+
+        filtered.forEach(student => {
+            const card = document.createElement('div');
+            card.className = 'student-card';
+            card.setAttribute('data-id', student.id);
+
+            const initials = getInitials(student.name);
+
+            card.innerHTML = `
+                <div class="student-info-group">
+                    <div class="avatar">${initials}</div>
+                    <div class="student-details">
+                        <h3>${escapeHtml(student.name)}</h3>
+                        <p>
+                            <strong>Reg No:</strong> ${escapeHtml(student.regNo)}
+                            <span class="dept-tag">${escapeHtml(student.dept)}</span>
+                            <span class="year-tag">${escapeHtml(student.year)}</span>
+                        </p>
+                    </div>
+                </div>
+                <button class="btn-delete" title="Delete Profile" onclick="deleteStudent(${student.id})">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                </button>
+            `;
+
+            studentsContainer.appendChild(card);
+        });
+    }
+
+    window.deleteStudent = function(id) {
+        const student = registeredStudents.find(s => s.id === id);
+        registeredStudents = registeredStudents.filter(s => s.id !== id);
+        renderStudents(searchInput.value);
+        if (student) {
+            showToast(`Removed registration for ${student.name}`, 'error');
+        }
+    };
+
+    function escapeHtml(str) {
+        return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    }
+
+    function resetFormInputs() {
+        form.reset();
+        nameError.classList.remove('visible');
+        regError.classList.remove('visible');
+        deptError.classList.remove('visible');
+        yearError.classList.remove('visible');
+
+        studentNameInput.classList.remove('invalid');
+        registerNoInput.classList.remove('invalid');
+        departmentInput.classList.remove('invalid');
+    }
+
+    btnReset.addEventListener('click', function() {
+        resetFormInputs();
+        showToast('Form inputs cleared.', 'error');
+    });
+
+    searchInput.addEventListener('input', function(e) {
+        renderStudents(e.target.value);
+    });
+
+    studentNameInput.addEventListener('input', () => nameError.classList.remove('visible'));
+    registerNoInput.addEventListener('input', () => regError.classList.remove('visible'));
+    departmentInput.addEventListener('change', () => deptError.classList.remove('visible'));
+    document.querySelectorAll('input[name="yearOfStudy"]').forEach(r => {
+        r.addEventListener('change', () => yearError.classList.remove('visible'));
+    });
+
+    renderStudents();
+</script>
+
+</body>
+</html>
